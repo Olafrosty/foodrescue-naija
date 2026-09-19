@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FoodRescue Naija - Save Food, Feed People</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+body { background:#f8faf8; color:#222; line-height:1.6; }
+a { text-decoration:none; color:inherit; }
+
+/* HEADER */
+header {
+  background:#2e7d32; color:white;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:14px 5%; position:sticky; top:0; z-index:1000;
+}
+.logo { font-weight:800; font-size:22px; }
+.logo span { color:#a5d6a7; }
+.nav-links { display:flex; gap:24px; list-style:none; align-items:center; }
+.nav-links a { color:white; font-weight:500; font-size:15px; }
+.nav-links .btn-donate { background:white; color:#2e7d32; padding:8px 16px; border-radius:20px; font-weight:700; }
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; z-index:1100; }
+.hamburger span { width:26px; height:3px; background:white; border-radius:3px; transition:0.3s; }
+
+/* HAMBURGER TO X */
+.hamburger.active span:nth-child(1){ transform:rotate(45deg) translate(5px,6px); }
+.hamburger.active span:nth-child(2){ opacity:0; }
+.hamburger.active span:nth-child(3){ transform:rotate(-45deg) translate(5px,-6px); }
+
+/* HERO */
+.hero {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:60px 5%; gap:30px; background: linear-gradient(135deg, #e8f5e9 0%, #ffffff 100%);
+}
+.hero-text { flex:1; }
+.hero-text h1 { font-size:42px; color:#1b5e20; line-height:1.2; margin-bottom:15px; }
+.hero-text h1 span { color:#2e7d32; }
+.hero-text p { font-size:17px; color:#555; margin-bottom:25px; max-width:500px; }
+.hero-btns { display:flex; gap:12px; flex-wrap:wrap; }
+.btn { padding:12px 22px; border-radius:8px; font-weight:600; border:none; cursor:pointer; }
+.btn-primary { background:#2e7d32; color:white; }
+.btn-outline { background:white; border:2px solid #2e7d32; color:#2e7d32; }
+.hero-img { flex:1; text-align:center; }
+.hero-img img { width:90%; max-width:450px; border-radius:16px; }
+
+/* HOW IT WORKS */
+.section { padding:50px 5%; text-align:center; }
+.section h2 { font-size:28px; color:#1b5e20; margin-bottom:10px; }
+.cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:20px; margin-top:20px; }
+.card { background:white; padding:25px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.06); }
+
+/* FOOTER */
+footer { background:#1b5e20; color:white; padding:45px 5% 20px; margin-top:40px; }
+.footer-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:30px; }
+footer h4 { margin-bottom:12px; color:#a5d6a7; }
+footer p, footer li { font-size:14px; color:#dcedc8; line-height:1.8; list-style:none; }
+.socials { display:flex; gap:14px; margin-top:12px; }
+.socials a { width:38px; height:38px; background:rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; border-radius:50%; transition:0.3s; }
+.socials a:hover { background:white; color:#1b5e20; }
+.copy { text-align:center; margin-top:30px; border-top:1px solid rgba(255,255,255,0.15); padding-top:15px; font-size:13px; color:#a5d6a7; }
+
+/* RESPONSIVE */
+@media (max-width:768px){
+  .hamburger { display:flex; }
+  .nav-links {
+    position:fixed; top:60px; right:-100%; flex-direction:column; align-items:flex-start;
+    background:#2e7d32; width:80%; height:100vh; padding:30px; transition:0.35s;
+  }
+  .nav-links.active { right:0; }
+  .hero { flex-direction:column; padding:30px 5%; }
+  .hero-text h1 { font-size:30px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">FoodRescue <span>Naija</span></div>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#index.html">Home</a></li>
+    <li><a href="/available_food.html">Available Food</a></li>
+    <li><a href="/map_view.html">Map View</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="/impact.html">impact</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a class="btn-donate" href="/donate_food.html">Donate_Food</a></li>
+  </ul>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>Save Food. <span>Feed People</span> Across Nigeria.</h1>
+    <p>A simple web platform that connects restaurants, supermarkets & individuals with surplus food to NGOs and people who need it — FREE, fast and verified.</p>
+    <div class="hero-btns">
+      <a href="/donate_food.html" class="btn btn-primary">Donate Food Now</a>
+      <a href="/available_food.html" class="btn btn-outline">Find Free Food</a>
+    </div>
+  </div>
+  <div class="hero-img">
+    <img src="https://www.christianaid.org.uk/sites/default/files/styles/image_with_x_sm_x1/public/2022-06/Nigeria-food-distribution.jpeg?h=cf2bcaaa&itok=RHpQhVys" alt="Food sharing">
+  </div>
+</section>
+
+<section class="section">
+  <h2>How It Works</h2>
+  <div class="cards">
+    <div class="card"><h3>1. Donate</h3><p>Post surplus food with quantity, expiry and pickup location.</p></div>
+    <div class="card"><h3>2. Match</h3><p>Nearby NGOs or individuals get notified and claim it instantly.</p></div>
+    <div class="card"><h3>3. Impact</h3><p>Food is picked up, verified and impact is tracked.</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>FoodRescue Naija</h4>
+      <p>Reducing food waste and hunger across Nigeria. 100% Free. SDG 2 & 12 compliant.</p>
+      <div class="socials">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <li><a href="#index.html">Home</a></li>
+      <li><a href="/donate_food.html">Donate_Food</a></li>
+      <li><a href="/available_food.html">Available_Food</a></li>
+      <li><a href="/map_view.html">Map View</a></li>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <li><a href="/impact.html">Our Impact</a></li>
+      <li><a href="#">FAQs</a></li>
+      <li><a href="#">Contact Us</a></li>
+      <li>Lagos, Nigeria</li>
+    </div>
+  </div>
+  <div class="copy">© 2026 FoodRescue Naija. Built for SDGs — All rights reserved.</div>
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+const links = document.querySelectorAll('.nav-links a');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  navLinks.classList.toggle('active');
+});
+
+// Cancel hamburger when any link is clicked
+links.forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    navLinks.classList.remove('active');
+  });
+});
+</script>
+</body>
+</html>

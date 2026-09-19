@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Map View - FoodRescue Naija</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{background:#f8faf8;color:#222;}
+a{text-decoration:none;color:inherit;}
+header{background:#2e7d32;color:white;display:flex;justify-content:space-between;align-items:center;padding:14px 5%;position:sticky;top:0;z-index:1000;}
+.logo{font-weight:800;font-size:22px;}.logo span{color:#a5d6a7;}
+.nav-links{display:flex;gap:24px;list-style:none;align-items:center;}
+.nav-links a{color:white;font-weight:500;font-size:15px;}
+.nav-links.btn-donate{background:white;color:#2e7d32;padding:8px 16px;border-radius:20px;font-weight:700;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1100;}
+.hamburger span{width:26px;height:3px;background:white;border-radius:3px;transition:0.3s;}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,6px);}
+.hamburger.active span:nth-child(2){opacity:0;}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-6px);}
+
+#map{height:75vh;width:100%;z-index:1;}
+.map-top{padding:15px 5%;background:white;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.map-top h2{color:#1b5e20;font-size:18px;}
+.legend{display:flex;gap:12px;font-size:13px;}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block;}
+.green{background:#2e7d32;}.orange{background:#ff9800;}
+
+footer{background:#1b5e20;color:white;padding:35px 5% 15px;}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;}
+footer h4{margin-bottom:10px;color:#a5d6a7;} footer li{list-style:none;font-size:14px;color:#dcedc8;line-height:1.8;}
+.socials{display:flex;gap:12px;margin-top:10px;}
+.socials a{width:35px;height:35px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;border-radius:50%;}
+.copy{text-align:center;margin-top:20px;border-top:1px solid rgba(255,255,255,0.15);padding-top:12px;font-size:12px;color:#a5d6a7;}
+
+@media(max-width:768px){
+ .hamburger{display:flex;}
+ .nav-links{position:fixed;top:60px;right:-100%;flex-direction:column;align-items:flex-start;background:#2e7d32;width:80%;height:100vh;padding:30px;transition:0.35s;z-index:1001;}
+ .nav-links.active{right:0;}
+  #map{height:65vh;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">FoodRescue <span>Naija</span></div>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/available_food.html">Available_Food</a></li>
+    <li><a href="#map_view.html">Map_View</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="/impact.html">Impact</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a class="btn-donate" href="/donate_food.html">Donate Food</a></li>
+  </ul>
+</header>
+
+<div class="map-top">
+  <h2><i class="fa fa-map-location-dot"></i> Live Food Map — Nigeria (100% FREE)</h2>
+  <div class="legend"><span><span class="dot green"></span> Available</span><span><span class="dot orange"></span> Claimed</span></div>
+</div>
+
+<div id="map"></div>
+
+<footer>
+  <div class="footer-grid">
+    <div><h4>FoodRescue Naija</h4><p>Mapping free food across all 36 states.</p><div class="socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div></div>
+    <div><h4>Quick Links</h4><li><a href="/index.html">Home</a></li><li><a href="donate-food.html">Donate</a></li><li><a href="available-food.html">Available</a></li></div>
+    <div><h4>Support</h4><li>Impact</li><li>Lagos, Nigeria</li></div>
+  </div>
+  <div class="copy">© 2026 FoodRescue Naija — Map powered by OpenStreetMap</div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// HAMBURGER
+const hamburger=document.getElementById('hamburger');
+const navLinks=document.getElementById('navLinks');
+hamburger.addEventListener('click',()=>{hamburger.classList.toggle('active');navLinks.classList.toggle('active');});
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('active');navLinks.classList.remove('active');}));
+
+// MAP - Center Nigeria
+const map = L.map('map').setView([9.0820, 8.6753], 6);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+
+// STATE COORDINATES FOR DEMO & REAL
+const stateCoords = {
+  "Lagos":[6.5244,3.3792], "Rivers":[4.8156,7.0498], "Abuja FCT":[9.0765,7.3986], "Oyo":[7.3775,3.9470], "Kano":[12.0022,8.5920],
+  "Anambra":[6.2209,6.9364], "Enugu":[6.5244,7.5086], "Delta":[5.5323,5.8987], "Kaduna":[10.5105,7.4165], "Other":[9.0820,8.6753]
+};
+
+function getFoods(){
+  let stored = JSON.parse(localStorage.getItem('foodDonations') || '[]');
+  if(stored.length) return stored;
+  return [
+    {foodName:"Cooked Jollof Rice - 20 plates", state:"Rivers", lga:"Rumuola", address:"12 Rumuola Rd", quantity:"20 plates", status:"Available"},
+    {foodName:"Fresh Bread Loaves", state:"Lagos", lga:"Yaba", address:"Yaba Market", quantity:"15 loaves", status:"Available"},
+    {foodName:"Tomatoes & Vegetables", state:"Oyo", lga:"Bodija", address:"Bodija Market", quantity:"10kg", status:"Claimed"},
+  ];
+}
+
+getFoods().forEach(f=>{
+  const coords = stateCoords[f.state] || stateCoords["Other"];
+  // Add small random offset so pins don't stack
+  const lat = coords[0] + (Math.random()-0.5)*0.3;
+  const lng = coords[1] + (Math.random()-0.5)*0.3;
+  const color = f.status==='Available'? 'green' : 'orange';
+  const icon = L.divIcon({className:'', html:`<div style="background:${color==='green'?'#2e7d32':'#ff9800'};width:14px;height:14px;border-radius:50%;border:2px solid white;box-shadow:0 0 6px rgba(0,0,0,0.4)"></div>`});
+
+  L.marker([lat,lng], {icon}).addTo(map).bindPopup(`
+    <b>${f.foodName}</b><br>
+    ${f.quantity}<br>
+    ${f.lga}, ${f.state}<br>
+    ${f.address}<br>
+    <b style="color:${color==='green'?'#2e7d32':'#ff9800'}">${f.status} - FREE</b><br>
+    <a href="available-food.html" style="color:#2e7d32;font-weight:700">View / Claim</a>
+  `);
+});
+</script>
+</body>
+</html>
