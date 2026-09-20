@@ -92,103 +92,59 @@ footer{background:var(--dark);color:#fff;padding:35px 5% 15px;margin-top:30px}
 <div class="feed" id="foodContainer"></div>
 
 <footer><div style="text-align:center;font-size:12px;color:#a7f3d0">© 2026 FoodRescue Naija • Ibadan Hub • Reducing Waste, Feeding Oyo State</div></footer>
-
 <script>
-// FIXED: Use relative API so it works on Render, not localhost
 const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:3000' : '';
-const API = `${API_BASE}/api/foods`;
-const container = document.getElementById('foodContainer');
-let allFoods = [];
-let activeCat = 'All';
+const API_URL = `${API_BASE}/api/foods`;
 
-const foodImages = {
-  rice: 'https://images.unsplash.com/photo-1534939561121-4a00a82a71d4?w=400',
-  bread: 'https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=400',
-  vegetables: 'https://images.unsplash.com/photo-1518843875459-f738682238a6?w=400',
-  default: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400'
-};
-function getImg(name){
-  const n = (name||'').toLowerCase();
-  if(n.includes('rice')||n.includes('jollof')) return foodImages.rice;
-  if(n.includes('bread')) return foodImages.bread;
-  if(n.includes('vegetable')||n.includes('tomato')) return foodImages.vegetables;
-  return foodImages.default;
-}
+async function loadFoods() {
+  let apiFoods = [];
+  try {
+    const res = await fetch(API_URL);
+    if (res.ok) apiFoods = await res.json();
+  } catch (e) { console.log('API offline, using local'); }
 
-async function loadFoods(){
-  try{
-    const res = await fetch(API);
-    if(!res.ok) throw new Error('API fail');
-    allFoods = await res.json();
-    render();
-  }catch(e){
-    // fallback demo data if API down
-    allFoods = [
-      {id:'1',foodName:'Jollof Rice - 5kg',quantity:'5kg',location:'Bodija, Ibadan',status:'Available',pickupTime:'2h ago • 1.2km',expiry:'Today',phone:'08012345678'},
-      {id:'2',foodName:'Sliced Bread Loaves - 10 loaves',quantity:'10 loaves',location:'Dugbe, Ibadan',status:'Available',pickupTime:'30min ago • 0.8km',expiry:'Expiring Soon',phone:'08012345678'},
-      {id:'3',foodName:'Fresh Vegetables Pack - 3kg',quantity:'3kg',location:'Challenge, Ibadan',status:'Available',pickupTime:'1h ago • 2.1km',expiry:'Fresh'},
-      {id:'4',foodName:'Cooked Beans & Plantain - 4kg',quantity:'4kg',location:'Mokola, Ibadan',status:'Available',pickupTime:'3h ago • 1.5km',expiry:'Today'},
-    ];
-    render();
+  // Also get local donations (so you see your own donation even if Render sleeps)
+  let localFoods = [];
+  try { localFoods = JSON.parse(localStorage.getItem('foodDonations') || '[]'); } catch {}
+
+  // Merge both, remove duplicates by id
+  const all = [...localFoods, ...apiFoods];
+  const unique = [];
+  const seen = new Set();
+  for (const f of all) {
+    const id = f.id || f._id;
+    if (!seen.has(id)) { seen.add(id); unique.push(f); }
   }
-}
 
-function render(){
-  let filtered = allFoods;
-  const q = document.getElementById('search').value.toLowerCase();
-  const state = document.getElementById('stateFilter').value.toLowerCase();
-  if(q) filtered = filtered.filter(f=> (f.foodName||f.name||'').toLowerCase().includes(q));
-  if(activeCat!=='All') filtered = filtered.filter(f=> (f.foodName||'').toLowerCase().includes(activeCat.toLowerCase()));
-  if(state) filtered = filtered.filter(f=> (f.location||'').toLowerCase().includes(state.toLowerCase()));
-  
-  document.getElementById('countText').textContent = `${filtered.length} donations available • helping communities across Ibadan`;
-  
-  if(!filtered.length){
-    container.innerHTML = `<div class="empty"><i class="fa fa-bowl-rice" style="font-size:40px;color:#10b981"></i><h3 style="margin-top:10px">No food found in Ibadan</h3><p>Try another category or donate now!</p><br><a href="/donate_food.html" style="background:var(--green);color:#fff;padding:10px 18px;border-radius:20px">Donate Food</a></div>`;
+  // Now render
+  const container = document.getElementById('foodGrid') || document.getElementById('foods') || document.querySelector('.grid');
+  if (!container) return;
+
+  if (unique.length === 0) {
+    container.innerHTML = `<p style="text-align:center;padding:40px;color:#666">No donations yet in Ibadan. Be the first to donate!</p>`;
     return;
   }
-  
-  container.innerHTML = filtered.map(f=>{
-    const name = f.foodName||f.FoodName||f.name||'Food Pack';
-    const isSoon = (f.expiry||'').toLowerCase().includes('soon');
-    const isClaimed = f.status==='Claimed';
-    const badgeClass = isClaimed?'b-claimed':isSoon?'b-soon':'b-available';
-    const badgeText = isClaimed?'CLAIMED':isSoon?'EXPIRING SOON':'AVAILABLE';
-    return `
-    <div class="food-card">
-      <div class="img-wrap"><img src="${getImg(name)}" alt="${name}"><span class="badge ${badgeClass}">${badgeText}</span></div>
-      <div class="body">
-        <h3>${name}</h3>
-        <div class="meta"><span><i class="fa fa-clock"></i> ${f.pickupTime||f.pickup_time||'Just now'}</span><span><i class="fa fa-location-dot"></i> ${f.location||'Ibadan'}</span></div>
-        <div class="meta"><span><i class="fa fa-box"></i> ${f.quantity||''}</span><span><i class="fa fa-tag"></i> ${f.expiry||'Fresh'}</span></div>
-        <div class="actions">
-          <button class="btn-claim" onclick="claimFood('${f.id||f._id}')" ${isClaimed?'disabled':''}>${isClaimed?'Claimed':'Claim Now'}</button>
-          <button class="btn-call" onclick="window.open('https://wa.me/${(f.phone||'2348101423991').replace(/[^0-9]/g,'')}','_blank')"><i class="fab fa-whatsapp"></i></button>
-        </div>
-      </div>
-    </div>`
-  }).join('');
+
+  container.innerHTML = unique.map(food => `
+    <div style="background:#fff;padding:16px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.06);border:1px solid #e5e7eb">
+      <h4 style="color:#064e3b">${food.foodName || food.name || 'Food Donation'}</h4>
+      <p style="font-size:13px;color:#555;margin:6px 0"><b>Qty:</b> ${food.quantity || '-'} <br><b>Location:</b> ${food.location || food.address || food.lga || 'Ibadan'} <br><b>Pickup:</b> ${food.pickupTime || food.pickup_time || '-'}</p>
+      <p style="font-size:11px;color:#888">${food.state || 'Oyo'} • ${food.status || 'Available'}</p>
+      <button onclick="claimFood('${food.id || food._id}')" style="margin-top:8px;padding:8px 14px;background:#064e3b;color:#fff;border:none;border-radius:20px;font-weight:700;cursor:pointer">Claim</button>
+    </div>
+  `).join('');
 }
 
-async function claimFood(id){
-  if(!confirm('Claim this free food? We will connect you via WhatsApp.')) return;
-  try{
-    await fetch(`${API}/${id}/claim`,{method:'PUT'});
-  }catch(e){}
-  alert('Claimed! Check My Claims & WhatsApp for pickup details 🎉');
+async function claimFood(id) {
+  try {
+    await fetch(`${API_URL}/${id}/claim`, { method: 'PUT' });
+  } catch {}
+  // Update local too
+  let local = JSON.parse(localStorage.getItem('foodDonations')||'[]');
+  local = local.map(f => (f.id==id || f._id==id) ? {...f, status:'Claimed'} : f);
+  localStorage.setItem('foodDonations', JSON.stringify(local));
   loadFoods();
 }
-
-document.getElementById('search').addEventListener('input',render);
-document.getElementById('stateFilter').addEventListener('change',render);
-document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>{
-  document.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));
-  p.classList.add('active'); activeCat=p.dataset.filter; render();
-}));
-document.getElementById('ham').addEventListener('click',()=>{
-  document.getElementById('ham').classList.toggle('active');
-  document.getElementById('navLinks').classList.toggle('active');
-});
 
 loadFoods();
 </script>
