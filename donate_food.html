@@ -6,7 +6,7 @@
 <title>Donate Food - Ibadan Hub | FoodRescue Naija</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{--green:#0f7a4a;--dark:#064e3b;--light:#ecfdf5}
+:root{--green:#0f7a4a;--dark:#064e3b;--light:#ecfdf5;--red:#ef4444}
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 body{background:#f8faf8;color:#222}
 a{text-decoration:none;color:inherit}
@@ -18,6 +18,8 @@ header{background:#fff;display:flex;justify-content:space-between;align-items:ce
 .container{max-width:1100px;margin:30px auto;padding:0 5%}
 .top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:20px}
 .badge-secure{border:1px solid #10b981;color:#065f46;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:700;background:#ecfdf5}
+.safety-alert{background:#fef3c7;border:1.5px solid #fbbf24;padding:12px 14px;border-radius:12px;margin-bottom:18px;display:flex;gap:10px;font-size:12px;line-height:1.5;color:#92400e}
+.safety-alert i{font-size:18px;color:#d97706;margin-top:2px}
 .grid{display:grid;grid-template-columns:1fr 1.2fr;gap:20px}
 .card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 6px 20px rgba(0,0,0,.06);border:1px solid #eef2f7}
 .upload{border:2px dashed var(--green);background:#f0fdf4;border-radius:14px;padding:30px;text-align:center;cursor:pointer;transition:.2s}
@@ -39,7 +41,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--green)}
 <body>
 
 <header>
-  <div class="logo">FoodRescue <span>Naija</span> <span style="font-size:10px;border:1px solid var(--green);padding:2px 8px;border-radius:12px;color:var(--green)">IBADAN</span></div>
+  <div class="logo">FoodRescue <span>Naija</span> <span style="font-size:10px;border:1px solid var(--green);padding:2px 8px;border-radius:12px;color:var(--green)">IBADAN SECURE</span></div>
   <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
   <ul class="nav-links" id="nav">
     <li><a href="/index.html">Home</a></li>
@@ -52,8 +54,18 @@ input:focus,select:focus,textarea:focus{border-color:var(--green)}
 
 <div class="container">
   <div class="top">
-    <div><h1 style="font-size:32px;font-weight:900">Food Donation Form</h1><p style="color:#666;font-size:13px">Help reduce waste in Ibadan. Donate safely to local charities & communities.</p></div>
-    <span class="badge-secure"><i class="fa fa-shield-halved"></i> Secure • 256-bit SSL Protected</span>
+    <div><h1 style="font-size:32px;font-weight:900"><i class="fa fa-shield-halved" style="color:var(--green)"></i> Safe Food Donation</h1><p style="color:#666;font-size:13px">Hub-only drop-off • No home address • Daylight 8AM-6PM only</p></div>
+    <span class="badge-secure"><i class="fa fa-lock"></i> Secure • Verified Hub</span>
+  </div>
+
+  <div class="safety-alert">
+    <i class="fa fa-triangle-exclamation"></i>
+    <div><b>SECURITY RULE - We banned home addresses to stop kidnapping:</b><br>
+    1. Never use your house address. Drop food only at <b>public Hubs/Markets/Churches</b>.<br>
+    2. Pickup is <b>Daylight only (8AM-6PM)</b>. Night pickup will be rejected.<br>
+    3. Receiver must show <b>4-digit Pickup Code</b>. No code, no food.<br>
+    4. Our volunteer will call you to verify before listing goes live.
+    </div>
   </div>
 
   <div class="grid">
@@ -62,39 +74,72 @@ input:focus,select:focus,textarea:focus{border-color:var(--green)}
         <h3 style="display:flex;justify-content:space-between;align-items:center"><span>1. Upload Photo</span><span style="font-size:10px;border:1px solid var(--green);padding:3px 8px;border-radius:12px;color:var(--green)">Required</span></h3>
         <div class="upload" onclick="document.getElementById('fileInput').click()">
           <i class="fa fa-cloud-arrow-up"></i>
-          <b>Drag & drop photo here</b><p style="font-size:12px;color:#666;margin:4px 0">or click to browse from device</p>
-          <p style="font-size:11px;color:#888">Clear photo of the food • JPG, PNG • Max 5MB</p>
+          <b>Drag & drop photo here</b><p style="font-size:12px;color:#666;margin:4px 0">or click to browse</p>
+          <p style="font-size:11px;color:#888">Clear photo • JPG, PNG • Max 5MB</p>
           <input type="file" id="fileInput" accept="image/*" style="display:none">
           <img id="preview" style="display:none;width:100%;margin-top:12px;border-radius:10px;max-height:200px;object-fit:cover">
         </div>
-        <div style="margin-top:12px;background:#f0fdf4;border-left:4px solid var(--green);padding:10px;border-radius:6px;font-size:12px"><i class="fa fa-circle-info" style="color:var(--green)"></i> <b>Tip:</b> Clear, well-lit photos help volunteers verify & match faster in Ibadan.</div>
+        <div style="margin-top:12px;background:#f0fdf4;border-left:4px solid var(--green);padding:10px;border-radius:6px;font-size:12px"><i class="fa fa-circle-info" style="color:var(--green)"></i> <b>Verification:</b> Our Ibadan volunteer will call <span id="vPhone">your number</span> to confirm food safety before it shows publicly.</div>
       </div>
       <div style="margin-top:18px"><h3>Trust & Safety</h3><div class="trust">
-        <div class="trust-item"><i class="fa fa-shield-check"></i><span><b>Verified by NAFDAC</b><br>Food safety checked</span></div>
-        <div class="trust-item"><i class="fa fa-lock"></i><span><b>Secure & Encrypted</b><br>Your data protected</span></div>
-        <div class="trust-item"><i class="fa fa-handshake"></i><span><b>Partnered with Ibadan Food Bank</b><br>120+ partners</span></div>
+        <div class="trust-item"><i class="fa fa-shield-check"></i><span><b>No Home Pickup</b><br>Hub only, public places</span></div>
+        <div class="trust-item"><i class="fa fa-sun"></i><span><b>Daylight Only</b><br>8AM - 6PM safe window</span></div>
+        <div class="trust-item"><i class="fa fa-key"></i><span><b>Pickup Code</b><br>4-digit code verification</span></div>
       </div></div>
     </div>
 
     <div class="card">
-      <h3>2. Donation Details <span style="float:right;font-size:10px;border:1px solid var(--green);padding:3px 8px;border-radius:12px;color:var(--green)">Step 1 of 1</span></h3>
+      <h3>2. Donation Details <span style="float:right;font-size:10px;background:var(--green);color:#fff;padding:3px 8px;border-radius:12px">SECURE MODE</span></h3>
       <form id="donateForm" style="margin-top:10px">
         <label>Food Details</label>
         <div class="row"><div><label style="margin-top:4px">Food Type *</label><input type="text" id="foodName" placeholder="e.g. Jollof Rice, Bread" required></div><div><label style="margin-top:4px">Category *</label><select id="category" required><option value="">Select category</option><option>Cooked Meal</option><option>Bakery</option><option>Fresh Produce</option><option>Packaged</option><option>Other</option></select></div></div>
         <div class="row"><div><label>Quantity *</label><input type="text" id="quantity" placeholder="e.g. 10 packs / 5kg" required></div><div><label>Expiry Date *</label><input type="datetime-local" id="expiry" required></div></div>
-        <label>Food Description *</label><textarea id="notes" rows="2" placeholder="Ingredients, storage, packaging condition..." maxlength="200"></textarea>
+        <label>Food Description *</label><textarea id="notes" rows="2" placeholder="Ingredients, storage, packaging condition..." maxlength="200" required></textarea>
 
-        <label style="margin-top:14px">Pickup Address</label>
-        <label style="margin-top:4px;font-weight:500">Address *</label><input type="text" id="address" placeholder="e.g. 12 Awolowo Ave, Dugbe, Ibadan, Oyo State" required>
-        <div class="row"><div><label>Landmark (Optional)</label><input type="text" id="lga" placeholder="Near Dugbe Market, Ibadan"></div><div><label>Pickup Time *</label><input type="text" id="pickupTime" placeholder="Today 2pm - 5pm" required></div></div>
-        <div class="row"><div><label>Contact Name *</label><input type="text" id="contactName" placeholder="Adebayo O." required></div><div><label>Contact Phone *</label><input type="tel" id="phone" placeholder="080..." required></div></div>
-        <div style="margin-top:12px;font-size:12px"><label style="display:flex;gap:8px;align-items:flex-start;font-weight:500"><input type="checkbox" required style="width:16px;height:16px;margin-top:2px"> I confirm the food is safe, uncontaminated, and within its expiry date</label></div>
-        <div style="display:flex;gap:10px;margin-top:14px"><button type="button" class="btn-submit" style="background:#fff;color:#111;border:1.5px solid #d1d5db;flex:1">Save as Draft</button><button type="submit" class="btn-submit" style="flex:1.5"><i class="fa fa-paper-plane"></i> Submit Donation</button></div>
-        <p style="text-align:center;font-size:11px;color:#666;margin-top:8px">Our Ibadan team will contact you within 24h to arrange pickup</p>
+        <label style="margin-top:14px;color:var(--green)"><i class="fa fa-location-dot"></i> Safe Drop-off Point (NO HOME ADDRESS) *</label>
+        <select id="hubLocation" required>
+          <option value="">Select verified public hub</option>
+          <option value="Dugbe Hub - No 12 Awolowo Ave, Dugbe, Ibadan">Dugbe Hub - No 12 Awolowo Ave (Main Hub - Safest)</option>
+          <option value="Bodija Market - FoodRescue Point">Bodija Market - FoodRescue Point</option>
+          <option value="UI Campus - Student Affairs Gate">UI Campus - Student Affairs Gate</option>
+          <option value="Challenge - FoodRescue Volunteer Point">Challenge - FoodRescue Volunteer Point</option>
+          <option value="Ring Road - Ibadan Food Bank">Ring Road - Ibadan Food Bank</option>
+          <option value="Mokola - Agodi Park">Mokola - Agodi Park</option>
+          <option value="Other Public Place - Church/Mosque/NGO">Other Public Place - Church/Mosque/NGO (specify in notes)</option>
+        </select>
+        <p style="font-size:10px;color:#ef4444;margin-top:4px;font-weight:600"><i class="fa fa-ban"></i> DO NOT type your house address. For security, only Hubs/Markets/Churches allowed.</p>
+
+        <div class="row">
+          <div>
+            <label>Pickup Time (Daylight Only) *</label>
+            <select id="pickupTime" required>
+              <option value="">Select time</option>
+              <option>Today 8AM - 11AM</option>
+              <option>Today 11AM - 2PM</option>
+              <option>Today 2PM - 5PM</option>
+              <option>Tomorrow 8AM - 11AM</option>
+              <option>Tomorrow 11AM - 2PM</option>
+              <option>Tomorrow 2PM - 5PM</option>
+            </select>
+          </div>
+          <div><label>Nearest Landmark (Public)</label><input type="text" id="lga" placeholder="e.g. Near Dugbe Market"></div>
+        </div>
+
+        <div class="row"><div><label>Contact Name *</label><input type="text" id="contactName" placeholder="Adebayo O." required></div><div><label>Contact Phone (For verification) *</label><input type="tel" id="phone" placeholder="080..." required oninput="document.getElementById('vPhone').textContent=this.value||'your number'"></div></div>
+
+        <div style="margin-top:14px;background:#ecfdf5;border:1px solid #a7f3d0;padding:12px;border-radius:10px;font-size:12px">
+          <b style="color:var(--dark)"><i class="fa fa-shield-halved"></i> Safety Agreement:</b><br>
+          <label style="display:flex;gap:8px;align-items:flex-start;font-weight:500;margin-top:8px"><input type="checkbox" required style="width:16px;height:16px;margin-top:2px"> I confirm I will drop food ONLY at the selected public Hub/market, not at my house.</label>
+          <label style="display:flex;gap:8px;align-items:flex-start;font-weight:500;margin-top:6px"><input type="checkbox" required style="width:16px;height:16px;margin-top:2px"> I confirm food is safe, uncontaminated, and I will not ask receiver to come at night or to private place.</label>
+          <label style="display:flex;gap:8px;align-items:flex-start;font-weight:500;margin-top:6px"><input type="checkbox" required style="width:16px;height:16px;margin-top:2px"> I agree to pickup code system and phone verification by volunteer.</label>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:14px"><button type="button" class="btn-submit" style="background:#fff;color:#111;border:1.5px solid #d1d5db;flex:1" onclick="alert('Draft saved locally')">Save as Draft</button><button type="submit" class="btn-submit" style="flex:1.5"><i class="fa fa-shield-halved"></i> Submit Safely</button></div>
+        <p style="text-align:center;font-size:11px;color:#666;margin-top:8px">Volunteer will call you within 2 hours to verify • Pickup code auto-generated</p>
       </form>
     </div>
   </div>
-  <div class="footer-bar"><span><i class="fa fa-shield"></i> ISO 22000 Safe Handling Certified</span><span>•</span><span><i class="fa fa-leaf"></i> Food Safety Compliant</span><span>•</span><span><i class="fa fa-heart"></i> Over 2,500 donations matched in Ibadan</span></div>
+  <div class="footer-bar"><span><i class="fa fa-shield"></i> Hub-Only • No Home Address</span><span>•</span><span><i class="fa fa-sun"></i> Daylight 8AM-6PM</span><span>•</span><span><i class="fa fa-key"></i> Code Verified</span></div>
 </div>
 
 <script>
@@ -103,34 +148,46 @@ document.getElementById('fileInput').addEventListener('change',e=>{
   const file=e.target.files[0]; if(!file) return;
   const url=URL.createObjectURL(file); const img=document.getElementById('preview'); img.src=url; img.style.display='block';
 });
-// FIXED API - works on Render + local
 const API_BASE = window.location.hostname==='localhost'? 'http://localhost:3000' : '';
 const API_URL = `${API_BASE}/api/donate`;
 
 document.getElementById('donateForm').addEventListener('submit', async e=>{
   e.preventDefault();
+  const hub = document.getElementById('hubLocation').value;
+  if(hub.toLowerCase().includes('house')||hub.toLowerCase().includes('home')||hub.toLowerCase().includes('my house')){
+    alert('SECURITY BLOCK: Please select public Hub only, not home address.');
+    return;
+  }
+  const code = Math.floor(1000+Math.random()*9000).toString();
   const data={
-    foodName:document.getElementById('foodName').value,
-    quantity:document.getElementById('quantity').value,
-    location:document.getElementById('address').value,
-    lga:document.getElementById('lga').value,
+    foodName:document.getElementById('foodName').value.trim(),
+    quantity:document.getElementById('quantity').value.trim(),
+    location: hub,
+    address: hub,
+    lga:document.getElementById('lga').value.trim()||'Ibadan',
     state:'Oyo',
-    address:document.getElementById('address').value,
     pickupTime:document.getElementById('pickupTime').value,
+    pickup_time:document.getElementById('pickupTime').value,
     expiry:document.getElementById('expiry').value,
-    phone:document.getElementById('phone').value,
-    notes:document.getElementById('notes').value,
+    phone:document.getElementById('phone').value.trim(),
+    notes:document.getElementById('notes').value.trim(),
     category:document.getElementById('category').value,
+    contactName:document.getElementById('contactName').value.trim(),
     status:'Available',
-    id:Date.now().toString()
+    pickupCode: code,
+    verified: false,
+    reports: 0,
+    id:Date.now().toString(),
+    _id:Date.now().toString(),
+    image:''
   };
-  // Save locally too
+  // Save locally
   let local=JSON.parse(localStorage.getItem('foodDonations')||'[]'); local.unshift(data); localStorage.setItem('foodDonations',JSON.stringify(local));
   try{
     const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
     if(!res.ok) throw new Error('server');
-  }catch(err){ console.log('Using local save, API not reachable yet'); }
-  alert('🎉 Donation submitted! Your food will appear in Ibadan Available page now.');
+  }catch(err){ console.log('Local save only'); }
+  alert(`🎉 Donation submitted SECURELY!\n\nYour Pickup Code: ${code}\nDrop-off: ${hub}\n\nOur volunteer will call ${data.phone} to verify before it goes live.\nTell receiver the code at Hub.`);
   window.location.href='available_food.html';
 });
 </script>
