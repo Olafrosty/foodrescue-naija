@@ -6,22 +6,26 @@
 <title>Contact Ibadan Hub - FoodRescue Naija</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{--green:#065f46;--emerald:#10b981;--light:#ecfdf5;--bg:#f9fafb}
+:root{--green:#065f46;--dark:#111827;--light:#ecfdf5;--bg:#f9fafb}
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Inter,sans-serif}
 body{background:var(--bg);color:#111}
 a{text-decoration:none;color:inherit}
-nav{padding:14px 5%;display:flex;justify-content:space-between;align-items:center;background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:99}
-.logo{font-weight:900;font-size:22px;line-height:1.1}.logo b{color:var(--green)}
-.badge{border:1px solid var(--green);color:var(--green);padding:2px 10px;border-radius:20px;font-size:10px;letter-spacing:1px;margin-left:6px}
-.nav-links{display:flex;gap:22px;list-style:none;align-items:center;font-size:14px;font-weight:600}
-.btn{padding:10px 18px;border-radius:30px;font-weight:700;cursor:pointer;border:none}
-.btn-outline{border:1.5px solid #222;background:#fff}
-.btn-green{background:var(--green);color:#fff}
+/* HEADER LIKE SCREENSHOT */
+header{background:#fff;display:flex;justify-content:space-between;align-items:center;padding:14px 5%;position:sticky;top:0;z-index:100;border-bottom:1px solid #eee}
+.logo{font-weight:800;font-size:20px;display:flex;align-items:center;gap:8px}
+.logo b{color:#111}
+.badge{border:1px solid #d1d5db;color:#065f46;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.5px}
+.nav-links{display:flex;gap:24px;list-style:none;align-items:center;font-size:14px;font-weight:500;color:#374151}
+.nav-links a.active{border-bottom:2px solid var(--green);padding-bottom:2px;font-weight:700;color:#111}
+.btn-donate{background:var(--dark);color:#fff;padding:10px 18px;border-radius:24px;font-weight:700;font-size:14px}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hamburger span{width:24px;height:3px;background:#111;display:block;border-radius:3px}
+/* HERO */
 .hero{background:linear-gradient(135deg,#064e3b 0%,#065f46 40%,#10b981 100%);color:#fff;padding:55px 5% 80px;position:relative;overflow:hidden}
 .hero h1{font-size:48px;line-height:1.05;max-width:550px;font-weight:900}
 .hero p{margin:14px 0 22px;max-width:540px;opacity:.9;font-size:15px}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
-.hero-actions .btn{background:#fff;color:var(--green)}
+.hero-actions .btn{background:#fff;color:var(--green);padding:10px 18px;border-radius:30px;font-weight:700}
 .hero-actions .btn.dark{background:transparent;border:1.5px solid #fff;color:#fff}
 .hero-cards{display:flex;gap:14px;margin-top:30px;margin-bottom:-110px;position:relative;z-index:2;flex-wrap:wrap}
 .h-card{background:rgba(255,255,255,.85);backdrop-filter:blur(12px);color:#111;padding:14px;border-radius:14px;min-width:220px;flex:1;box-shadow:0 10px 30px rgba(0,0,0,.1)}
@@ -32,39 +36,37 @@ nav{padding:14px 5%;display:flex;justify-content:space-between;align-items:cente
 .card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 24px rgba(0,0,0,.05);border:1px solid #eef2f7}
 label{font-weight:600;font-size:13px;margin:12px 0 4px;display:block}
 input,textarea,select{width:100%;padding:12px 14px;border:1.5px solid #e5e7eb;border-radius:10px;outline:none;font-size:14px}
-input:focus,textarea:focus,select:focus{border-color:var(--emerald)}
-.btn-send{width:100%;background:var(--green);color:#fff;padding:14px;border-radius:12px;margin-top:14px;font-size:16px;border:none;cursor:pointer}
+input:focus,textarea:focus,select:focus{border-color:#10b981}
+.btn-send{width:100%;background:var(--green);color:#fff;padding:14px;border-radius:12px;margin-top:14px;font-size:16px;border:none;cursor:pointer;font-weight:700}
 .map{height:320px;background:#f1f5f9;border-radius:12px;position:relative;overflow:hidden;border:1px solid #e2e8f0}
 .map iframe{width:100%;height:100%;border:0}
 .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .tags span{background:var(--green);color:#fff;padding:5px 10px;border-radius:6px;font-size:12px;font-weight:700}
 .cta{background:linear-gradient(135deg,var(--green),#6ee7b7);color:#fff;padding:18px;border-radius:14px;margin-top:20px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
-.hamburger span{width:24px;height:3px;background:#111;display:block;border-radius:3px}
 @media(max-width:900px){
  .main{grid-template-columns:1fr;margin-top:60px}
  .hero h1{font-size:34px}
  .nav-links{display:none}
  .hamburger{display:flex}
- .nav-links.active{display:flex;position:fixed;top:62px;left:0;right:0;background:#fff;flex-direction:column;padding:20px;box-shadow:0 10px 20px rgba(0,0,0,.1)}
+ .nav-links.active{display:flex;position:fixed;top:62px;left:0;right:0;background:#fff;flex-direction:column;align-items:flex-start;padding:20px;box-shadow:0 10px 20px rgba(0,0,0,.1)}
  .hero-cards{margin-bottom:0;flex-direction:column}
 }
 </style>
 </head>
 <body>
 
-<nav>
-  <div style="display:flex;align-items:center"><div class="logo"><b>FoodRescue<br>Naija</b></div><span class="badge">IBADAN HUB</span></div>
+<header>
+  <div class="logo"><span>FoodRescue Naija</span> <span class="badge">IBADAN HUB</span></div>
   <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
   <ul class="nav-links" id="nav">
     <li><a href="/index.html">Home</a></li>
-    <li><a href="/donate_food.html">Donate Food</a></li>
+    <li><a href="/available_food.html">Available Food</a></li>
+    <li><a href="/dashboard.html">Dashboard</a></li>
     <li><a href="/impact.html">Impact</a></li>
-    <li><a href="/contact.html" style="border-bottom:2px solid var(--green);padding-bottom:2px">Contact</a></li>
-    <li><a class="btn btn-outline" href="/donate_food.html">Donate Now</a></li>
-    <li><a class="btn btn-green" href="https://wa.me/2348101423991">Become Volunteer</a></li>
+    <li><a href="/contact.html" class="active">Contact</a></li>
+    <li><a class="btn-donate" href="/donate_food.html">Donate Food</a></li>
   </ul>
-</nav>
+</header>
 
 <section class="hero">
   <h1>Get in Touch with the Ibadan Hub</h1>
@@ -96,7 +98,6 @@ input:focus,textarea:focus,select:focus{border-color:var(--emerald)}
       <p id="status" style="text-align:center;margin-top:12px;font-size:13px;font-weight:700"></p>
     </form>
   </div>
-
   <div>
     <div class="card">
       <h2>Our Ibadan Hub Location</h2><p style="font-size:13px;color:#666">Conveniently located in Dugbe, central Ibadan</p>
@@ -123,7 +124,7 @@ document.getElementById('form').addEventListener('submit', async (e)=>{
   const btn=document.getElementById('sendBtn'); const status=document.getElementById('status');
   const data={ name:document.getElementById('name').value.trim(), phone:document.getElementById('phone').value.trim(), email:document.getElementById('email').value.trim(), message:document.getElementById('msg').value.trim(), helpType:document.getElementById('helpType').value, date:new Date().toISOString() };
   btn.disabled=true; btn.innerHTML='Sending...';
-  try{ const res=await fetch(`${API_BASE}/api/contact`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}); if(res.ok){ status.style.color='#065f46'; status.textContent='✅ Message sent! We will reply within 2 hours.'; } else throw new Error(); }catch{ status.style.color='#d97706'; status.textContent='⚠️ Saved offline.'; let local=JSON.parse(localStorage.getItem('contactMessages')||'[]'); local.unshift(data); localStorage.setItem('contactMessages', JSON.stringify(local)); }
+  try{ const res=await fetch(`${API_BASE}/api/contact`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}); if(res.ok){ status.style.color='#065f46'; status.textContent='✅ Message sent! We will reply within 2 hours.'; } else throw new Error(); }catch{ status.style.color='#d97706'; status.textContent='⚠️ Saved offline.'; }
   e.target.reset(); btn.disabled=false; btn.innerHTML='Send Message <i class="fa fa-paper-plane"></i>';
 });
 </script>
