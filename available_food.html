@@ -10,14 +10,12 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 body{background:#f8faf8;color:#222}
 a{text-decoration:none;color:inherit}
-/* HEADER */
 header{background:var(--dark);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:14px 5%;position:sticky;top:0;z-index:100}
 .logo{font-weight:800;font-size:22px} .logo span{color:#6ee7b7}
 .nav-links{display:flex;gap:20px;list-style:none;align-items:center}
 .btn-donate{background:#fff;color:var(--dark);padding:8px 16px;border-radius:20px;font-weight:700}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
 .hamburger span{width:26px;height:3px;background:#fff;border-radius:3px;transition:.3s}
-/* HERO TOP */
 .hero{padding:22px 5%;background:#fff;border-bottom:1px solid #eee}
 .hero h2{color:var(--dark);font-size:22px} .hero p{color:#666;font-size:13px}
 .location{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--green);margin-bottom:8px;font-weight:600}
@@ -28,32 +26,23 @@ header{background:var(--dark);color:#fff;display:flex;justify-content:space-betw
 .pills{display:flex;gap:8px;flex-wrap:wrap}
 .pill{padding:8px 14px;border:1.5px solid #d1d5db;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;background:#fff;transition:.2s}
 .pill.active{background:var(--green);color:#fff;border-color:var(--green)}
-.pill:hover{border-color:var(--green)}
-/* GRID */
-.feed{padding:24px 5%;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
-.food-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.06);border:1px solid #eef2f7;transition:.25s;display:flex;flex-direction:column}
-.food-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.1)}
-.img-wrap{height:180px;position:relative;background:#f3f4f6;overflow:hidden}
+.feed{padding:24px 5%;display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.food-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.06);border:1px solid #eef2f7;display:flex;flex-direction:column}
+.img-wrap{height:170px;position:relative;background:#f3f4f6}
 .img-wrap img{width:100%;height:100%;object-fit:cover}
-.badge{position:absolute;top:10px;right:10px;font-size:10px;font-weight:800;padding:5px 10px;border-radius:20px;letter-spacing:.5px;color:#fff}
-.b-available{background:var(--green)} .b-soon{background:var(--orange)} .b-claimed{background:#6b7280}
+.badge{position:absolute;top:10px;right:10px;font-size:10px;font-weight:800;padding:5px 10px;border-radius:20px;color:#fff}
+.b-available{background:var(--green)} .b-claimed{background:#6b7280}
 .body{padding:14px 16px;flex:1;display:flex;flex-direction:column}
-.body h3{font-size:15px;margin-bottom:4px;color:#111}
+.body h3{font-size:15px;color:#111}
 .meta{font-size:12px;color:#6b7280;display:flex;gap:10px;flex-wrap:wrap;margin:6px 0}
 .meta i{color:var(--green)}
 .actions{margin-top:auto;display:flex;gap:8px;padding-top:12px}
 .btn-claim{flex:1;background:var(--green);color:#fff;border:none;padding:11px;border-radius:10px;font-weight:700;cursor:pointer}
-.btn-claim:disabled{background:#9ca3af;cursor:not-allowed}
+.btn-claim:disabled{background:#9ca3af}
 .btn-call{padding:11px 14px;background:#fff;border:1.5px solid var(--green);color:var(--green);border-radius:10px;cursor:pointer}
-.empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:#888;background:#fff;border-radius:16px}
-footer{background:var(--dark);color:#fff;padding:35px 5% 15px;margin-top:30px}
-@media(max-width:768px){
- .hamburger{display:flex}
- .nav-links{position:fixed;top:60px;right:-100%;flex-direction:column;align-items:flex-start;background:var(--dark);width:80%;height:100vh;padding:30px;transition:.35s}
- .nav-links.active{right:0}
- .feed{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
- .img-wrap{height:140px}
-}
+.empty{grid-column:1/-1;text-align:center;padding:60px 20px;background:#fff;border-radius:16px;color:#666}
+footer{background:var(--dark);color:#fff;padding:20px;text-align:center;font-size:12px;color:#a7f3d0;margin-top:30px}
+@media(max-width:768px){.hamburger{display:flex}.nav-links{position:fixed;top:60px;right:-100%;flex-direction:column;background:var(--dark);width:80%;height:100vh;padding:30px;transition:.35s}.nav-links.active{right:0}.feed{grid-template-columns:1fr 1fr;gap:12px}.img-wrap{height:130px}}
 </style>
 </head>
 <body>
@@ -61,90 +50,133 @@ footer{background:var(--dark);color:#fff;padding:35px 5% 15px;margin-top:30px}
 <header>
   <div class="logo">FoodRescue <span>Naija</span></div>
   <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
-  <ul class="nav-links" id="navLinks">
+  <ul class="nav-links" id="nav">
     <li><a href="/index.html">Home</a></li>
     <li><a href="/available_food.html" style="border-bottom:2px solid #6ee7b7">Available Food</a></li>
-    <li><a href="/map_view.html">Map View</a></li>
     <li><a href="/dashboard.html">Dashboard</a></li>
-    <li><a href="/contact.html">Contact</a></li>
+    <li><a href="/impact.html">Impact</a></li>
     <li><a class="btn-donate" href="/donate_food.html">Donate Food</a></li>
   </ul>
 </header>
 
 <div class="hero">
-  <div class="location"><i class="fa fa-location-dot"></i> Ibadan, Nigeria • Bodija Market Area • Oyo State</div>
+  <div class="location"><i class="fa fa-location-dot"></i> Ibadan, Oyo State • Bodija • Dugbe • Ogbomoso</div>
   <h2><i class="fa fa-utensils"></i> Food Donations Near You</h2>
-  <p id="countText">Loading donations... helping communities across Ibadan</p>
+  <p id="countText">Loading fresh donations across Ibadan...</p>
   <div class="filters">
-    <div class="search-box"><i class="fa fa-search"></i><input type="text" id="search" placeholder="Search rice, bread, vegetables..."></div>
+    <div class="search-box"><i class="fa fa-search"></i><input id="search" placeholder="Search rice, bread, vegetables..."></div>
     <div class="pills" id="pills">
       <span class="pill active" data-filter="All">All</span>
       <span class="pill" data-filter="Rice">Rice</span>
       <span class="pill" data-filter="Bread">Bread</span>
       <span class="pill" data-filter="Vegetables">Vegetables</span>
-      <span class="pill" data-filter="Fruits">Fruits</span>
-      <span class="pill" data-filter="Cooked">Cooked Meals</span>
+      <span class="pill" data-filter="Cooked">Cooked</span>
     </div>
-    <select id="stateFilter" style="padding:10px;border-radius:20px;border:1.5px solid #d1fae5"><option value="">All States</option><option selected>Oyo</option><option>Lagos</option><option>Rivers</option><option>Abuja FCT</option></select>
   </div>
 </div>
 
 <div class="feed" id="foodContainer"></div>
 
-<footer><div style="text-align:center;font-size:12px;color:#a7f3d0">© 2026 FoodRescue Naija • Ibadan Hub • Reducing Waste, Feeding Oyo State</div></footer>
+<footer>© 2026 FoodRescue Naija • Ibadan Hub • Reducing Waste, Feeding Oyo State</footer>
+
 <script>
+const ham=document.getElementById('ham'), nav=document.getElementById('nav');
+ham.onclick=()=>{ham.classList.toggle('active');nav.classList.toggle('active')};
+
 const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:3000' : '';
 const API_URL = `${API_BASE}/api/foods`;
+let allFoods = [];
 
-async function loadFoods() {
-  let apiFoods = [];
-  try {
-    const res = await fetch(API_URL);
-    if (res.ok) apiFoods = await res.json();
-  } catch (e) { console.log('API offline, using local'); }
+function getLocal() { try{return JSON.parse(localStorage.getItem('foodDonations')||'[]')}catch{return []} }
+function saveLocal(data){ localStorage.setItem('foodDonations', JSON.stringify(data)); }
 
-  // Also get local donations (so you see your own donation even if Render sleeps)
-  let localFoods = [];
-  try { localFoods = JSON.parse(localStorage.getItem('foodDonations') || '[]'); } catch {}
+async function loadFoods(){
+  let apiFoods=[];
+  try{
+    const r=await fetch(API_URL);
+    if(r.ok) apiFoods=await r.json();
+  }catch(e){ console.log('API offline'); }
 
-  // Merge both, remove duplicates by id
-  const all = [...localFoods, ...apiFoods];
-  const unique = [];
-  const seen = new Set();
-  for (const f of all) {
-    const id = f.id || f._id;
-    if (!seen.has(id)) { seen.add(id); unique.push(f); }
-  }
+  const localFoods=getLocal();
+  const merged=[...localFoods, ...apiFoods];
+  const map=new Map();
+  merged.forEach(f=>{
+    const id=f.id||f._id||f.foodName+ (f.date||'');
+    if(!map.has(id)) map.set(id,f);
+  });
+  allFoods=Array.from(map.values()).sort((a,b)=> new Date(b.date||0)-new Date(a.date||0));
+  
+  render(allFoods);
+}
 
-  // Now render
-  const container = document.getElementById('foodGrid') || document.getElementById('foods') || document.querySelector('.grid');
-  if (!container) return;
-
-  if (unique.length === 0) {
-    container.innerHTML = `<p style="text-align:center;padding:40px;color:#666">No donations yet in Ibadan. Be the first to donate!</p>`;
+function render(list){
+  const container=document.getElementById('foodContainer');
+  document.getElementById('countText').textContent = `${list.length} donations available in Ibadan • Helping Oyo State`;
+  
+  if(list.length===0){
+    container.innerHTML=`<div class="empty"><i class="fa fa-bowl-rice" style="font-size:32px;color:#0f7a4a;margin-bottom:10px"></i><h3>No food yet</h3><p>Be the first to donate in Bodija, Dugbe or Ogbomoso</p><br><a href="/donate_food.html" style="background:#064e3b;color:#fff;padding:10px 18px;border-radius:20px;font-weight:700">Donate Food Now</a></div>`;
     return;
   }
 
-  container.innerHTML = unique.map(food => `
-    <div style="background:#fff;padding:16px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.06);border:1px solid #e5e7eb">
-      <h4 style="color:#064e3b">${food.foodName || food.name || 'Food Donation'}</h4>
-      <p style="font-size:13px;color:#555;margin:6px 0"><b>Qty:</b> ${food.quantity || '-'} <br><b>Location:</b> ${food.location || food.address || food.lga || 'Ibadan'} <br><b>Pickup:</b> ${food.pickupTime || food.pickup_time || '-'}</p>
-      <p style="font-size:11px;color:#888">${food.state || 'Oyo'} • ${food.status || 'Available'}</p>
-      <button onclick="claimFood('${food.id || food._id}')" style="margin-top:8px;padding:8px 14px;background:#064e3b;color:#fff;border:none;border-radius:20px;font-weight:700;cursor:pointer">Claim</button>
-    </div>
-  `).join('');
+  container.innerHTML=list.map(food=>{
+    const status=food.status||'Available';
+    const isClaimed=status==='Claimed';
+    const name=food.foodName||food.name||'Food Donation';
+    const qty=food.quantity||'1 plate';
+    const loc=food.location||food.address||food.lga||'Ibadan';
+    const state=food.state||'Oyo';
+    const time=food.pickupTime||food.pickup_time||'ASAP';
+    const img=food.image||`https://source.unsplash.com/400x300/?${encodeURIComponent(name)},food,nigeria`;
+    const cat=(food.category||name).toLowerCase();
+    return `
+    <div class="food-card" data-cat="${cat}" data-name="${name.toLowerCase()} ${loc.toLowerCase()}">
+      <div class="img-wrap">
+        <img src="${img}" onerror="this.src='https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400'">
+        <span class="badge ${isClaimed?'b-claimed':'b-available'}">${status}</span>
+      </div>
+      <div class="body">
+        <h3>${name}</h3>
+        <div class="meta"><span><i class="fa fa-weight-scale"></i> ${qty}</span><span><i class="fa fa-location-dot"></i> ${loc}</span></div>
+        <div class="meta"><span><i class="fa fa-clock"></i> ${time}</span><span><i class="fa fa-map"></i> ${state}</span></div>
+        <div class="actions">
+          <button class="btn-claim" ${isClaimed?'disabled':''} onclick="claimFood('${food.id||food._id}')">${isClaimed?'Claimed':'Claim Food'}</button>
+          <a class="btn-call" href="tel:${food.phone||''}"><i class="fa fa-phone"></i></a>
+        </div>
+      </div>
+    </div>`
+  }).join('');
 }
 
-async function claimFood(id) {
-  try {
-    await fetch(`${API_URL}/${id}/claim`, { method: 'PUT' });
-  } catch {}
-  // Update local too
-  let local = JSON.parse(localStorage.getItem('foodDonations')||'[]');
-  local = local.map(f => (f.id==id || f._id==id) ? {...f, status:'Claimed'} : f);
-  localStorage.setItem('foodDonations', JSON.stringify(local));
-  loadFoods();
+async function claimFood(id){
+  // Update local
+  let local=getLocal();
+  local=local.map(f=> (f.id==id||f._id==id)?{...f,status:'Claimed'}:f);
+  saveLocal(local);
+  
+  try{ await fetch(`${API_URL}/${id}/claim`,{method:'PUT'}); }catch{}
+  allFoods=allFoods.map(f=> (f.id==id||f._id==id)?{...f,status:'Claimed'}:f);
+  render(filterNow());
 }
+
+function filterNow(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const active=document.querySelector('.pill.active')?.dataset.filter||'All';
+  return allFoods.filter(f=>{
+    const name=(f.foodName||f.name||'').toLowerCase() + ' ' + (f.location||'').toLowerCase();
+    const matchSearch=name.includes(q);
+    const cat=(f.category||f.foodName||'').toLowerCase();
+    const matchCat=active==='All'||cat.includes(active.toLowerCase());
+    return matchSearch&&matchCat;
+  });
+}
+
+document.getElementById('search').addEventListener('input',()=>render(filterNow()));
+document.getElementById('pills').addEventListener('click',e=>{
+  if(!e.target.classList.contains('pill'))return;
+  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+  e.target.classList.add('active');
+  render(filterNow());
+});
 
 loadFoods();
 </script>
