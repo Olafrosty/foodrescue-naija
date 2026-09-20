@@ -3,155 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Us - FoodRescue Naija</title>
+<title>Contact Ibadan Hub - FoodRescue Naija</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
-body{background:#f8faf8;color:#222;line-height:1.6;}
-a{text-decoration:none;color:inherit;}
-header{background:#2e7d32;color:white;display:flex;justify-content:space-between;align-items:center;padding:14px 5%;position:sticky;top:0;z-index:1000;}
-.logo{font-weight:800;font-size:22px;}.logo span{color:#a5d6a7;}
-.nav-links{display:flex;gap:24px;list-style:none;align-items:center;}
-.nav-links a{color:white;font-weight:500;font-size:15px;}
-.nav-links .btn-donate{background:white;color:#2e7d32;padding:8px 16px;border-radius:20px;font-weight:700;}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1100;}
-.hamburger span{width:26px;height:3px;background:white;border-radius:3px;transition:0.3s;}
-.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,6px);}
-.hamburger.active span:nth-child(2){opacity:0;}
-.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-6px);}
+:root{--green:#065f46;--emerald:#10b981;--light:#ecfdf5;--bg:#f9fafb}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Inter,sans-serif}
+body{background:var(--bg);color:#111}
+a{text-decoration:none;color:inherit}
 
-/* CONTACT */
-.container{padding:40px 5%;}
-.title{text-align:center;margin-bottom:25px;}
-.title h2{color:#1b5e20;font-size:28px;}
-.title p{color:#666;font-size:14px;}
-.grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:25px;max-width:1100px;margin:0 auto;}
-.card{background:white;padding:25px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.06);}
-.card h3{color:#1b5e20;margin-bottom:12px;}
-label{display:block;font-weight:600;margin:12px 0 5px;font-size:14px;}
-input, textarea{width:100%;padding:11px 14px;border:1.5px solid #c8e6c9;border-radius:8px;outline:none;font-size:14px;}
-input:focus, textarea:focus{border-color:#2e7d32;}
-.btn{padding:12px 20px;border:none;border-radius:8px;font-weight:700;cursor:pointer;}
-.btn-send{background:#2e7d32;color:white;width:100%;margin-top:14px;}
-.info-item{display:flex;gap:12px;margin:16px 0;font-size:14px;}
-.info-item i{width:36px;height:36px;background:#e8f5e9;color:#2e7d32;display:flex;align-items:center;justify-content:center;border-radius:50%;}
-.socials{display:flex;gap:12px;margin-top:12px;}
-.socials a{width:38px;height:38px;background:#e8f5e9;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#2e7d32;transition:0.3s;}
-.socials a:hover{background:#2e7d32;color:white;}
-.whatsapp{display:block;margin-top:18px;padding:12px;background:#25D366;color:white;text-align:center;border-radius:8px;font-weight:700;}
+/* NAV */
+nav{padding:14px 5%;display:flex;justify-content:space-between;align-items:center;background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:99}
+.logo{font-weight:900;font-size:22px;line-height:1.1}.logo b{color:var(--green)}
+.badge{border:1px solid var(--green);color:var(--green);padding:2px 10px;border-radius:20px;font-size:10px;letter-spacing:1px;margin-left:6px}
+.nav-links{display:flex;gap:22px;list-style:none;align-items:center;font-size:14px;font-weight:600}
+.btn{padding:10px 18px;border-radius:30px;font-weight:700;cursor:pointer;border:none}
+.btn-outline{border:1.5px solid #222;background:#fff}
+.btn-green{background:var(--green);color:#fff}
 
-footer{background:#1b5e20;color:white;padding:35px 5% 15px;margin-top:40px;}
-.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;}
-footer h4{margin-bottom:10px;color:#a5d6a7;} footer li{list-style:none;font-size:14px;color:#dcedc8;line-height:1.8;}
-.footer-socials{display:flex;gap:12px;margin-top:10px;}
-.footer-socials a{width:35px;height:35px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;border-radius:50%;}
-.copy{text-align:center;margin-top:20px;border-top:1px solid rgba(255,255,255,0.15);padding-top:12px;font-size:12px;color:#a5d6a7;}
+/* HERO */
+.hero{background:linear-gradient(135deg,#064e3b 0%,#065f46 40%,#10b981 100%);color:#fff;padding:55px 5% 80px;position:relative;overflow:hidden}
+.hero h1{font-size:48px;line-height:1.05;max-width:550px;font-weight:900}
+.hero p{margin:14px 0 22px;max-width:540px;opacity:.9;font-size:15px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-actions .btn{background:#fff;color:var(--green)}
+.hero-actions .btn.dark{background:transparent;border:1.5px solid #fff;color:#fff}
+.hero-cards{display:flex;gap:14px;margin-top:30px;margin-bottom:-110px;position:relative;z-index:2;flex-wrap:wrap}
+.h-card{background:rgba(255,255,255,.85);backdrop-filter:blur(12px);color:#111;padding:14px;border-radius:14px;min-width:220px;flex:1;box-shadow:0 10px 30px rgba(0,0,0,.1)}
+.h-card b{display:inline-block;background:#fff;padding:2px 8px;border-radius:6px;font-size:12px;margin-bottom:6px;border:1px solid #ddd}
+.h-card p{font-size:13px;line-height:1.4}
+.h-card i{width:30px;height:30px;background:var(--green);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:6px}
 
-@media(max-width:900px){ .grid{grid-template-columns:1fr;} }
-@media(max-width:768px){
- .hamburger{display:flex;}
- .nav-links{position:fixed;top:60px;right:-100%;flex-direction:column;align-items:flex-start;background:#2e7d32;width:80%;height:100vh;padding:30px;transition:0.35s;z-index:1001;}
- .nav-links.active{right:0;}
+/* MAIN */
+.main{max-width:1250px;margin:90px auto 0;padding:0 5% 40px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px}
+.card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 24px rgba(0,0,0,.05);border:1px solid #eef2f7}
+label{font-weight:600;font-size:13px;margin:12px 0 4px;display:block}
+input,textarea,select{width:100%;padding:12px 14px;border:1.5px solid #e5e7eb;border-radius:10px;outline:none;font-size:14px}
+input:focus,textarea:focus,select:focus{border-color:var(--emerald)}
+.btn-send{width:100%;background:var(--green);color:#fff;padding:14px;border-radius:12px;margin-top:14px;font-size:16px}
+.map{height:320px;background:#f1f5f9;border-radius:12px;position:relative;overflow:hidden;border:1px solid #e2e8f0}
+.map iframe{width:100%;height:100%;border:0}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.tags span{background:var(--green);color:#fff;padding:5px 10px;border-radius:6px;font-size:12px;font-weight:700}
+.cta{background:linear-gradient(135deg,var(--green),#6ee7b7);color:#fff;padding:18px;border-radius:14px;margin-top:20px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hamburger span{width:24px;height:3px;background:#111;display:block;border-radius:3px}
+@media(max-width:900px){
+ .main{grid-template-columns:1fr;margin-top:60px}
+ .hero h1{font-size:34px}
+ .nav-links{display:none}
+ .hamburger{display:flex}
+ .nav-links.active{display:flex;position:fixed;top:62px;left:0;right:0;background:#fff;flex-direction:column;padding:20px;box-shadow:0 10px 20px rgba(0,0,0,.1)}
+ .hero-cards{margin-bottom:0;flex-direction:column}
 }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">FoodRescue <span>Naija</span></div>
-  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="/index.html">Home</a></li>
-    <li><a href="/available_food.html">Available_Food</a></li>
-    <li><a href="/map_view.html">Map_View</a></li>
-    <li><a href="dashboard.html">Dashboard</a></li>
-    <li><a href="/impact.html">Impact</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a class="btn-donate" href="/donate_food.html">Donate_Food</a></li>
+<nav>
+  <div style="display:flex;align-items:center"><div class="logo"><b>FoodRescue<br>Naija</b></div><span class="badge">IBADAN HUB</span></div>
+  <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+  <ul class="nav-links" id="nav">
+    <li><a href="/index.html">Home</a></li><li><a href="#">About</a></li><li><a href="/donate_food.html">Donate Food</a></li><li><a href="/impact.html">Impact</a></li><li><a href="/contact.html" style="border-bottom:2px solid var(--green)">Contact</a></li>
+    <li><a class="btn btn-outline" href="#">Donate Now</a></li>
+    <li><a class="btn btn-green" href="#">Become Volunteer</a></li>
   </ul>
-</header>
+</nav>
 
-<div class="container">
-  <div class="title">
-    <h2>Contact FoodRescue Naija</h2>
-    <p>Have surplus food? Need help? Want to partner as NGO? Reach us — 100% FREE, fast response.</p>
+<section class="hero">
+  <h1>Get in Touch with the Ibadan Hub</h1>
+  <p>Have food to donate? Want to volunteer or partner with us? We're here to coordinate rescue and redistribute surplus food across Ibadan communities.</p>
+  <div class="hero-actions">
+    <a class="btn" href="tel:+2348101423991"><i class="fa fa-phone"></i> Call Us Now +234 810 142 3991</a>
+    <a class="btn dark" href="mailto:hello@foodrescuenaija.ng"><i class="fa fa-envelope"></i> Email the Team</a>
+  </div>
+  <div class="hero-cards">
+    <div class="h-card"><i class="fa fa-location-dot"></i><br><b>Hub Address</b><p>No. 12, Awolowo Avenue, Dugbe, Ibadan, Oyo State, Nigeria</p></div>
+    <div class="h-card"><i class="fa fa-clock"></i><br><b>Hours</b><p>Mon - Sat: 8:00am - 6:00pm<br>Sun • Emergency: 9am - 4pm</p></div>
+    <div class="h-card"><i class="fa fa-comment-dots"></i><br><b>Response Time</b><p>We respond within 2 hours<br>Weekdays • Fast support via email & WhatsApp</p></div>
+  </div>
+</section>
+
+<div class="main">
+  <div class="card">
+    <h2>Send us a Message</h2><p style="color:#666;font-size:13px;margin-bottom:10px">We'll get back to you as soon as possible.</p>
+    <form id="form">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div><label>Full Name</label><input required id="name" placeholder="Adaora Olamide"></div>
+        <div><label>Phone Number (optional)</label><input id="phone" placeholder="+234 812 345 6789"></div>
+      </div>
+      <label>Email Address</label><input required type="email" id="email" placeholder="adaora@email.com">
+      <label>Your Message</label><textarea required id="msg" rows="4" placeholder="I have surplus cooked food from a catering event at Jericho, about 50 meals available..."></textarea>
+      <label>How can we help?</label>
+      <select><option>Donate Food</option><option>Need Food / NGO</option><option>Volunteer</option><option>Partnership</option></select>
+      <button class="btn btn-send">Send Message <i class="fa fa-paper-plane"></i></button>
+      <p id="status" style="text-align:center;margin-top:10px;font-size:13px;color:var(--green)"></p>
+    </form>
   </div>
 
-  <div class="grid">
+  <div>
     <div class="card">
-      <h3><i class="fa fa-envelope"></i> Send Us a Message</h3>
-      <form id="contactForm">
-        <label>Full Name *</label>
-        <input type="text" id="name" required placeholder="Your name">
-        <label>Email *</label>
-        <input type="email" id="email" required placeholder="you@email.com">
-        <label>Phone (WhatsApp)</label>
-        <input type="tel" id="phone" placeholder="080....">
-        <label>Message *</label>
-        <textarea id="message" rows="5" required placeholder="How can we help you? I have surplus food / I need food / I am an NGO..."></textarea>
-        <button type="submit" class="btn btn-send">Send Message</button>
-      </form>
-      <p id="status" style="font-size:13px;color:#2e7d32;margin-top:10px;text-align:center;"></p>
+      <h2>Our Ibadan Hub Location</h2><p style="font-size:13px;color:#666">Conveniently located in Dugbe, central Ibadan</p>
+      <div class="map" style="margin-top:12px">
+        <iframe src="https://www.google.com/maps?q=Dugbe,Ibadan,Oyo+State&z=15&output=embed"></iframe>
+      </div>
+      <h3 style="margin-top:16px">Nearby Areas We Serve</h3>
+      <div class="tags"><span>Dugbe</span><span>Challenge</span><span>Bodija</span><span>UI Campus</span><span>Ring Road</span><span>Mokola</span><span>Ogbomoso</span></div>
     </div>
-
-    <div class="card">
-      <h3><i class="fa fa-location-dot"></i> Reach Us Directly</h3>
-      <div class="info-item"><i class="fa fa-map-pin"></i><div><b>Lagos Hub</b><br>Yaba, Lagos State, Nigeria</div></div>
-      <div class="info-item"><i class="fa fa-map-pin"></i><div><b>Port Harcourt Hub</b><br>Rumuola, Rivers State, Nigeria</div></div>
-      <div class="info-item"><i class="fa fa-map-pin"></i><div><b>Ibadan, oyo</b><br>ogbomosho oyo State, Nigeria</div></div>
-      
-      <div class="info-item"><i class="fa fa-phone"></i><div><b>Phone / WhatsApp</b><br>+234 8101423991</div></div>
-      <div class="info-item"><i class="fa fa-envelope"></i><div><b>Email</b><br>hello@foodrescuenaija.ng</div></div>
-      
-      <h4 style="margin-top:18px;color:#1b5e20;">Follow Us</h4>
-      <div class="socials">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-      </div>
-
-      <a class="whatsapp" href="https://wa.me/2348101423991?text=Hello%20FoodRescue%20Naija%20I%20want%20to%20donate%2Freceive%20food" target="_blank"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
-
-      <div style="margin-top:18px;background:#e8f5e9;padding:12px;border-radius:8px;font-size:13px;color:#2e7d32;">
-        <b>For NGOs:</b> Message us on WhatsApp to get verified instantly and receive priority food alerts in your state.
-      </div>
+    <div class="cta">
+      <div><b>Want to partner with FoodRescue Naija?</b><br><span style="font-size:13px">Join 120+ restaurants, markets & volunteers reducing food waste across Ibadan.</span></div>
+      <a href="https://wa.me/2348101423991" style="background:#fff;color:var(--green);padding:8px 14px;border-radius:20px;font-weight:700;white-space:nowrap">Partner With Us →</a>
     </div>
   </div>
 </div>
 
-<footer>
-  <div class="footer-grid">
-    <div><h4>FoodRescue Naija</h4><p>Reducing waste, feeding Nigeria. Free platform.</p><div class="footer-socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div></div>
-    <div><h4>Quick Links</h4><li><a href="/index.html">Home</a></li><li><a href="/donate_food.html">Donate</a></li><li><a href="/available_food.html">Available</a></li><li><a href="contact.html">Contact</a></li></div>
-    <div><h4>Support</h4><li>Lagos, Nigeria</li><li>Rivers, Nigeria</li><li>hello@foodrescuenaija.ng</li></div>
-  </div>
-  <div class="copy">© 2026 FoodRescue Naija.</div>
-</footer>
+<footer style="background:#111;color:#fff;padding:20px 5%;text-align:center;font-size:12px;margin-top:20px">© 2026 FoodRescue Naija • Reducing Food Waste, Feeding Ibadan • Dugbe, Ibadan, Oyo State</footer>
 
 <script>
-// HAMBURGER
-const hamburger=document.getElementById('hamburger');
-const navLinks=document.getElementById('navLinks');
-hamburger.addEventListener('click',()=>{hamburger.classList.toggle('active');navLinks.classList.toggle('active');});
-document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('active');navLinks.classList.remove('active');}));
-
-// CONTACT FORM - Save to LocalStorage
-document.getElementById('contactForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  const msg = {
-    id: Date.now(),
-    name: document.getElementById('name').value,
-    email: document.getElementById('email').value,
-    phone: document.getElementById('phone').value,
-    message: document.getElementById('message').value,
-    date: new Date().toLocaleString()
-  };
-  let msgs = JSON.parse(localStorage.getItem('contactMessages') || '[]');
-  msgs.unshift(msg);
-  localStorage.setItem('contactMessages', JSON.stringify(msgs));
-  document.getElementById('status').textContent = "Message sent! We will reply on WhatsApp/Email ASAP. Thank you! 🎉";
-  this.reset();
+document.getElementById('ham').onclick=()=>document.getElementById('nav').classList.toggle('active');
+document.getElementById('form').addEventListener('submit',e=>{
+ e.preventDefault();
+ const data={name:document.getElementById('name').value,email:document.getElementById('email').value,phone:document.getElementById('phone').value,message:document.getElementById('msg').value,date:new Date().toLocaleString()};
+ let arr=JSON.parse(localStorage.getItem('contactMessages')||'[]'); arr.unshift(data); localStorage.setItem('contactMessages',JSON.stringify(arr));
+ document.getElementById('status').textContent="✅ Message sent! We will reply within 2 hours.";
+ e.target.reset();
 });
 </script>
 </body>
