@@ -6,8 +6,6 @@ const path = require('path');
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-// Serve ALL html files from root folder (where server.js is)
 app.use(express.static(__dirname));
 
 const DB_FILE = path.join(__dirname, 'foods.json');
@@ -19,7 +17,7 @@ const getFoods = () => {
 };
 const saveFoods = (data) => fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
 
-// --- API ROUTES ---
+// API
 app.get('/api/foods', (req, res) => res.json(getFoods()));
 
 app.post('/api/donate', (req, res) => {
@@ -29,15 +27,14 @@ app.post('/api/donate', (req, res) => {
     _id: Date.now().toString(),
     foodName: req.body.foodName || 'Food Donation',
     quantity: req.body.quantity,
-    location: req.body.location || req.body.address,
-    lga: req.body.lga || req.body.location || 'Ibadan',
+    location: req.body.location || req.body.address || 'Ibadan',
+    lga: req.body.lga || 'Ibadan',
     state: req.body.state || 'Oyo',
     address: req.body.address || req.body.location,
     pickupTime: req.body.pickupTime,
     expiry: req.body.expiry,
     phone: req.body.phone,
     notes: req.body.notes,
-    category: req.body.category,
     status: 'Available',
     date: new Date().toISOString()
   };
@@ -46,10 +43,9 @@ app.post('/api/donate', (req, res) => {
   res.json({ success: true, food: newFood });
 });
 
-// Support both POST routes
 app.post('/api/foods', (req, res) => {
   const foods = getFoods();
-  foods.unshift({ id: Date.now().toString(), _id: Date.now().toString(), status: 'Available', ...req.body, date: new Date().toISOString() });
+  foods.unshift({ id: Date.now().toString(), status: 'Available', ...req.body, date: new Date().toISOString() });
   saveFoods(foods);
   res.json({ success: true });
 });
@@ -61,25 +57,22 @@ app.put('/api/foods/:id/claim', (req, res) => {
   res.json({ success: true });
 });
 
-// --- FIX FOR Cannot GET / ---
-// Serve index.html for root and all html pages
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-app.get('/dashboard.html', (req, res) => res.sendFile(path.join(__dirname, 'dashboard.html')));
-app.get('/available_food.html', (req, res) => res.sendFile(path.join(__dirname, 'available_food.html')));
-app.get('/donate_food.html', (req, res) => res.sendFile(path.join(__dirname, 'donate_food.html')));
-app.get('/impact.html', (req, res) => res.sendFile(path.join(__dirname, 'impact.html')));
-app.get('/contact.html', (req, res) => res.sendFile(path.join(__dirname, 'contact.html')));
+// PAGES - Express 5 compatible
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
-// Fallback for any other page
-app.get('*', (req, res) => {
-  if (req.path.includes('.html')) {
-    const filePath = path.join(__dirname, req.path);
-    if (fs.existsSync(filePath)) return res.sendFile(filePath);
+// This line fixes Cannot GET / and all html
+app.get('/*splat', (req, res) => {
+  const requestedPath = path.join(__dirname, req.path);
+  // if file exists like /available_food.html serve it
+  if (fs.existsSync(requestedPath) && req.path.endsWith('.html')) {
+    return res.sendFile(requestedPath);
   }
-  res.sendFile(path.join(__dirname, 'index.html'));
+  // otherwise serve index.html
+  if (fs.existsSync(path.join(__dirname, 'index.html'))) {
+    return res.sendFile(path.join(__dirname, 'index.html'));
+  }
+  res.status(404).send('File not found');
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log('FoodRescue running on port', PORT));
+app.listen(PORT, () => console.log('FoodRescue running on', PORT));
