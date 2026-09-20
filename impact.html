@@ -6,14 +6,17 @@
 <title>Our Impact - Ibadan Hub | FoodRescue Naija</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{--green:#0f7a4a;--dark:#064e3b;--light:#ecfdf5}
+:root{--green:#0f7a4a;--dark:#111827;--light:#ecfdf5;--red:#ef4444;--yellow:#f59e0b}
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 body{background:#f8faf8;color:#222;line-height:1.7}
 a{text-decoration:none;color:inherit}
+/* HEADER LIKE SCREENSHOT */
 header{background:#fff;display:flex;justify-content:space-between;align-items:center;padding:14px 5%;position:sticky;top:0;z-index:100;border-bottom:1px solid #e5e7eb}
-.logo{font-weight:900;font-size:20px}.logo span{color:var(--green)}
-.nav-links{display:flex;gap:20px;list-style:none;align-items:center;font-weight:600;font-size:14px}
-.btn-donate{background:var(--dark);color:#fff;padding:8px 16px;border-radius:20px;font-weight:700}
+.logo{font-weight:800;font-size:20px;display:flex;align-items:center;gap:8px}
+.badge{border:1px solid #d1d5db;color:#065f46;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700}
+.nav-links{display:flex;gap:24px;list-style:none;align-items:center;font-size:14px;font-weight:500;color:#374151}
+.nav-links a.active{border-bottom:2px solid #065f46;padding-bottom:2px;font-weight:700;color:#111}
+.btn-donate{background:#111827;color:#fff;padding:10px 18px;border-radius:24px;font-weight:700;font-size:14px}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}.hamburger span{width:24px;height:3px;background:#111;border-radius:3px}
 /* HERO */
 .hero{padding:70px 5% 60px;background:linear-gradient(135deg,#064e3b 0%,#0f7a4a 55%,#10b981 100%);color:#fff;text-align:center;position:relative;overflow:hidden}
@@ -22,6 +25,16 @@ header{background:#fff;display:flex;justify-content:space-between;align-items:ce
 .hero-stats{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:28px}
 .h-stat{background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);padding:12px 18px;border-radius:14px;min-width:150px}
 .h-stat b{font-size:24px;display:block}
+/* SECURITY BANNER */
+.security-notice{background:#fff;border:2px solid #ef4444;border-radius:16px;padding:0;overflow:hidden;margin: -30px auto 30px;max-width:1200px;box-shadow:0 10px 30px rgba(239,68,68,.15);position:relative;z-index:10}
+.security-header{background:linear-gradient(135deg,#991b1b,#ef4444);color:#fff;padding:16px 20px;display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.security-header h2{font-size:18px;font-weight:900;display:flex;align-items:center;gap:10px}
+.security-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0}
+.sec-item{padding:18px 20px;border-bottom:1px solid #fee2e2;border-right:1px solid #fee2e2;display:flex;gap:12px}
+.sec-item i{width:40px;height:40px;min-width:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.sec-item b{font-size:13px;color:#111;display:block;margin-bottom:2px}
+.sec-item p{font-size:12px;color:#555;line-height:1.4}
+.bg-green{background:#dcfce7;color:#166534}.bg-blue{background:#dbeafe;color:#1e40af}.bg-yellow{background:#fef3c7;color:#92400e}.bg-purple{background:#ede9fe;color:#5b21b6}.bg-orange{background:#ffedd5;color:#9a3412}.bg-red{background:#fee2e2;color:#991b1b}.bg-emerald{background:#d1fae5;color:#065f46}
 .section{padding:40px 5%;max-width:1200px;margin:0 auto}
 .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:24px}
 .card{background:#fff;padding:24px;border-radius:16px;box-shadow:0 6px 20px rgba(0,0,0,.06);border:1px solid #eef2f7;text-align:left}
@@ -30,20 +43,20 @@ header{background:#fff;display:flex;justify-content:space-between;align-items:ce
 .sdg b{font-size:28px;min-width:50px;text-align:center}
 .cta{background:linear-gradient(135deg,#064e3b,#10b981);color:#fff;padding:40px;border-radius:20px;text-align:center;margin-top:30px}
 .btn{padding:12px 22px;border-radius:30px;font-weight:700;border:none;cursor:pointer;display:inline-block;margin:6px}
-.btn-primary{background:#fff;color:var(--dark)}.btn-outline{background:transparent;border:2px solid #fff;color:#fff}
-@media(max-width:768px){.hamburger{display:flex}.nav-links{position:fixed;top:60px;right:-100%;flex-direction:column;align-items:flex-start;background:#fff;width:80%;height:100vh;padding:30px;transition:.35s}.nav-links.active{right:0}.hero h1{font-size:30px}.sdg{flex-direction:column}}
+.btn-primary{background:#fff;color:#111}.btn-outline{background:transparent;border:2px solid #fff;color:#fff}
+@media(max-width:768px){.hamburger{display:flex}.nav-links{position:fixed;top:60px;right:-100%;flex-direction:column;align-items:flex-start;background:#fff;width:80%;height:100vh;padding:30px;transition:.35s}.nav-links.active{right:0}.hero h1{font-size:30px}.sdg{flex-direction:column}.security-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">FoodRescue <span>Naija</span> <span style="font-size:10px;border:1px solid var(--green);padding:2px 8px;border-radius:12px;color:var(--green)">IBADAN HUB</span></div>
+  <div class="logo"><span>FoodRescue Naija</span> <span class="badge">IBADAN HUB</span></div>
   <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
   <ul class="nav-links" id="nav">
     <li><a href="/index.html">Home</a></li>
     <li><a href="/available_food.html">Available Food</a></li>
     <li><a href="/dashboard.html">Dashboard</a></li>
-    <li><a href="/impact.html" style="border-bottom:2px solid var(--green)">Impact</a></li>
+    <li><a href="/impact.html" class="active">Impact</a></li>
     <li><a href="/contact.html">Contact</a></li>
     <li><a class="btn-donate" href="/donate_food.html">Donate Food</a></li>
   </ul>
@@ -51,17 +64,60 @@ header{background:#fff;display:flex;justify-content:space-between;align-items:ce
 
 <div class="hero">
   <h1>Zero Waste, Zero Hunger<br>in Ibadan & Oyo State</h1>
-  <p>FoodRescue Naija connects surplus food from Bodija, Dugbe & Ogbomoso to families who need it — 100% FREE, built for SDG 2, 12 & 13.</p>
+  <p>FoodRescue Naija connects surplus food from Bodija, Dugbe & Ogbomoso to families who need it — 100% FREE, built for SDG 2, 12 & 13. <b>Security First.</b></p>
   <div class="hero-stats">
     <div class="h-stat"><b id="h-kg">0 kg</b><small>Food Saved in Ibadan</small></div>
     <div class="h-stat"><b id="h-people">0</b><small>People Fed</small></div>
     <div class="h-stat"><b id="h-co2">0 kg</b><small>CO₂ Avoided</small></div>
-    <div class="h-stat"><b>5 Areas</b><small>Oyo State Coverage</small></div>
+    <div class="h-stat"><b>100% Safe</b><small>Hub Verified Pickup</small></div>
   </div>
 </div>
 
-<div class="section">
-  <h2 style="color:var(--dark);text-align:center;font-size:28px;font-weight:900">Our Live Impact in Ibadan</h2>
+<div class="section" style="padding-top:20px">
+  <!-- SECURITY NOTIFICATION -->
+  <div class="security-notice">
+    <div class="security-header">
+      <h2><i class="fa fa-shield-halved"></i> SECURITY FIRST: How we prevent kidnapping & scams in Ibadan</h2>
+      <span style="background:#fff;color:#991b1b;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:800"><i class="fa fa-lock"></i> HUB-ONLY • NO HOME ADDRESS</span>
+    </div>
+    <div class="security-grid">
+      <div class="sec-item">
+        <i class="fa fa-house-circle-xmark bg-red"></i>
+        <div><b>1. No Home Pickups - BANNED</b><p>All food is dropped at <b>Dugbe Hub or partnered churches/mosques/markets</b>. No private house address is ever shown on the app. If user tries to type house, system blocks it.</p></div>
+      </div>
+      <div class="sec-item">
+        <i class="fa fa-phone-volume bg-blue"></i>
+        <div><b>2. Phone Verification</b><p>Volunteer calls donor before listing goes live to verify food and identity. <b>No verification, no listing.</b> Scammers are filtered out.</p></div>
+      </div>
+      <div class="sec-item">
+        <i class="fa fa-sun bg-yellow"></i>
+        <div><b>3. Daylight Only (8AM - 6PM)</b><p>Pickup time is locked to daylight hours. System rejects night pickups. All pickups happen in crowded public places.</p></div>
+      </div>
+      <div class="sec-item">
+        <i class="fa fa-key bg-green"></i>
+        <div><b>4. Pickup Code: No code, no food</b><p>4-digit code auto-generated. Receiver must show code at Hub. Prevents impersonation and ensures only verified collector gets food.</p></div>
+      </div>
+      <div class="sec-item">
+        <i class="fa fa-users bg-purple"></i>
+        <div><b>5. Never Alone Rule</b><p>App forces safety modal before claiming: <i>"Never go alone, share live location with family"</i> + WhatsApp share location button.</p></div>
+      </div>
+      <div class="sec-item">
+        <i class="fa fa-flag bg-orange"></i>
+        <div><b>6. Report & Ban - 2 Reports = Hidden</b><p>Any suspicious listing can be reported. After 2 reports, food auto-hides as "Under Review". Repeat offenders phone number blocked. Emergency: 199 / 112</p></div>
+      </div>
+      <div class="sec-item" style="grid-column: span 2; background:#f0fdf4; border-bottom:none">
+        <i class="fa fa-hand-holding-heart bg-emerald"></i>
+        <div><b>7. NGO Priority - Food goes to verified NGOs first</b><p>Food goes to verified NGOs, orphanages, mosques, churches first — not random individuals. We partner with Ibadan Food Bank, UI campus groups, Bodija market women associations. This reduces risk of one-on-one strangers meeting.</p></div>
+      </div>
+    </div>
+    <div style="background:#111827;color:#a7f3d0;padding:12px 20px;font-size:11px;display:flex;gap:20px;flex-wrap:wrap;justify-content:center">
+      <span><i class="fa fa-check-circle" style="color:#10b981"></i> Verified by NAFDAC</span>
+      <span><i class="fa fa-check-circle" style="color:#10b981"></i> Ibadan Hub: No 12 Awolowo Ave, Dugbe</span>
+      <span><i class="fa fa-check-circle" style="color:#10b981"></i> Emergency: 199 / 112 / 08101423991</span>
+    </div>
+  </div>
+
+  <h2 style="color:#111;text-align:center;font-size:28px;font-weight:900">Our Live Impact in Ibadan</h2>
   <p style="text-align:center;color:#666;font-size:14px;max-width:600px;margin:8px auto 0">Real-time data from our Ibadan hub — Bodija Market, Dugbe, Challenge, Mokola & Ogbomoso Township</p>
   <div class="grid3">
     <div class="card"><i class="fa fa-weight-scale"></i><h3 id="kg">0 kg</h3><p style="color:#666;font-size:13px"><b>Food Waste Prevented</b><br>Every plate rescued in Bodija is a meal not in landfill. Estimated 5kg saved per donation.</p></div>
@@ -69,28 +125,29 @@ header{background:#fff;display:flex;justify-content:space-between;align-items:ce
     <div class="card"><i class="fa fa-leaf"></i><h3 id="co2">0 kg CO₂</h3><p style="color:#666;font-size:13px"><b>Climate Action in Ibadan</b><br>Food waste = methane. Saving 1kg prevents 2.5kg CO₂ — we track it live.</p></div>
   </div>
 
-  <h2 style="color:var(--dark);margin-top:50px;text-align:center;font-size:26px">How We Align With SDGs</h2>
+  <h2 style="color:#111;margin-top:50px;text-align:center;font-size:26px">How We Align With SDGs</h2>
   <div style="margin-top:20px">
-    <div class="sdg"><b>🥘</b><div><h4 style="color:var(--dark)">SDG 2: Zero Hunger — Ibadan First</h4><p style="font-size:13px;color:#555">We prioritize Oyo State: surplus from restaurants in Dugbe, bakeries in Bodija, events at UI reaches NGOs, orphanages & low-income families in Ogbomoso & Challenge — 100% free.</p></div></div>
-    <div class="sdg"><b>♻️</b><div><h4 style="color:var(--dark)">SDG 12: Responsible Consumption</h4><p style="font-size:13px;color:#555">Nigeria wastes 40% of food. Our Ibadan marketplace rescues food before expiry — real-time alerts for pickup in under 2 hours.</p></div></div>
-    <div class="sdg"><b>🌍</b><div><h4 style="color:var(--dark)">SDG 13: Climate Action</h4><p style="font-size:13px;color:#555">Landfill in Ajakanga, Ibadan emits methane. Every kg we save = 2.5kg CO₂ avoided. Dashboard shows live carbon savings for Oyo State.</p></div></div>
+    <div class="sdg"><b>🥘</b><div><h4 style="color:#111">SDG 2: Zero Hunger — Ibadan First</h4><p style="font-size:13px;color:#555">We prioritize Oyo State: surplus from restaurants in Dugbe, bakeries in Bodija, events at UI reaches NGOs, orphanages & low-income families in Ogbomoso & Challenge — 100% free.</p></div></div>
+    <div class="sdg"><b>♻️</b><div><h4 style="color:#111">SDG 12: Responsible Consumption</h4><p style="font-size:13px;color:#555">Nigeria wastes 40% of food. Our Ibadan marketplace rescues food before expiry — real-time alerts for pickup in under 2 hours.</p></div></div>
+    <div class="sdg"><b>🌍</b><div><h4 style="color:#111">SDG 13: Climate Action</h4><p style="font-size:13px;color:#555">Landfill in Ajakanga, Ibadan emits methane. Every kg we save = 2.5kg CO₂ avoided. Dashboard shows live carbon savings for Oyo State.</p></div></div>
+    <div class="sdg" style="border-left-color:#ef4444"><b>🛡️</b><div><h4 style="color:#991b1b">SDG 16: Safety & Trust</h4><p style="font-size:13px;color:#555"><b>Security is part of sustainability.</b> By banning home addresses, enforcing Hub-only daylight pickup, phone verification and pickup codes, we prevent kidnapping, scams and ritual risks that destroy community trust. Safe food rescue is sustainable food rescue.</p></div></div>
   </div>
 
   <div class="cta">
-    <h3 style="font-size:26px;font-weight:900">Be Part of Ibadan's Solution</h3>
-    <p style="opacity:.9;margin:10px 0 20px;font-size:14px">Restaurants in Bodija? Events in Dugbe? Student in UI? Donate in 30 seconds — we handle pickup across Ibadan.</p>
-    <a href="/donate_food.html" class="btn btn-primary"><i class="fa fa-heart"></i> Donate Food Now — Ibadan</a>
-    <a href="/available_food.html" class="btn btn-outline"><i class="fa fa-search"></i> Find Free Food in Oyo</a>
-    <p style="margin-top:16px;font-size:11px;opacity:.8">✓ Verified by Ibadan Food Bank • ✓ NAFDAC Safe • ✓ 2,500+ donations matched in Ibadan</p>
+    <h3 style="font-size:26px;font-weight:900">Be Part of Ibadan's Safe Solution</h3>
+    <p style="opacity:.9;margin:10px 0 20px;font-size:14px">Restaurants in Bodija? Events in Dugbe? Student in UI? Donate safely at Hub in 30 seconds — we handle verification.</p>
+    <a href="/donate_food.html" class="btn btn-primary"><i class="fa fa-shield-halved"></i> Donate Food Safely — Ibadan Hub</a>
+    <a href="/available_food.html" class="btn btn-outline"><i class="fa fa-location-dot"></i> Find Hub Food in Oyo</a>
+    <p style="margin-top:16px;font-size:11px;opacity:.8">✓ Hub-Only • ✓ Daylight 8AM-6PM • ✓ Code Verified • ✓ 2,500+ donations matched safely in Ibadan</p>
   </div>
 </div>
 
 <footer style="background:#064e3b;color:#fff;padding:30px 5% 15px;margin-top:30px">
   <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;max-width:1200px;margin:0 auto">
-    <div><b>FoodRescue Naija — Ibadan Hub</b><br><span style="color:#a7f3d0;font-size:13px">Bodija, Dugbe & Ogbomoso • Oyo State<br>Building no-waste Ibadan.</span></div>
-    <div style="font-size:13px"><b style="color:#a7f3d0">Quick Links</b><br><a href="/donate_food.html" style="color:#d1fae5">Donate</a> • <a href="/available_food.html" style="color:#d1fae5">Available</a> • <a href="/contact.html" style="color:#d1fae5">Contact</a></div>
+    <div><b>FoodRescue Naija — Ibadan Hub</b><br><span style="color:#a7f3d0;font-size:13px">Dugbe Hub • No Home Pickups • 8AM-6PM Only<br>Building safe, no-waste Ibadan.</span></div>
+    <div style="font-size:13px"><b style="color:#a7f3d0">Safety</b><br><span style="color:#d1fae5;font-size:12px">Hub: 08101423991 • Emergency: 199 / 112<br>Report: Use flag on any food card</span></div>
   </div>
-  <div style="text-align:center;margin-top:20px;border-top:1px solid rgba(255,255,255,.15);padding-top:12px;font-size:11px;color:#a7f3d0">© 2026 FoodRescue Naija • Ibadan Hub • SDG 2, 12, 13 • Oyo State, Nigeria</div>
+  <div style="text-align:center;margin-top:20px;border-top:1px solid rgba(255,255,255,.15);padding-top:12px;font-size:11px;color:#a7f3d0">© 2026 FoodRescue Naija • Ibadan Hub • Security First • SDG 2, 12, 13, 16 • Oyo State, Nigeria</div>
 </footer>
 
 <script>
