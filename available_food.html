@@ -6,7 +6,7 @@
 <title>Available Food - Ibadan | FoodRescue Naija</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{--green:#0f7a4a;--dark:#064e3b;--light:#ecfdf5;--red:#ef4444}
+:root{--green:#0f7a4a;--dark:#064e3b;--light:#ecfdf5;--red:#ef4444;--yellow:#f59e0b}
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 body{background:#f8faf8;color:#222}
 a{text-decoration:none;color:inherit}
@@ -18,6 +18,8 @@ header{background:var(--dark);color:#fff;display:flex;justify-content:space-betw
 .hamburger span{width:26px;height:3px;background:#fff;border-radius:3px;transition:.3s}
 .hero{padding:22px 5%;background:#fff;border-bottom:1px solid #eee}
 .hero h2{color:var(--dark);font-size:22px} .hero p{color:#666;font-size:13px}
+.safety-banner{background:#fef3c7;border:1.5px solid #fcd34d;color:#92400e;padding:10px 14px;border-radius:12px;margin:14px 0;display:flex;gap:10px;font-size:12px;font-weight:600;line-height:1.4}
+.safety-banner i{color:#d97706;font-size:16px;margin-top:2px}
 .location{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--green);margin-bottom:8px;font-weight:600}
 .filters{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .search-box{flex:1;min-width:240px;position:relative}
@@ -29,21 +31,35 @@ header{background:var(--dark);color:#fff;display:flex;justify-content:space-betw
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
 .clear-btn{background:#fff;border:1.5px solid var(--red);color:var(--red);padding:8px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer}
 .feed{padding:24px 5%;display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
-.food-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.06);border:1px solid #eef2f7;display:flex;flex-direction:column}
+.food-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.06);border:1px solid #eef2f7;display:flex;flex-direction:column;position:relative}
 .img-wrap{height:170px;position:relative;background:#f3f4f6}
 .img-wrap img{width:100%;height:100%;object-fit:cover}
 .badge{position:absolute;top:10px;right:10px;font-size:10px;font-weight:800;padding:5px 10px;border-radius:20px;color:#fff}
-.b-available{background:var(--green)} .b-claimed{background:#6b7280}
+.b-available{background:var(--green)} .b-claimed{background:#6b7280} .b-review{background:var(--red)}
+.verified{position:absolute;top:10px;left:10px;background:#fff;color:var(--green);font-size:10px;font-weight:800;padding:4px 8px;border-radius:20px;display:flex;align-items:center;gap:4px}
 .body{padding:14px 16px;flex:1;display:flex;flex-direction:column}
 .body h3{font-size:15px;color:#111}
 .meta{font-size:12px;color:#6b7280;display:flex;gap:10px;flex-wrap:wrap;margin:6px 0}
 .meta i{color:var(--green)}
+.hub-tag{font-size:10px;background:var(--light);color:var(--dark);border:1px solid #a7f3d0;padding:3px 8px;border-radius:20px;font-weight:700;display:inline-flex;align-items:center;gap:4px;margin-top:4px}
 .actions{margin-top:auto;display:flex;gap:8px;padding-top:12px}
 .btn-claim{flex:1;background:var(--green);color:#fff;border:none;padding:11px;border-radius:10px;font-weight:700;cursor:pointer}
 .btn-claim:disabled{background:#9ca3af}
 .btn-del{padding:11px 14px;background:#fff;border:1.5px solid var(--red);color:var(--red);border-radius:10px;cursor:pointer}
+.btn-report{width:100%;margin-top:8px;background:none;border:none;color:#ef4444;font-size:11px;cursor:pointer;text-decoration:underline}
 .empty{grid-column:1/-1;text-align:center;padding:60px 20px;background:#fff;border-radius:16px;color:#666}
 footer{background:var(--dark);color:#a7f3d0;padding:20px;text-align:center;font-size:12px;margin-top:30px}
+/* MODALS */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:200;padding:16px}
+.modal-overlay.active{display:flex}
+.modal{background:#fff;border-radius:16px;padding:22px;max-width:420px;width:100%;box-shadow:0 20px 40px rgba(0,0,0,.2)}
+.modal h3{color:var(--dark);font-size:18px;margin-bottom:8px}
+.modal ul{font-size:13px;color:#444;line-height:1.6;margin:10px 0 14px;padding-left:18px}
+.modal .check{display:flex;gap:8px;font-size:12px;font-weight:600;margin:12px 0}
+.modal .btns{display:flex;gap:10px;margin-top:14px}
+.btn-agree{flex:1;background:var(--dark);color:#fff;border:none;padding:12px;border-radius:10px;font-weight:700;cursor:pointer}
+.btn-cancel{flex:1;background:#f3f4f6;border:none;padding:12px;border-radius:10px;font-weight:700;cursor:pointer}
+.code-box{background:var(--dark);color:#6ee7b7;text-align:center;padding:16px;border-radius:12px;font-size:32px;font-weight:900;letter-spacing:4px;margin:12px 0}
 @media(max-width:768px){.hamburger{display:flex}.nav-links{position:fixed;top:60px;right:-100%;flex-direction:column;background:var(--dark);width:80%;height:100vh;padding:30px;transition:.35s}.nav-links.active{right:0}.feed{grid-template-columns:1fr 1fr;gap:12px}.img-wrap{height:130px}}
 </style>
 </head>
@@ -62,8 +78,12 @@ footer{background:var(--dark);color:#a7f3d0;padding:20px;text-align:center;font-
 </header>
 
 <div class="hero">
-  <div class="location"><i class="fa fa-location-dot"></i> Ibadan, Oyo State • Bodija • Dugbe • Ogbomoso</div>
-  <h2><i class="fa fa-utensils"></i> Food Donations Near You</h2>
+  <div class="location"><i class="fa fa-location-dot"></i> Ibadan, Oyo State • Verified Hub Pickup Only • 8AM - 6PM</div>
+  <h2><i class="fa fa-shield-halved"></i> Safe Food Donations Near You</h2>
+  <div class="safety-banner">
+    <i class="fa fa-triangle-exclamation"></i>
+    <div><b>Security Alert:</b> For your safety, we BANNED home addresses. All food must be picked at public Hubs/Markets in daylight. Never go alone. Share live location. Report suspicious listings. Emergency: 199 / 112</div>
+  </div>
   <div class="topbar">
     <p id="countText">Loading...</p>
     <button class="clear-btn" onclick="clearClaimed()"><i class="fa fa-trash"></i> Clear Claimed</button>
@@ -74,23 +94,64 @@ footer{background:var(--dark);color:#a7f3d0;padding:20px;text-align:center;font-
       <span class="pill active" data-filter="All">All</span>
       <span class="pill" data-filter="Rice">Rice</span>
       <span class="pill" data-filter="Bread">Bread</span>
-      <span class="pill" data-filter="Vegetables">Vegetables</span>
-      <span class="pill" data-filter="Cooked">Cooked</span>
+      <span class="pill" data-filter="Hub">Hub Only</span>
     </div>
   </div>
 </div>
 
 <div class="feed" id="foodContainer"></div>
 
-<footer>© 2026 FoodRescue Naija • Ibadan Hub • Reducing Waste, Feeding Oyo State</footer>
+<!-- SAFETY MODAL -->
+<div class="modal-overlay" id="safetyModal">
+  <div class="modal">
+    <h3><i class="fa fa-shield-halved" style="color:var(--green)"></i> Safety Rules - Read Before Claiming</h3>
+    <p style="font-size:12px;color:#666">To prevent kidnapping & scams, you MUST agree:</p>
+    <ul>
+      <li><b>Never go alone</b> - go with a friend/family</li>
+      <li><b>Hub only:</b> Meet ONLY at public hub/market listed (Dugbe, Bodija, UI Gate). NO house.</li>
+      <li><b>Daylight only:</b> 8AM - 6PM. No night pickup.</li>
+      <li>Share your live location with family</li>
+      <li>Ask for <b>Pickup Code</b> - don't give food without code</li>
+      <li>If you feel unsafe, leave and click Report</li>
+    </ul>
+    <label class="check"><input type="checkbox" id="agreeCheck"> I agree to meet at public place in daylight and not go alone</label>
+    <div class="btns">
+      <button class="btn-cancel" onclick="closeSafety()">Cancel</button>
+      <button class="btn-agree" onclick="confirmClaim()">I Agree - Claim Food</button>
+    </div>
+  </div>
+</div>
+
+<!-- CODE MODAL -->
+<div class="modal-overlay" id="codeModal">
+  <div class="modal" style="text-align:center">
+    <h3 style="color:var(--green)">✅ Food Claimed Safely!</h3>
+    <p style="font-size:13px;color:#555;margin:8px 0">Show this code at the Hub to collect food. Don't share code with strangers.</p>
+    <div class="code-box" id="codeBox">----</div>
+    <div style="font-size:12px;background:#ecfdf5;padding:10px;border-radius:10px;text-align:left;line-height:1.5">
+      <b>Pickup Details:</b><br>
+      📍 <span id="codeLoc">Dugbe Hub</span><br>
+      🕗 Time: <b>Today 8AM - 6PM only</b><br>
+      📞 Hub: 08101423991<br>
+      ⚠️ Go with someone & share live location
+    </div>
+    <div class="btns" style="margin-top:16px">
+      <button class="btn-agree" style="flex:1" onclick="closeCode()">Got it</button>
+      <a id="waShare" target="_blank" style="flex:1;background:#25D366;color:#fff;padding:12px;border-radius:10px;font-weight:700;text-align:center"><i class="fa-brands fa-whatsapp"></i> Share Location</a>
+    </div>
+    <button class="btn-report" onclick="reportFood(currentClaimId)" style="margin-top:12px"><i class="fa fa-flag"></i> Report suspicious listing</button>
+  </div>
+</div>
+
+<footer>© 2026 FoodRescue Naija • Security First: Hub Pickup Only • Emergency 199/112 • Ibadan</footer>
 
 <script>
 const ham=document.getElementById('ham'), nav=document.getElementById('nav');
 ham.onclick=()=>nav.classList.toggle('active');
-
 const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:3000' : '';
 const API_URL = `${API_BASE}/api/foods`;
 let allFoods = [];
+let pendingClaimId=null, currentClaimId=null;
 
 function getLocal(){ try{return JSON.parse(localStorage.getItem('foodDonations')||'[]')}catch{return []} }
 function saveLocal(d){ localStorage.setItem('foodDonations', JSON.stringify(d)); }
@@ -101,75 +162,106 @@ async function loadFoods(){
   const localFoods=getLocal();
   const merged=[...localFoods, ...apiFoods];
   const map=new Map();
-  merged.forEach(f=>{
-    const id=f.id||f._id;
-    if(!map.has(id)) map.set(id,f);
-  });
-  allFoods=Array.from(map.values()).sort((a,b)=> new Date(b.date||0)-new Date(a.date||0));
+  merged.forEach(f=>{ const id=f.id||f._id; if(!map.has(id)) map.set(id,f); });
+  allFoods=Array.from(map.values()).filter(f=>f.status!=='Under Review').sort((a,b)=> new Date(b.date||0)-new Date(a.date||0));
   render(allFoods);
 }
 
 function render(list){
   const c=document.getElementById('foodContainer');
-  document.getElementById('countText').textContent=`${list.length} donations • ${list.filter(f=>f.status!=='Claimed').length} available in Ibadan`;
+  document.getElementById('countText').textContent=`${list.length} verified donations • ${list.filter(f=>f.status!=='Claimed').length} available at Hubs`;
   if(list.length===0){
-    c.innerHTML=`<div class="empty"><i class="fa fa-bowl-rice" style="font-size:36px;color:#0f7a4a"></i><h3>No food yet</h3><p>Be first to donate in Bodija, Dugbe or Ogbomoso</p><br><a href="/donate_food.html" style="background:#064e3b;color:#fff;padding:12px 20px;border-radius:24px;font-weight:800">Donate Food Now</a></div>`;
+    c.innerHTML=`<div class="empty"><i class="fa fa-shield-halved" style="font-size:36px;color:#0f7a4a"></i><h3>No verified food yet</h3><p>All foods are checked at Dugbe Hub before showing. Be first to donate safely.</p><br><a href="/donate_food.html" style="background:#064e3b;color:#fff;padding:12px 20px;border-radius:24px;font-weight:800">Donate at Hub</a></div>`;
     return;
   }
   c.innerHTML=list.map(f=>{
     const id=f.id||f._id;
     const isClaimed=f.status==='Claimed';
+    const isReview=f.status==='Under Review';
     const name=f.foodName||f.name||'Food Donation';
     const qty=f.quantity||'1 plate';
-    const loc=f.location||f.address||f.lga||'Ibadan';
-    const state=f.state||'Oyo';
-    const time=f.pickupTime||f.pickup_time||'ASAP';
+    const loc=f.location||f.address||f.lga||'Ibadan Hub';
+    const time=f.pickupTime||f.pickup_time||'8AM-6PM';
     const img=f.image||`https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400`;
-    const cat=(f.category||name).toLowerCase();
+    const code=f.pickupCode||'----';
+    const safeLoc=loc.toLowerCase().includes('hub')||loc.toLowerCase().includes('market')||loc.toLowerCase().includes('gate')?loc:'Dugbe Hub (Safe Public Point)';
     return `
-    <div class="food-card" data-cat="${cat}" data-name="${name.toLowerCase()}">
+    <div class="food-card">
       <div class="img-wrap">
         <img src="${img}" onerror="this.src='https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400'">
-        <span class="badge ${isClaimed?'b-claimed':'b-available'}">${f.status||'Available'}</span>
+        <span class="badge ${isClaimed?'b-claimed': isReview?'b-review':'b-available'}">${f.status||'Available'}</span>
+        <span class="verified"><i class="fa fa-check-circle"></i> Hub Verified</span>
       </div>
       <div class="body">
         <h3>${name}</h3>
-        <div class="meta"><span><i class="fa fa-weight-scale"></i> ${qty}</span><span><i class="fa fa-location-dot"></i> ${loc}</span></div>
-        <div class="meta"><span><i class="fa fa-clock"></i> ${time}</span><span><i class="fa fa-map"></i> ${state}</span></div>
+        <span class="hub-tag"><i class="fa fa-location-dot"></i> ${safeLoc}</span>
+        <div class="meta"><span><i class="fa fa-weight-scale"></i> ${qty}</span><span><i class="fa fa-clock"></i> ${time} (Daylight only)</span></div>
+        <div class="meta"><span><i class="fa fa-shield"></i> Code: ${isClaimed?code:'****'}</span><span style="color:var(--green);font-weight:700"><i class="fa fa-users"></i> Go with someone</span></div>
         <div class="actions">
-          <button class="btn-claim" ${isClaimed?'disabled':''} onclick="claimFood('${id}')">${isClaimed?'Claimed ✓':'Claim Food'}</button>
+          <button class="btn-claim" ${isClaimed?'disabled':''} onclick="openSafety('${id}')">${isClaimed?'Claimed - Code: '+code:'Claim Safely'}</button>
           <button class="btn-del" onclick="deleteFood('${id}')" title="Delete"><i class="fa fa-trash"></i></button>
         </div>
+        <button class="btn-report" onclick="reportFood('${id}')"><i class="fa fa-flag"></i> Report suspicious • Emergency 199</button>
       </div>
     </div>`;
   }).join('');
 }
 
-async function claimFood(id){
+function openSafety(id){ pendingClaimId=id; document.getElementById('agreeCheck').checked=false; document.getElementById('safetyModal').classList.add('active'); }
+function closeSafety(){ document.getElementById('safetyModal').classList.remove('active'); pendingClaimId=null; }
+function closeCode(){ document.getElementById('codeModal').classList.remove('active'); }
+
+async function confirmClaim(){
+  if(!document.getElementById('agreeCheck').checked){ alert('Please tick agreement to safety rules'); return; }
+  const id=pendingClaimId; closeSafety();
+  if(!id) return;
+  // generate code if not exists
   let local=getLocal();
-  local=local.map(f=> (f.id==id||f._id==id)?{...f,status:'Claimed'}:f);
+  let code=Math.floor(1000+Math.random()*9000).toString();
+  local=local.map(f=> (f.id==id||f._id==id)?{...f,status:'Claimed',pickupCode:f.pickupCode||code}:f);
   saveLocal(local);
   try{ await fetch(`${API_URL}/${id}/claim`,{method:'PUT'}); }catch{}
-  allFoods=allFoods.map(f=> (f.id==id||f._id==id)?{...f,status:'Claimed'}:f);
+  allFoods=allFoods.map(f=> (f.id==id||f._id==id)?{...f,status:'Claimed',pickupCode:f.pickupCode||code}:f);
+  const claimed=allFoods.find(f=>f.id==id||f._id==id);
+  showCodeModal(id, claimed?.pickupCode||code, claimed?.location||'Dugbe Hub');
   render(filterNow());
 }
 
+function showCodeModal(id,code,loc){
+  currentClaimId=id;
+  document.getElementById('codeBox').textContent=code;
+  document.getElementById('codeLoc').textContent=loc;
+  document.getElementById('waShare').href=`https://wa.me/?text=${encodeURIComponent(`I am going to pick FoodRescue food at ${loc}. My pickup code is ${code}. My live location: `)}`;
+  document.getElementById('codeModal').classList.add('active');
+}
+
+async function claimFood(id){ openSafety(id); } // legacy support
+
 function deleteFood(id){
-  if(!confirm('Delete this food? This cannot be undone.')) return;
-  let local=getLocal();
-  local=local.filter(f=> f.id!=id && f._id!=id);
+  if(!confirm('Delete this food?')) return;
+  let local=getLocal().filter(f=> f.id!=id && f._id!=id);
   saveLocal(local);
   allFoods=allFoods.filter(f=> f.id!=id && f._id!=id);
   render(filterNow());
   fetch(`${API_URL}/${id}`,{method:'DELETE'}).catch(()=>{});
 }
 
+async function reportFood(id){
+  const reason=prompt('Why is this suspicious? (e.g., asks for money, asks to come to house at night, fake)');
+  if(!reason) return;
+  alert('Reported! We will review within 30 mins. If unsafe, we hide it. Emergency: Call 199');
+  try{ await fetch(`${API_URL}/${id}/report`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reason})}); }catch{}
+  let local=getLocal().map(f=> (f.id==id||f._id==id)?{...f,reports:(f.reports||0)+1,status:(f.reports||0)>=1?'Under Review':f.status}:f);
+  saveLocal(local);
+  loadFoods();
+}
+
 function clearClaimed(){
   if(!confirm('Delete ALL claimed foods?')) return;
-  let local=getLocal().filter(f=> f.status!=='Claimed');
-  saveLocal(local);
+  saveLocal(getLocal().filter(f=> f.status!=='Claimed'));
   allFoods=allFoods.filter(f=> f.status!=='Claimed');
   render(filterNow());
+  fetch(`${API_URL}?status=Claimed`,{method:'DELETE'}).catch(()=>{});
 }
 
 function filterNow(){
@@ -178,6 +270,7 @@ function filterNow(){
   return allFoods.filter(f=>{
     const hay=(f.foodName||f.name||'')+' '+(f.location||'')+' '+(f.category||'');
     const matchSearch=hay.toLowerCase().includes(q);
+    if(active==='Hub') return matchSearch && (f.location||'').toLowerCase().includes('hub')||(f.location||'').toLowerCase().includes('market');
     const cat=(f.category||f.foodName||'').toLowerCase();
     const matchCat=active==='All'||cat.includes(active.toLowerCase());
     return matchSearch&&matchCat;
@@ -191,7 +284,6 @@ document.getElementById('pills').addEventListener('click',e=>{
   e.target.classList.add('active');
   render(filterNow());
 });
-
 loadFoods();
 </script>
 </body>
