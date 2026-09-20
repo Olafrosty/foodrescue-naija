@@ -6,7 +6,7 @@
 <title>Available Food - Ibadan | FoodRescue Naija</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{--green:#0f7a4a;--dark:#064e3b;--light:#ecfdf5;--orange:#d97706}
+:root{--green:#0f7a4a;--dark:#064e3b;--light:#ecfdf5;--red:#ef4444}
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 body{background:#f8faf8;color:#222}
 a{text-decoration:none;color:inherit}
@@ -24,8 +24,10 @@ header{background:var(--dark);color:#fff;display:flex;justify-content:space-betw
 .search-box input{width:100%;padding:12px 14px 12px 38px;border:1.5px solid #d1fae5;border-radius:30px;background:#f0fdf4;outline:none}
 .search-box i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#888}
 .pills{display:flex;gap:8px;flex-wrap:wrap}
-.pill{padding:8px 14px;border:1.5px solid #d1d5db;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;background:#fff;transition:.2s}
+.pill{padding:8px 14px;border:1.5px solid #d1d5db;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;background:#fff}
 .pill.active{background:var(--green);color:#fff;border-color:var(--green)}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+.clear-btn{background:#fff;border:1.5px solid var(--red);color:var(--red);padding:8px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer}
 .feed{padding:24px 5%;display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
 .food-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.06);border:1px solid #eef2f7;display:flex;flex-direction:column}
 .img-wrap{height:170px;position:relative;background:#f3f4f6}
@@ -39,9 +41,9 @@ header{background:var(--dark);color:#fff;display:flex;justify-content:space-betw
 .actions{margin-top:auto;display:flex;gap:8px;padding-top:12px}
 .btn-claim{flex:1;background:var(--green);color:#fff;border:none;padding:11px;border-radius:10px;font-weight:700;cursor:pointer}
 .btn-claim:disabled{background:#9ca3af}
-.btn-call{padding:11px 14px;background:#fff;border:1.5px solid var(--green);color:var(--green);border-radius:10px;cursor:pointer}
+.btn-del{padding:11px 14px;background:#fff;border:1.5px solid var(--red);color:var(--red);border-radius:10px;cursor:pointer}
 .empty{grid-column:1/-1;text-align:center;padding:60px 20px;background:#fff;border-radius:16px;color:#666}
-footer{background:var(--dark);color:#fff;padding:20px;text-align:center;font-size:12px;color:#a7f3d0;margin-top:30px}
+footer{background:var(--dark);color:#a7f3d0;padding:20px;text-align:center;font-size:12px;margin-top:30px}
 @media(max-width:768px){.hamburger{display:flex}.nav-links{position:fixed;top:60px;right:-100%;flex-direction:column;background:var(--dark);width:80%;height:100vh;padding:30px;transition:.35s}.nav-links.active{right:0}.feed{grid-template-columns:1fr 1fr;gap:12px}.img-wrap{height:130px}}
 </style>
 </head>
@@ -62,7 +64,10 @@ footer{background:var(--dark);color:#fff;padding:20px;text-align:center;font-siz
 <div class="hero">
   <div class="location"><i class="fa fa-location-dot"></i> Ibadan, Oyo State • Bodija • Dugbe • Ogbomoso</div>
   <h2><i class="fa fa-utensils"></i> Food Donations Near You</h2>
-  <p id="countText">Loading fresh donations across Ibadan...</p>
+  <div class="topbar">
+    <p id="countText">Loading...</p>
+    <button class="clear-btn" onclick="clearClaimed()"><i class="fa fa-trash"></i> Clear Claimed</button>
+  </div>
   <div class="filters">
     <div class="search-box"><i class="fa fa-search"></i><input id="search" placeholder="Search rice, bread, vegetables..."></div>
     <div class="pills" id="pills">
@@ -81,80 +86,89 @@ footer{background:var(--dark);color:#fff;padding:20px;text-align:center;font-siz
 
 <script>
 const ham=document.getElementById('ham'), nav=document.getElementById('nav');
-ham.onclick=()=>{ham.classList.toggle('active');nav.classList.toggle('active')};
+ham.onclick=()=>nav.classList.toggle('active');
 
 const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:3000' : '';
 const API_URL = `${API_BASE}/api/foods`;
 let allFoods = [];
 
-function getLocal() { try{return JSON.parse(localStorage.getItem('foodDonations')||'[]')}catch{return []} }
-function saveLocal(data){ localStorage.setItem('foodDonations', JSON.stringify(data)); }
+function getLocal(){ try{return JSON.parse(localStorage.getItem('foodDonations')||'[]')}catch{return []} }
+function saveLocal(d){ localStorage.setItem('foodDonations', JSON.stringify(d)); }
 
 async function loadFoods(){
   let apiFoods=[];
-  try{
-    const r=await fetch(API_URL);
-    if(r.ok) apiFoods=await r.json();
-  }catch(e){ console.log('API offline'); }
-
+  try{ const r=await fetch(API_URL); if(r.ok) apiFoods=await r.json(); }catch{}
   const localFoods=getLocal();
   const merged=[...localFoods, ...apiFoods];
   const map=new Map();
   merged.forEach(f=>{
-    const id=f.id||f._id||f.foodName+ (f.date||'');
+    const id=f.id||f._id;
     if(!map.has(id)) map.set(id,f);
   });
   allFoods=Array.from(map.values()).sort((a,b)=> new Date(b.date||0)-new Date(a.date||0));
-  
   render(allFoods);
 }
 
 function render(list){
-  const container=document.getElementById('foodContainer');
-  document.getElementById('countText').textContent = `${list.length} donations available in Ibadan • Helping Oyo State`;
-  
+  const c=document.getElementById('foodContainer');
+  document.getElementById('countText').textContent=`${list.length} donations • ${list.filter(f=>f.status!=='Claimed').length} available in Ibadan`;
   if(list.length===0){
-    container.innerHTML=`<div class="empty"><i class="fa fa-bowl-rice" style="font-size:32px;color:#0f7a4a;margin-bottom:10px"></i><h3>No food yet</h3><p>Be the first to donate in Bodija, Dugbe or Ogbomoso</p><br><a href="/donate_food.html" style="background:#064e3b;color:#fff;padding:10px 18px;border-radius:20px;font-weight:700">Donate Food Now</a></div>`;
+    c.innerHTML=`<div class="empty"><i class="fa fa-bowl-rice" style="font-size:36px;color:#0f7a4a"></i><h3>No food yet</h3><p>Be first to donate in Bodija, Dugbe or Ogbomoso</p><br><a href="/donate_food.html" style="background:#064e3b;color:#fff;padding:12px 20px;border-radius:24px;font-weight:800">Donate Food Now</a></div>`;
     return;
   }
-
-  container.innerHTML=list.map(food=>{
-    const status=food.status||'Available';
-    const isClaimed=status==='Claimed';
-    const name=food.foodName||food.name||'Food Donation';
-    const qty=food.quantity||'1 plate';
-    const loc=food.location||food.address||food.lga||'Ibadan';
-    const state=food.state||'Oyo';
-    const time=food.pickupTime||food.pickup_time||'ASAP';
-    const img=food.image||`https://source.unsplash.com/400x300/?${encodeURIComponent(name)},food,nigeria`;
-    const cat=(food.category||name).toLowerCase();
+  c.innerHTML=list.map(f=>{
+    const id=f.id||f._id;
+    const isClaimed=f.status==='Claimed';
+    const name=f.foodName||f.name||'Food Donation';
+    const qty=f.quantity||'1 plate';
+    const loc=f.location||f.address||f.lga||'Ibadan';
+    const state=f.state||'Oyo';
+    const time=f.pickupTime||f.pickup_time||'ASAP';
+    const img=f.image||`https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400`;
+    const cat=(f.category||name).toLowerCase();
     return `
-    <div class="food-card" data-cat="${cat}" data-name="${name.toLowerCase()} ${loc.toLowerCase()}">
+    <div class="food-card" data-cat="${cat}" data-name="${name.toLowerCase()}">
       <div class="img-wrap">
         <img src="${img}" onerror="this.src='https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400'">
-        <span class="badge ${isClaimed?'b-claimed':'b-available'}">${status}</span>
+        <span class="badge ${isClaimed?'b-claimed':'b-available'}">${f.status||'Available'}</span>
       </div>
       <div class="body">
         <h3>${name}</h3>
         <div class="meta"><span><i class="fa fa-weight-scale"></i> ${qty}</span><span><i class="fa fa-location-dot"></i> ${loc}</span></div>
         <div class="meta"><span><i class="fa fa-clock"></i> ${time}</span><span><i class="fa fa-map"></i> ${state}</span></div>
         <div class="actions">
-          <button class="btn-claim" ${isClaimed?'disabled':''} onclick="claimFood('${food.id||food._id}')">${isClaimed?'Claimed':'Claim Food'}</button>
-          <a class="btn-call" href="tel:${food.phone||''}"><i class="fa fa-phone"></i></a>
+          <button class="btn-claim" ${isClaimed?'disabled':''} onclick="claimFood('${id}')">${isClaimed?'Claimed ✓':'Claim Food'}</button>
+          <button class="btn-del" onclick="deleteFood('${id}')" title="Delete"><i class="fa fa-trash"></i></button>
         </div>
       </div>
-    </div>`
+    </div>`;
   }).join('');
 }
 
 async function claimFood(id){
-  // Update local
   let local=getLocal();
   local=local.map(f=> (f.id==id||f._id==id)?{...f,status:'Claimed'}:f);
   saveLocal(local);
-  
   try{ await fetch(`${API_URL}/${id}/claim`,{method:'PUT'}); }catch{}
   allFoods=allFoods.map(f=> (f.id==id||f._id==id)?{...f,status:'Claimed'}:f);
+  render(filterNow());
+}
+
+function deleteFood(id){
+  if(!confirm('Delete this food? This cannot be undone.')) return;
+  let local=getLocal();
+  local=local.filter(f=> f.id!=id && f._id!=id);
+  saveLocal(local);
+  allFoods=allFoods.filter(f=> f.id!=id && f._id!=id);
+  render(filterNow());
+  fetch(`${API_URL}/${id}`,{method:'DELETE'}).catch(()=>{});
+}
+
+function clearClaimed(){
+  if(!confirm('Delete ALL claimed foods?')) return;
+  let local=getLocal().filter(f=> f.status!=='Claimed');
+  saveLocal(local);
+  allFoods=allFoods.filter(f=> f.status!=='Claimed');
   render(filterNow());
 }
 
@@ -162,8 +176,8 @@ function filterNow(){
   const q=document.getElementById('search').value.toLowerCase();
   const active=document.querySelector('.pill.active')?.dataset.filter||'All';
   return allFoods.filter(f=>{
-    const name=(f.foodName||f.name||'').toLowerCase() + ' ' + (f.location||'').toLowerCase();
-    const matchSearch=name.includes(q);
+    const hay=(f.foodName||f.name||'')+' '+(f.location||'')+' '+(f.category||'');
+    const matchSearch=hay.toLowerCase().includes(q);
     const cat=(f.category||f.foodName||'').toLowerCase();
     const matchCat=active==='All'||cat.includes(active.toLowerCase());
     return matchSearch&&matchCat;
@@ -172,7 +186,7 @@ function filterNow(){
 
 document.getElementById('search').addEventListener('input',()=>render(filterNow()));
 document.getElementById('pills').addEventListener('click',e=>{
-  if(!e.target.classList.contains('pill'))return;
+  if(!e.target.classList.contains('pill')) return;
   document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
   e.target.classList.add('active');
   render(filterNow());
