@@ -57,9 +57,12 @@ input:focus,textarea:focus,select:focus{border-color:var(--emerald)}
   <div style="display:flex;align-items:center"><div class="logo"><b>FoodRescue<br>Naija</b></div><span class="badge">IBADAN HUB</span></div>
   <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
   <ul class="nav-links" id="nav">
-    <li><a href="/index.html">Home</a></li><li><a href="/available_food.html">Available</a></li><li><a href="/contact.html" style="border-bottom:2px solid var(--green)">Contact</a></li>
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/donate_food.html">Donate Food</a></li>
+    <li><a href="/impact.html">Impact</a></li>
+    <li><a href="/contact.html" style="border-bottom:2px solid var(--green);padding-bottom:2px">Contact</a></li>
     <li><a class="btn btn-outline" href="/donate_food.html">Donate Now</a></li>
-    <li><a class="btn btn-green" href="https://wa.me/2348101423991">Volunteer</a></li>
+    <li><a class="btn btn-green" href="https://wa.me/2348101423991">Become Volunteer</a></li>
   </ul>
 </nav>
 
@@ -107,12 +110,6 @@ input:focus,textarea:focus,select:focus{border-color:var(--emerald)}
       <div><b>Want to partner with FoodRescue Naija?</b><br><span style="font-size:13px">Join 120+ restaurants, markets & volunteers reducing food waste across Ibadan.</span></div>
       <a href="https://wa.me/2348101423991" style="background:#fff;color:var(--green);padding:8px 14px;border-radius:20px;font-weight:700;white-space:nowrap">Partner With Us →</a>
     </div>
-    <div class="card" style="margin-top:16px">
-      <h3 style="font-size:14px"><i class="fa fa-inbox"></i> Recent Messages (Admin Only)</h3>
-      <div id="recentMsgs" style="margin-top:10px;font-size:12px;color:#555">Loading...</div>
-      <button onclick="loadMessages()" style="margin-top:8px;font-size:11px;padding:6px 10px;border-radius:20px;border:1px solid #ddd;background:#fff;cursor:pointer">Refresh</button>
-      <button onclick="clearMsgs()" style="margin-top:8px;font-size:11px;padding:6px 10px;border-radius:20px;border:1px solid #ef4444;color:#ef4444;background:#fff;cursor:pointer">Clear All</button>
-    </div>
   </div>
 </div>
 
@@ -121,80 +118,13 @@ input:focus,textarea:focus,select:focus{border-color:var(--emerald)}
 <script>
 const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:3000' : '';
 document.getElementById('ham').onclick=()=>document.getElementById('nav').classList.toggle('active');
-
-async function loadMessages(){
-  let apiMsgs=[];
-  try{
-    const r=await fetch(`${API_BASE}/api/messages`);
-    if(r.ok) apiMsgs=await r.json();
-  }catch{}
-  let localMsgs=[];
-  try{ localMsgs=JSON.parse(localStorage.getItem('contactMessages')||'[]'); }catch{}
-  
-  const all=[...apiMsgs, ...localMsgs].slice(0,5);
-  const box=document.getElementById('recentMsgs');
-  if(all.length===0){ box.innerHTML='<i>No messages yet</i>'; return; }
-  box.innerHTML=all.map(m=>`
-    <div style="border-bottom:1px solid #eee;padding:6px 0">
-      <b>${m.name}</b> <span style="color:#888">• ${m.helpType||m.help||''}</span><br>
-      <span>${(m.message||'').slice(0,80)}...</span><br>
-      <small style="color:#10b981">${m.email||''} ${m.phone||''} • ${new Date(m.date).toLocaleString()}</small>
-    </div>
-  `).join('');
-}
-function clearMsgs(){
-  if(!confirm('Clear all contact messages?')) return;
-  localStorage.removeItem('contactMessages');
-  fetch(`${API_BASE}/api/messages/clear`,{method:'DELETE'}).then(()=>loadMessages());
-  loadMessages();
-}
-loadMessages();
-
 document.getElementById('form').addEventListener('submit', async (e)=>{
   e.preventDefault();
-  const btn=document.getElementById('sendBtn');
-  const status=document.getElementById('status');
-  const data={
-    name: document.getElementById('name').value.trim(),
-    phone: document.getElementById('phone').value.trim(),
-    email: document.getElementById('email').value.trim(),
-    message: document.getElementById('msg').value.trim(),
-    helpType: document.getElementById('helpType').value,
-    date: new Date().toISOString()
-  };
-  btn.disabled=true; btn.innerHTML='Sending... <i class="fa fa-spinner fa-spin"></i>';
-  
-  // 1. Save locally immediately
-  let local=JSON.parse(localStorage.getItem('contactMessages')||'[]');
-  local.unshift(data);
-  localStorage.setItem('contactMessages', JSON.stringify(local));
-
-  // 2. Try save to server
-  try{
-    const res=await fetch(`${API_BASE}/api/contact`,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(data)
-    });
-    if(res.ok){
-      status.style.color='#065f46';
-      status.innerHTML='✅ Message sent! We will reply within 2 hours to '+data.email;
-    } else throw new Error();
-  }catch{
-    status.style.color='#d97706';
-    status.innerHTML='⚠️ Saved offline (Render sleeping). We have it locally. Check Recent Messages below.';
-  }
-  e.target.reset();
-  btn.disabled=false; btn.innerHTML='Send Message <i class="fa fa-paper-plane"></i>';
-  loadMessages();
-  
-  // 3. Also open WhatsApp as backup so YOU get it instantly
-  setTimeout(()=>{
-    if(confirm('Also send this via WhatsApp to Ibadan Hub for faster reply?')){
-      const waText=encodeURIComponent(`New FoodRescue Message:%0AName: ${data.name}%0APhone: ${data.phone}%0AEmail: ${data.email}%0AHelp: ${data.helpType}%0AMessage: ${data.message}`);
-      window.open(`https://wa.me/2348101423991?text=${waText}`,'_blank');
-    }
-  },800);
+  const btn=document.getElementById('sendBtn'); const status=document.getElementById('status');
+  const data={ name:document.getElementById('name').value.trim(), phone:document.getElementById('phone').value.trim(), email:document.getElementById('email').value.trim(), message:document.getElementById('msg').value.trim(), helpType:document.getElementById('helpType').value, date:new Date().toISOString() };
+  btn.disabled=true; btn.innerHTML='Sending...';
+  try{ const res=await fetch(`${API_BASE}/api/contact`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}); if(res.ok){ status.style.color='#065f46'; status.textContent='✅ Message sent! We will reply within 2 hours.'; } else throw new Error(); }catch{ status.style.color='#d97706'; status.textContent='⚠️ Saved offline.'; let local=JSON.parse(localStorage.getItem('contactMessages')||'[]'); local.unshift(data); localStorage.setItem('contactMessages', JSON.stringify(local)); }
+  e.target.reset(); btn.disabled=false; btn.innerHTML='Send Message <i class="fa fa-paper-plane"></i>';
 });
 </script>
 </body>
