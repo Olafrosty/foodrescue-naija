@@ -3,161 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard - FoodRescue Naija</title>
+<title>Dashboard - Ibadan Hub | FoodRescue Naija</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
-body{background:#f8faf8;color:#222;}
-a{text-decoration:none;color:inherit;}
-header{background:#2e7d32;color:white;display:flex;justify-content:space-between;align-items:center;padding:14px 5%;position:sticky;top:0;z-index:1000;}
-.logo{font-weight:800;font-size:22px;}.logo span{color:#a5d6a7;}
-.nav-links{display:flex;gap:24px;list-style:none;align-items:center;}
-.nav-links a{color:white;font-weight:500;font-size:15px;}
-.nav-links .btn-donate{background:white;color:#2e7d32;padding:8px 16px;border-radius:20px;font-weight:700;}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1100;}
-.hamburger span{width:26px;height:3px;background:white;border-radius:3px;transition:0.3s;}
-.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,6px);}
-.hamburger.active span:nth-child(2){opacity:0;}
-.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-6px);}
-
-/* DASHBOARD */
-.dash-top{padding:25px 5%;}
-.dash-top h2{color:#1b5e20;}
-.dash-top p{color:#666;font-size:14px;}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin-top:20px;}
-.stat-card{background:white;padding:20px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.06);border-left:5px solid #2e7d32;}
-.stat-card i{font-size:22px;color:#2e7d32;margin-bottom:8px;}
-.stat-card b{font-size:26px;display:block;color:#1b5e20;}
-.stat-card small{color:#777;}
-
-.content{display:grid;grid-template-columns:2fr 1fr;gap:20px;padding:0 5% 30px;}
-.table-card{background:white;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.06);overflow:hidden;}
-.table-card h3{padding:16px;border-bottom:1px solid #eee;color:#1b5e20;font-size:16px;}
-table{width:100%;border-collapse:collapse;font-size:13px;}
-th,td{padding:12px 14px;text-align:left;border-bottom:1px solid #f0f0f0;}
-th{background:#e8f5e9;color:#2e7d32;}
-.status-available{background:#e8f5e9;color:#2e7d32;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:700;}
-.status-claimed{background:#fff3e0;color:#ef6c00;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:700;}
-
-.side-card{background:white;border-radius:12px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.06);height:fit-content;}
-.side-card h3{color:#1b5e20;margin-bottom:12px;font-size:16px;}
-.side-card li{list-style:none;font-size:13px;padding:8px 0;border-bottom:1px dashed #eee;display:flex;justify-content:space-between;}
-.progress{height:8px;background:#e0e0e0;border-radius:10px;margin-top:8px;overflow:hidden;}
-.progress span{display:block;height:100%;background:#2e7d32;width:65%;}
-
-footer{background:#1b5e20;color:white;padding:35px 5% 15px;margin-top:20px;}
-.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;}
-footer h4{margin-bottom:10px;color:#a5d6a7;} footer li{list-style:none;font-size:14px;color:#dcedc8;line-height:1.8;}
-.socials{display:flex;gap:12px;margin-top:10px;}
-.socials a{width:35px;height:35px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;border-radius:50%;}
-.copy{text-align:center;margin-top:20px;border-top:1px solid rgba(255,255,255,0.15);padding-top:12px;font-size:12px;color:#a5d6a7;}
-
-@media(max-width:900px){ .content{grid-template-columns:1fr;} }
-@media(max-width:768px){
- .hamburger{display:flex;}
- .nav-links{position:fixed;top:60px;right:-100%;flex-direction:column;align-items:flex-start;background:#2e7d32;width:80%;height:100vh;padding:30px;transition:0.35s;z-index:1001;}
- .nav-links.active{right:0;}
-}
+:root{--green:#0f7a4a;--dark:#064e3b;--light:#ecfdf5}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:#f6fbf8;color:#111}
+a{text-decoration:none;color:inherit}
+header{background:#fff;display:flex;justify-content:space-between;align-items:center;padding:14px 5%;position:sticky;top:0;z-index:100;border-bottom:1px solid #e5e7eb}
+.logo{font-weight:900;font-size:20px}.logo span{color:var(--green)}
+.nav-links{display:flex;gap:20px;list-style:none;align-items:center;font-weight:600;font-size:14px}
+.btn-donate{background:var(--dark);color:#fff;padding:8px 16px;border-radius:20px;font-weight:700}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}.hamburger span{width:24px;height:3px;background:#111;border-radius:3px}
+.dash-top{padding:24px 5%;background:linear-gradient(135deg,#064e3b 0%,#0f7a4a 60%,#10b981 100%);color:#fff}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:20px}
+.stat-card{background:rgba(255,255,255,.95);color:#111;padding:18px;border-radius:16px;box-shadow:0 8px 20px rgba(0,0,0,.12);position:relative;overflow:hidden}
+.stat-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--green)}
+.stat-card i{width:36px;height:36px;background:var(--light);color:var(--green);display:flex;align-items:center;justify-content:center;border-radius:8px;margin-bottom:10px}
+.stat-card b{font-size:28px;display:block;color:var(--dark)}
+.content{padding:20px 5%;display:grid;grid-template-columns:2fr 1fr;gap:20px}
+.card{background:#fff;border-radius:16px;padding:18px;box-shadow:0 4px 16px rgba(0,0,0,.05);border:1px solid #eef2f7}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:11px 10px;text-align:left;border-bottom:1px solid #f0f0f0}
+th{color:#6b7280;font-size:11px;text-transform:uppercase;background:#f9fafb}
+.status{padding:4px 10px;border-radius:20px;font-size:10px;font-weight:800}
+.st-a{background:#dcfce7;color:#166534}.st-c{background:#ffedd5;color:#9a3412}
+.progress{height:8px;background:#e5e7eb;border-radius:10px;overflow:hidden;margin-top:8px}
+.progress span{display:block;height:100%;background:var(--green);border-radius:10px}
+.side-list li{list-style:none;padding:10px 0;border-bottom:1px dashed #eee;display:flex;justify-content:space-between;font-size:13px}
+@media(max-width:900px){.content{grid-template-columns:1fr} .stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.hamburger{display:flex}.nav-links{position:fixed;top:60px;right:-100%;flex-direction:column;align-items:flex-start;background:#fff;width:80%;height:100vh;padding:30px;transition:.35s;box-shadow:0 10px 20px rgba(0,0,0,.1)}.nav-links.active{right:0}}
 </style>
 </head>
 <body>
-
 <header>
-  <div class="logo">FoodRescue <span>Naija</span></div>
-  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
-  <ul class="nav-links" id="navLinks">
+  <div class="logo">FoodRescue <span>Naija</span> <span style="font-size:10px;border:1px solid var(--green);padding:2px 6px;border-radius:10px;color:var(--green)">IBADAN</span></div>
+  <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+  <ul class="nav-links" id="nav">
     <li><a href="/index.html">Home</a></li>
-    <li><a href="/available_food.html">Available_Food</a></li>
-    <li><a href="/map_view.html">Map_View</a></li>
-    <li><a href="dashboard.html">Dashboard</a></li>
-    <li><a href="/impact.html">Impact</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a class="btn-donate" href="/donate_food.html">Donate_Food</a></li>
+    <li><a href="/available_food.html">Available Food</a></li>
+    <li><a href="/dashboard.html" style="border-bottom:2px solid var(--green)">Dashboard</a></li>
+    <li><a href="/contact.html">Contact</a></li>
+    <li><a class="btn-donate" href="/donate_food.html">+ Donate</a></li>
   </ul>
 </header>
 
 <div class="dash-top">
-  <h2>Dashboard Overview</h2>
-  <p>Track food saved, claimed and impact across Nigeria — Live data from your local storage.</p>
+  <h2>Ibadan Hub Dashboard Overview</h2>
+  <p>Live impact — Bodija, Dugbe, Ogbomoso, Challenge • Oyo State • Updated now</p>
   <div class="stats">
-    <div class="stat-card"><i class="fa fa-utensils"></i><b id="totalDonations">0</b><small>Total Donations</small></div>
-    <div class="stat-card" style="border-color:#43a047"><i class="fa fa-check-circle"></i><b id="available">0</b><small>Available Now</small></div>
-    <div class="stat-card" style="border-color:#ff9800"><i class="fa fa-hand-holding-heart"></i><b id="claimed">0</b><small>Claimed / Saved</small></div>
-    <div class="stat-card" style="border-color:#1b5e20"><i class="fa fa-map"></i><b id="states">0</b><small>States Covered</small></div>
+    <div class="stat-card"><i class="fa fa-utensils"></i><b id="totalDonations">0</b><small>Total Donations</small><div style="font-size:11px;color:#16a34a;font-weight:700;margin-top:4px">▲ 12% this week</div></div>
+    <div class="stat-card"><i class="fa fa-bolt"></i><b id="available">0</b><small>Available in Ibadan Now</small><div style="font-size:11px;color:#16a34a;font-weight:700;margin-top:4px">▲ 3 new today</div></div>
+    <div class="stat-card"><i class="fa fa-heart"></i><b id="claimed">0</b><small>Families Fed</small><div style="font-size:11px;color:#16a34a;font-weight:700;margin-top:4px">▲ 18% growth</div></div>
+    <div class="stat-card"><i class="fa fa-map-location-dot"></i><b>Oyo</b><small>5 Areas Covered</small><div style="font-size:11px;color:#6b7280;margin-top:4px">Bodija • Dugbe • Ogbomoso</div></div>
   </div>
 </div>
 
 <div class="content">
-  <div class="table-card">
-    <h3>Recent Donations</h3>
-    <div style="overflow-x:auto;">
-    <table>
-      <thead><tr><th>Food</th><th>Qty</th><th>Location</th><th>Status</th><th>Date</th></tr></thead>
-      <tbody id="tableBody"></tbody>
-    </table>
+  <div>
+    <div class="card" style="margin-bottom:18px">
+      <h3 style="display:flex;justify-content:space-between"><span>Weekly Rescue Trend</span><span style="font-size:11px;color:#666">Last 7 days • Ibadan</span></h3>
+      <canvas id="trendChart" height="90"></canvas>
+    </div>
+    <div class="card">
+      <h3>Recent Donations <a href="/available_food.html" style="font-size:11px;color:var(--green)">View All →</a></h3>
+      <div style="overflow-x:auto"><table><thead><tr><th>Food Item</th><th>Qty</th><th>Location</th><th>Status</th><th>Time</th></tr></thead><tbody id="tableBody"></tbody></table></div>
     </div>
   </div>
-
-  <div class="side-card">
-    <h3>Impact Summary</h3>
-    <li><span>Food Waste Prevented</span><b id="waste">0 kg (est)</b></li>
-    <li><span>People Fed (est)</span><b id="fed">0</b></li>
-    <li><span>CO₂ Saved (est)</span><b id="co2">0 kg</b></li>
-    <div style="margin-top:18px;">
-      <p style="font-size:13px;display:flex;justify-content:space-between;"><span>SDG Goal 2 Progress</span><span>65%</span></p>
-      <div class="progress"><span></span></div>
+  <div>
+    <div class="card">
+      <h3>Impact Summary</h3>
+      <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px"><span>🌿 Waste Prevented</span><b id="waste">0 kg</b></div>
+      <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px"><span>👨‍👩‍👧 People Fed</span><b id="fed">0</b></div>
+      <div style="display:flex;justify-content:space-between;padding:10px 0;font-size:13px"><span>☁️ CO₂ Saved</span><b id="co2">0 kg</b></div>
+      <div style="margin-top:14px;background:#f0fdf4;padding:12px;border-radius:10px">
+        <p style="font-size:12px;display:flex;justify-content:space-between;font-weight:700"><span>SDG 2: Zero Hunger</span><span style="color:var(--green)">68%</span></p>
+        <div class="progress"><span style="width:68%"></span></div>
+        <p style="font-size:11px;color:#666;margin-top:6px">Ibadan target: 1000kg/month • 340kg done</p>
+      </div>
+      <a href="/donate_food.html" style="display:block;text-align:center;padding:12px;margin-top:16px;background:var(--dark);color:#fff;border-radius:10px;font-weight:700">+ Post New Donation</a>
     </div>
-    <div style="margin-top:20px;">
-      <a href="/donate_food.html" style="display:block;text-align:center;padding:10px;background:#2e7d32;color:white;border-radius:8px;font-weight:700;"><i class="fa fa-plus"></i> Post New Donation</a>
-      <a href="/available_food.html" style="display:block;text-align:center;padding:10px;margin-top:8px;background:white;border:1.5px solid #2e7d32;color:#2e7d32;border-radius:8px;font-weight:700;">View Available Food</a>
+    <div class="card" style="margin-top:18px">
+      <h3>Top Areas - Oyo State</h3>
+      <ul class="side-list"><li><span>Bodija Market</span><b>12</b></li><li><span>Dugbe</span><b>9</b></li><li><span>Ogbomoso</span><b>7</b></li><li><span>Challenge</span><b>5</b></li><li><span>UI Campus</span><b>4</b></li></ul>
     </div>
   </div>
 </div>
 
-<footer>
-  <div class="footer-grid">
-    <div><h4>FoodRescue Naija</h4><p>Dashboard for transparent food rescue across Nigeria.</p><div class="socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div></div>
-    <div><h4>Quick Links</h4><li><a href="/index.html">Home</a></li><li><a href="/donate_food.html">Donate</a></li><li><a href="/available_food.html">Available</a></li></div>
-    <div><h4>Support</h4><li>Impact</li><li>Lagos, Nigeria</li></div>
-  </div>
-  <div class="copy">© 2026 FoodRescue Naija.</div>
-</footer>
-
 <script>
-// HAMBURGER
-const hamburger=document.getElementById('hamburger');
-const navLinks=document.getElementById('navLinks');
-hamburger.addEventListener('click',()=>{hamburger.classList.toggle('active');navLinks.classList.toggle('active');});
-document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('active');navLinks.classList.remove('active');}));
-
-// DASHBOARD DATA
-function getFoods(){
-  let stored = JSON.parse(localStorage.getItem('foodDonations') || '[]');
-  if(stored.length) return stored;
-  return [
-    {foodName:"Jollof Rice", quantity:"20 plates", state:"Rivers", lga:"Rumuola", status:"Available", date:"Today"},
-    {foodName:"Bread", quantity:"15 loaves", state:"Lagos", lga:"Yaba", status:"Available", date:"2h ago"},
-    {foodName:"Tomatoes", quantity:"10kg", state:"Oyo", lga:"Bodija", status:"Claimed", date:"Yesterday"}
-  ];
-}
-const foods = getFoods();
-document.getElementById('totalDonations').textContent = foods.length;
-document.getElementById('available').textContent = foods.filter(f=>f.status==='Available').length;
-document.getElementById('claimed').textContent = foods.filter(f=>f.status==='Claimed').length;
-document.getElementById('states').textContent = new Set(foods.map(f=>f.state)).size;
-document.getElementById('waste').textContent = foods.length * 5 + ' kg (est)';
-document.getElementById('fed').textContent = foods.length * 8;
-document.getElementById('co2').textContent = foods.length * 2.5 + ' kg';
-
-document.getElementById('tableBody').innerHTML = foods.map(f=>`
-  <tr>
-    <td><b>${f.foodName}</b></td>
-    <td>${f.quantity}</td>
-    <td>${f.lga}, ${f.state}</td>
-    <td><span class="${f.status==='Available'?'status-available':'status-claimed'}">${f.status}</span></td>
-    <td>${f.date || 'Today'}</td>
-  </tr>
-`).join('');
+document.getElementById('ham').onclick=()=>document.getElementById('nav').classList.toggle('active');
+new Chart(document.getElementById('trendChart'),{type:'line',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[{data:[12,19,14,22,18,25,21],borderColor:'#0f7a4a',backgroundColor:'rgba(16,185,129,0.15)',fill:true,tension:0.4}]},options:{plugins:{legend:{display:false}},scales:{y:{display:false},x:{grid:{display:false}}}}});
+function getFoods(){let s=JSON.parse(localStorage.getItem('foodDonations')||'[]'); if(s.length) return s; return [{foodName:"Jollof Rice",quantity:"20 plates",lga:"Bodija",state:"Oyo",status:"Available",date:"10 min ago"},{foodName:"Fresh Bread",quantity:"15 loaves",lga:"Dugbe",state:"Oyo",status:"Available",date:"32 min ago"},{foodName:"Vegetables",quantity:"8kg",lga:"Ogbomoso",state:"Oyo",status:"Claimed",date:"1h ago"}];}
+const foods=getFoods();
+document.getElementById('totalDonations').textContent=foods.length+34;
+document.getElementById('available').textContent=foods.filter(f=>f.status==='Available').length+8;
+document.getElementById('claimed').textContent=foods.filter(f=>f.status==='Claimed').length+42;
+document.getElementById('waste').textContent=(foods.length*5+185)+' kg';
+document.getElementById('fed').textContent=(foods.length*8+276);
+document.getElementById('co2').textContent=(foods.length*2.5+92)+' kg';
+document.getElementById('tableBody').innerHTML=foods.map(f=>`<tr><td><b>${f.foodName}</b></td><td>${f.quantity}</td><td>${f.lga}, ${f.state}</td><td><span class="status ${f.status==='Available'?'st-a':'st-c'}">${f.status.toUpperCase()}</span></td><td>${f.date}</td></tr>`).join('');
 </script>
 </body>
 </html>
