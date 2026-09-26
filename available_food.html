@@ -7,32 +7,32 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root{--green:#0f7a4a;--dark:#111827;--light:#ecfdf5;--red:#ef4444}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-body{background:#f8faf8;color:#222}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Inter,system-ui,sans-serif}
+body{background:#f8faf8;color:#222;line-height:1.6;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
-/* HEADER LIKE SCREENSHOT */
-header{background:#fff;display:flex;justify-content:space-between;align-items:center;padding:14px 5%;position:sticky;top:0;z-index:100;border-bottom:1px solid #e5e7eb}
-.logo{font-weight:800;font-size:20px;display:flex;align-items:center;gap:8px}
-.badge{border:1px solid #d1d5db;color:#065f46;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700}
+img{max-width:100%}
+/* HEADER */
+header{background:#fff;display:flex;justify-content:space-between;align-items:center;padding:14px 5%;position:sticky;top:0;z-index:1000;border-bottom:1px solid #e5e7eb}
+.logo{font-weight:800;font-size:clamp(16px,4vw,20px);display:flex;align-items:center;gap:8px}
+.badge{border:1px solid #d1d5db;color:#065f46;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;white-space:nowrap}
 .nav-links{display:flex;gap:24px;list-style:none;align-items:center;font-size:14px;font-weight:500;color:#374151}
 .nav-links a.active{border-bottom:2px solid #065f46;padding-bottom:2px;font-weight:700;color:#111}
-.btn-donate{background:#111827;color:#fff;padding:10px 18px;border-radius:24px;font-weight:700;font-size:14px}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
-.hamburger span{width:24px;height:3px;background:#111;border-radius:3px}
+.btn-donate{background:#111827;color:#fff;padding:10px 18px;border-radius:24px;font-weight:700;font-size:14px;white-space:nowrap}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}.hamburger span{width:24px;height:3px;background:#111;border-radius:3px;transition:.3s}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,6px)}.hamburger.active span:nth-child(2){opacity:0}.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-6px)}
 .hero{padding:22px 5%;background:#fff;border-bottom:1px solid #eee}
-.hero h2{color:#111;font-size:22px} .hero p{color:#666;font-size:13px}
+.hero h2{color:#111;font-size:clamp(18px,4vw,22px)} 
 .safety-banner{background:#fef3c7;border:1.5px solid #fcd34d;color:#92400e;padding:12px 14px;border-radius:12px;margin:14px 0;display:flex;gap:10px;font-size:12px;font-weight:600;line-height:1.4}
-.safety-banner i{color:#d97706;font-size:16px;margin-top:2px}
 .filters{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .search-box{flex:1;min-width:240px;position:relative}
 .search-box input{width:100%;padding:12px 14px 12px 38px;border:1.5px solid #d1fae5;border-radius:30px;background:#f0fdf4;outline:none}
 .search-box i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#888}
-.pills{display:flex;gap:8px;flex-wrap:wrap}
-.pill{padding:8px 14px;border:1.5px solid #d1d5db;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;background:#fff}
+.pills{display:flex;gap:8px;flex-wrap:wrap;overflow-x:auto}
+.pill{padding:8px 14px;border:1.5px solid #d1d5db;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;background:#fff;white-space:nowrap}
 .pill.active{background:var(--green);color:#fff;border-color:var(--green)}
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
 .clear-btn{background:#fff;border:1.5px solid var(--red);color:var(--red);padding:8px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer}
-.feed{padding:24px 5%;display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.feed{padding:24px 5%;display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;max-width:1250px;margin:0 auto}
 .food-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.06);border:1px solid #eef2f7;display:flex;flex-direction:column;position:relative}
 .img-wrap{height:170px;position:relative;background:#f3f4f6}
 .img-wrap img{width:100%;height:100%;object-fit:cover}
@@ -41,8 +41,7 @@ header{background:#fff;display:flex;justify-content:space-between;align-items:ce
 .verified{position:absolute;top:10px;left:10px;background:#fff;color:var(--green);font-size:10px;font-weight:800;padding:4px 8px;border-radius:20px;display:flex;align-items:center;gap:4px}
 .body{padding:14px 16px;flex:1;display:flex;flex-direction:column}
 .body h3{font-size:15px;color:#111}
-.meta{font-size:12px;color:#6b7280;display:flex;gap:10px;flex-wrap:wrap;margin:6px 0}
-.meta i{color:var(--green)}
+.meta{font-size:11px;color:#6b7280;display:flex;gap:10px;flex-wrap:wrap;margin:6px 0}
 .hub-tag{font-size:10px;background:var(--light);color:#064e3b;border:1px solid #a7f3d0;padding:3px 8px;border-radius:20px;font-weight:700;display:inline-flex;align-items:center;gap:4px;margin-top:4px}
 .actions{margin-top:auto;display:flex;gap:8px;padding-top:12px}
 .btn-claim{flex:1;background:var(--green);color:#fff;border:none;padding:11px;border-radius:10px;font-weight:700;cursor:pointer}
@@ -50,19 +49,35 @@ header{background:#fff;display:flex;justify-content:space-between;align-items:ce
 .btn-del{padding:11px 14px;background:#fff;border:1.5px solid var(--red);color:var(--red);border-radius:10px;cursor:pointer}
 .btn-report{width:100%;margin-top:8px;background:none;border:none;color:#ef4444;font-size:11px;cursor:pointer;text-decoration:underline}
 .empty{grid-column:1/-1;text-align:center;padding:60px 20px;background:#fff;border-radius:16px;color:#666}
-footer{background:#111827;color:#a7f3d0;padding:20px;text-align:center;font-size:12px;margin-top:30px}
-/* MODALS */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:200;padding:16px}
 .modal-overlay.active{display:flex}
 .modal{background:#fff;border-radius:16px;padding:22px;max-width:420px;width:100%;box-shadow:0 20px 40px rgba(0,0,0,.2)}
-.modal h3{color:#111;font-size:18px;margin-bottom:8px}
-.modal ul{font-size:13px;color:#444;line-height:1.6;margin:10px 0 14px;padding-left:18px}
-.modal .check{display:flex;gap:8px;font-size:12px;font-weight:600;margin:12px 0}
-.modal .btns{display:flex;gap:10px;margin-top:14px}
-.btn-agree{flex:1;background:#111827;color:#fff;border:none;padding:12px;border-radius:10px;font-weight:700;cursor:pointer}
-.btn-cancel{flex:1;background:#f3f4f6;border:none;padding:12px;border-radius:10px;font-weight:700;cursor:pointer}
 .code-box{background:#111827;color:#6ee7b7;text-align:center;padding:16px;border-radius:12px;font-size:32px;font-weight:900;letter-spacing:4px;margin:12px 0}
-@media(max-width:768px){.hamburger{display:flex}.nav-links{position:fixed;top:60px;right:-100%;flex-direction:column;background:#fff;width:80%;height:100vh;padding:30px;transition:.35s;align-items:flex-start;box-shadow:0 10px 20px rgba(0,0,0,.1)}.nav-links.active{right:0}.feed{grid-template-columns:1fr;gap:12px}}
+/* FOOTER SOCIAL */
+footer{background:#0b1220;color:#cbd5e1;margin-top:30px}
+.footer-top{padding:36px 5%;display:grid;grid-template-columns:1.5fr .8fr .8fr 1fr;gap:28px;max-width:1250px;margin:0 auto}
+.footer-top h4{color:#fff;font-size:13px;margin-bottom:12px;font-weight:800;text-transform:uppercase}
+.socials{display:flex;gap:9px;margin-top:14px;flex-wrap:wrap}
+.socials a{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.12);transition:.2s}
+.socials a:hover{background:#10b981;transform:translateY(-2px)}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:7px}
+.footer-links a{font-size:12px;color:#94a3b8}
+.footer-contact p{font-size:11px;color:#94a3b8;display:flex;gap:8px;margin-bottom:7px}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding:14px 5%;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:10px;color:#64748b;max-width:1250px;margin:0 auto}
+@media(max-width:768px){
+.hamburger{display:flex}
+.nav-links{position:fixed;top:60px;right:-100%;flex-direction:column;align-items:flex-start;background:#fff;width:85%;max-width:320px;height:100vh;padding:24px;transition:.35s;box-shadow:-10px 0 30px rgba(0,0,0,.1);z-index:99}
+.nav-links.active{right:0}
+.nav-links li{width:100%}.nav-links a{display:block;padding:12px 0;border-bottom:1px solid #f3f4f6;width:100%}
+.btn-donate{width:100%;text-align:center;margin-top:10px}
+.feed{grid-template-columns:1fr;gap:12px;padding:16px 4%}
+.hero{padding:16px 4%}
+.filters{flex-direction:column;align-items:stretch}
+.search-box{min-width:100%}
+.footer-top{grid-template-columns:1fr}
+.footer-bottom{flex-direction:column;text-align:center}
+}
+@media(max-width:480px){header{padding:12px 4%}.pill{font-size:12px;padding:6px 10px}}
 </style>
 </head>
 <body>
@@ -76,16 +91,16 @@ footer{background:#111827;color:#a7f3d0;padding:20px;text-align:center;font-size
     <li><a href="/dashboard.html">Dashboard</a></li>
     <li><a href="/impact.html">Impact</a></li>
     <li><a href="/contact.html">Contact</a></li>
-    <li><a class="btn-donate" href="/donate_food.html">Donate Food</a></li>
+    <li><a class="btn-donate" href="/donate_food.html"><i class="fa fa-heart"></i> Donate Food</a></li>
   </ul>
 </header>
 
 <div class="hero">
   <h2><i class="fa fa-shield-halved"></i> Safe Food Donations - Hub Verified</h2>
-  <p style="margin-top:4px">All foods verified by volunteer call • Daylight 8AM-6PM • Pickup code required • NGO priority</p>
+  <p style="margin-top:4px;font-size:12px;color:#666">All foods verified by volunteer call • Daylight 8AM-6PM • Pickup code required • NGO priority</p>
   <div class="safety-banner">
     <i class="fa fa-triangle-exclamation"></i>
-    <div><b>SECURITY:</b> We banned home addresses. All pickup at public Hubs/Markets. Never go alone. Share live location. Need help? Emergency: 199 / 112 • Hub: 08101423991 • 2 reports = auto-hidden, 3 reports = phone blocked.</div>
+    <div><b>SECURITY:</b> We banned home addresses. All pickup at public Hubs/Markets. Never go alone. Share live location. Emergency: 199 / 112 • Hub: 08101423991 • 2 reports = auto-hidden, 3 reports = phone blocked.</div>
   </div>
   <div class="topbar">
     <p id="countText">Loading...</p>
@@ -105,75 +120,69 @@ footer{background:#111827;color:#a7f3d0;padding:20px;text-align:center;font-size
 
 <div class="feed" id="foodContainer"></div>
 
-<!-- SAFETY MODAL -->
 <div class="modal-overlay" id="safetyModal">
   <div class="modal">
-    <h3><i class="fa fa-shield-halved" style="color:var(--green)"></i> Safety Rules - Read Before Claiming</h3>
+    <h3><i class="fa fa-shield-halved" style="color:var(--green)"></i> Safety Rules</h3>
     <p style="font-size:12px;color:#666">To prevent kidnapping & scams:</p>
-    <ul>
+    <ul style="font-size:13px;color:#444;line-height:1.6;margin:10px 0 14px;padding-left:18px">
       <li><b>Never go alone</b> - go with a friend/family</li>
       <li><b>Hub only:</b> Meet ONLY at public hub/market listed. NO house.</li>
       <li><b>Daylight only:</b> 8AM - 6PM. No night pickup.</li>
-      <li>Share your live location with family</li>
-      <li>You will get <b>4-digit Pickup Code</b> - show at Hub</li>
-      <li>If unsafe, leave and click Report</li>
+      <li>Share your live location</li>
+      <li>You will get <b>4-digit Pickup Code</b></li>
     </ul>
-    <label class="check"><input type="checkbox" id="agreeCheck"> I agree to meet at public place in daylight and not go alone</label>
-    <div class="btns">
-      <button class="btn-cancel" onclick="closeSafety()">Cancel</button>
-      <button class="btn-agree" onclick="confirmClaim()">I Agree - Get Code</button>
+    <label style="display:flex;gap:8px;font-size:12px;font-weight:600;margin:12px 0"><input type="checkbox" id="agreeCheck"> I agree to meet at public place in daylight and not go alone</label>
+    <div style="display:flex;gap:10px;margin-top:14px">
+      <button style="flex:1;background:#f3f4f6;border:none;padding:12px;border-radius:10px;font-weight:700;cursor:pointer" onclick="closeSafety()">Cancel</button>
+      <button style="flex:1;background:#111827;color:#fff;border:none;padding:12px;border-radius:10px;font-weight:700;cursor:pointer" onclick="confirmClaim()">I Agree - Get Code</button>
     </div>
   </div>
 </div>
 
-<!-- CODE MODAL -->
 <div class="modal-overlay" id="codeModal">
   <div class="modal" style="text-align:center">
-    <h3 style="color:var(--green)">✅ Claimed Safely! Code Generated</h3>
+    <h3 style="color:var(--green)">✅ Claimed Safely!</h3>
     <p style="font-size:13px;color:#555;margin:8px 0">Show this code at the Hub. Server verified.</p>
     <div class="code-box" id="codeBox">----</div>
     <div style="font-size:12px;background:#ecfdf5;padding:10px;border-radius:10px;text-align:left;line-height:1.5">
-      <b>Pickup Details:</b><br>
-      📍 <span id="codeLoc">Dugbe Hub</span><br>
-      🕗 Time: <b>8AM - 6PM only</b><br>
-      📞 Hub: 08101423991<br>
-      ⚠️ Go with someone & share live location<br>
-      <small style="color:#ef4444">Server: No code, no food. Code verified at Hub.</small>
+      <b>Pickup:</b> 📍 <span id="codeLoc">Dugbe Hub</span><br>🕗 <b>8AM-6PM only</b><br>📞 08101423991<br><small style="color:#ef4444">No code, no food. Code verified at Hub.</small>
     </div>
-    <div class="btns" style="margin-top:16px">
-      <button class="btn-agree" style="flex:1" onclick="closeCode()">Got it</button>
-      <a id="waShare" target="_blank" style="flex:1;background:#25D366;color:#fff;padding:12px;border-radius:10px;font-weight:700;text-align:center"><i class="fa-brands fa-whatsapp"></i> Share Location</a>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button style="flex:1;background:#111827;color:#fff;border:none;padding:12px;border-radius:10px;font-weight:700" onclick="closeCode()">Got it</button>
+      <a id="waShare" target="_blank" style="flex:1;background:#25D366;color:#fff;padding:12px;border-radius:10px;font-weight:700;text-align:center"><i class="fa-brands fa-whatsapp"></i> Share</a>
     </div>
   </div>
 </div>
 
-<footer>© 2026 FoodRescue Naija • Security First: Hub Pickup Only • Emergency 199/112 • Ibadan</footer>
+<footer>
+  <div class="footer-top">
+    <div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><b style="color:#fff;font-size:18px">FoodRescue Naija</b><span style="border:1px solid #10b981;color:#10b981;padding:2px 8px;border-radius:20px;font-size:9px;font-weight:800">IBADAN HUB</span></div><p style="font-size:11px;color:#94a3b8;margin-top:8px;line-height:1.5">Hub-Only • No Home Pickup • Daylight 8AM-6PM • Code Verified<br>Building safe, no-waste Ibadan. 100% FREE rescue.</p><div class="socials">
+      <a href="https://wa.me/2348101423991" target="_blank"><i class="fa-brands fa-whatsapp"></i></a><a href="https://facebook.com/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a><a href="https://instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a><a href="https://x.com/" target="_blank"><i class="fa-brands fa-x-twitter"></i></a><a href="https://tiktok.com/" target="_blank"><i class="fa-brands fa-tiktok"></i></a><a href="mailto:hello@foodrescuenaija.ng"><i class="fa fa-envelope"></i></a>
+    </div></div>
+    <div><h4>Quick Links</h4><ul class="footer-links"><li><a href="/index.html">Home</a></li><li><a href="/available_food.html">Available Food</a></li><li><a href="/dashboard.html">Dashboard</a></li><li><a href="/impact.html">Impact & Safety</a></li></ul></div>
+    <div><h4>Safety</h4><ul class="footer-links"><li><a href="/impact.html">Security Policy</a></li><li><a href="/contact.html">Contact Hub</a></li><li><a href="#">Report - 199</a></li><li><a href="#">Code System</a></li></ul></div>
+    <div class="footer-contact"><h4>Ibadan Hub</h4><p><i class="fa fa-location-dot" style="color:#10b981"></i> No 12 Awolowo Ave, Dugbe</p><p><i class="fa fa-phone" style="color:#10b981"></i> 08101423991 • 199 / 112</p><p><i class="fa fa-envelope" style="color:#10b981"></i> hello@foodrescuenaija.ng</p></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 FoodRescue Naija • Security First: Hub Pickup Only • Emergency 199/112 • Ibadan</span><span><a href="https://wa.me/2348101423991" style="color:#10b981">WhatsApp Us</a> • Follow @FoodRescueNaija</span></div>
+</footer>
 
 <script>
 const ham=document.getElementById('ham'), nav=document.getElementById('nav');
-ham.onclick=()=>nav.classList.toggle('active');
+ham.onclick=()=>{ham.classList.toggle('active');nav.classList.toggle('active');document.body.style.overflow=nav.classList.contains('active')?'hidden':''};
 const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:3000' : '';
 const API_URL = `${API_BASE}/api/foods`;
-let allFoods = [];
-let pendingClaimId=null;
-
+let allFoods = [], pendingClaimId=null;
 function getLocal(){ try{return JSON.parse(localStorage.getItem('foodDonations')||'[]')}catch{return []} }
 function saveLocal(d){ localStorage.setItem('foodDonations', JSON.stringify(d)); }
-
 async function loadFoods(){
   let apiFoods=[];
-  try{ 
-    const r=await fetch(`${API_URL}?public=true`); 
-    if(r.ok) apiFoods=await r.json(); 
-  }catch{}
+  try{ const r=await fetch(`${API_URL}?public=true`); if(r.ok) apiFoods=await r.json(); }catch{}
   const localFoods=getLocal().filter(f=>(f.reports||0)<2 && f.hidden!==true);
-  const merged=[...apiFoods, ...localFoods];
-  const map=new Map();
+  const merged=[...apiFoods, ...localFoods]; const map=new Map();
   merged.forEach(f=>{ const id=f.id||f._id; if(!map.has(id)) map.set(id,f); });
   allFoods=Array.from(map.values()).sort((a,b)=> new Date(b.date||0)-new Date(a.date||0));
   render(allFoods);
 }
-
 function render(list){
   const c=document.getElementById('foodContainer');
   const availableCount = list.filter(f=>f.status!=='Claimed').length;
@@ -183,144 +192,45 @@ function render(list){
     return;
   }
   c.innerHTML=list.map(f=>{
-    const id=f.id||f._id;
-    const isClaimed=f.status==='Claimed';
-    const isReview=f.status==='Under Review';
-    const name=f.foodName||f.name||'Food Donation';
-    const qty=f.quantity||'1 plate';
-    const loc=f.location||f.address||f.lga||'Dugbe Hub - No 12 Awolowo Ave';
-    const time=f.pickupTime||f.pickup_time||'8AM-6PM';
+    const id=f.id||f._id; const isClaimed=f.status==='Claimed'; const isReview=f.status==='Under Review';
+    const name=f.foodName||f.name||'Food Donation'; const qty=f.quantity||'1 plate';
+    const loc=f.location||f.address||'Dugbe Hub - No 12 Awolowo Ave'; const time=f.pickupTime||f.pickup_time||'8AM-6PM';
     const img=f.image||`https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400`;
-    const verifiedBadge = f.verified ? `<span class="verified"><i class="fa fa-check-circle"></i> Verified</span>` : `<span class="verified" style="color:#d97706"><i class="fa fa-clock"></i> Pending verification</span>`;
-    const codeDisplay = f.pickupCode ? `Code: ${isClaimed?f.pickupCode:'****'}` : 'Code: Server will generate';
-    return `
-    <div class="food-card" style="${isReview?'opacity:.6':''}">
-      <div class="img-wrap">
-        <img src="${img}" onerror="this.src='https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400'">
-        <span class="badge-status ${isClaimed?'b-claimed': isReview?'b-review':'b-available'}">${(f.status||'Available').toUpperCase()}${f.reports?` • ${f.reports} reports`:''}</span>
-        ${verifiedBadge}
-      </div>
-      <div class="body">
-        <h3>${name}</h3>
-        <span class="hub-tag"><i class="fa fa-location-dot"></i> ${loc}</span>
-        <div class="meta"><span><i class="fa fa-weight-scale"></i> ${qty}</span><span><i class="fa fa-clock"></i> ${time}</span></div>
-        <div class="meta"><span><i class="fa fa-shield"></i> ${codeDisplay}</span><span style="color:var(--green);font-weight:700"><i class="fa fa-users"></i> Never alone</span></div>
-        <div class="actions">
-          <button class="btn-claim" ${isClaimed||isReview?'disabled':''} onclick="openSafety('${id}')">${isClaimed?'Claimed':'Claim Safely - Get Code'}</button>
-          <button class="btn-del" onclick="deleteFood('${id}')" title="Delete"><i class="fa fa-trash"></i></button>
-        </div>
-        <button class="btn-report" onclick="reportFood('${id}')"><i class="fa fa-flag"></i> Report suspicious • Emergency 199</button>
-      </div>
-    </div>`;
+    const verifiedBadge = f.verified ? `<span class="verified"><i class="fa fa-check-circle"></i> Verified</span>` : `<span class="verified" style="color:#d97706"><i class="fa fa-clock"></i> Pending</span>`;
+    const codeDisplay = f.pickupCode ? `Code: ${isClaimed?f.pickupCode:'****'}` : 'Code: Server gen';
+    return `<div class="food-card" style="${isReview?'opacity:.6':''}"><div class="img-wrap"><img src="${img}"><span class="badge-status ${isClaimed?'b-claimed': isReview?'b-review':'b-available'}">${(f.status||'Available').toUpperCase()}${f.reports?` • ${f.reports} reports`:''}</span>${verifiedBadge}</div><div class="body"><h3>${name}</h3><span class="hub-tag"><i class="fa fa-location-dot"></i> ${loc}</span><div class="meta"><span><i class="fa fa-weight-scale"></i> ${qty}</span><span><i class="fa fa-clock"></i> ${time}</span></div><div class="meta"><span><i class="fa fa-shield"></i> ${codeDisplay}</span><span style="color:var(--green);font-weight:700"><i class="fa fa-users"></i> Never alone</span></div><div class="actions"><button class="btn-claim" ${isClaimed||isReview?'disabled':''} onclick="openSafety('${id}')">${isClaimed?'Claimed':'Claim Safely'}</button><button class="btn-del" onclick="deleteFood('${id}')"><i class="fa fa-trash"></i></button></div><button class="btn-report" onclick="reportFood('${id}')"><i class="fa fa-flag"></i> Report suspicious • Emergency 199</button></div></div>`;
   }).join('');
 }
-
 function openSafety(id){ pendingClaimId=id; document.getElementById('agreeCheck').checked=false; document.getElementById('safetyModal').classList.add('active'); }
 function closeSafety(){ document.getElementById('safetyModal').classList.remove('active'); pendingClaimId=null; }
 function closeCode(){ document.getElementById('codeModal').classList.remove('active'); }
-
 async function confirmClaim(){
-  if(!document.getElementById('agreeCheck').checked){ alert('Please tick agreement to safety rules'); return; }
-  const id=pendingClaimId; 
-  if(!id) return;
-  const food = allFoods.find(f=> (f.id==id||f._id==id));
-  if(!food){ alert('Food not found'); return; }
+  if(!document.getElementById('agreeCheck').checked){ alert('Please tick agreement'); return; }
+  const id=pendingClaimId; if(!id) return;
+  const food = allFoods.find(f=> (f.id==id||f._id==id)); if(!food){ alert('Not found'); return; }
   closeSafety();
-
-  // Use server code if exists, otherwise generate locally as fallback
   const serverCode = food.pickupCode || Math.floor(1000+Math.random()*9000).toString();
-
-  // Call server claim with code to satisfy secure server
   try{
-    const res = await fetch(`${API_URL}/${id}/claim`,{
-      method:'PUT',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ code: serverCode, claimerName: 'Ibadan User', claimerPhone: '080...' })
-    });
-    const data = await res.json();
-    if(!res.ok){
-      alert(data.error||'Claim failed. Invalid code or already claimed.');
-      return;
-    }
-  }catch(e){
-    console.log('Offline claim, using local');
-  }
-
-  // Update local
-  let local=getLocal();
-  local=local.map(f=> (f.id==id||f._id==id)?{...f,status:'Claimed',pickupCode:f.pickupCode||serverCode}:f);
-  saveLocal(local);
+    const res = await fetch(`${API_URL}/${id}/claim`,{method:'PUT',headers:{'Content-Type':'application/json'},body: JSON.stringify({ code: serverCode, claimerName: 'Ibadan User', claimerPhone: '080...' })});
+    const data = await res.json(); if(!res.ok){ alert(data.error||'Claim failed'); return; }
+  }catch(e){ console.log('Offline'); }
+  let local=getLocal(); local=local.map(f=> (f.id==id||f._id==id)?{...f,status:'Claimed',pickupCode:f.pickupCode||serverCode}:f); saveLocal(local);
   allFoods=allFoods.map(f=> (f.id==id||f._id==id)?{...f,status:'Claimed',pickupCode:f.pickupCode||serverCode}:f);
-  
-  showCodeModal(id, serverCode, food.location||'Dugbe Hub');
-  render(filterNow());
-}
-
-function showCodeModal(id,code,loc){
-  document.getElementById('codeBox').textContent=code;
-  document.getElementById('codeLoc').textContent=loc;
-  document.getElementById('waShare').href=`https://wa.me/?text=${encodeURIComponent(`I am going to pick FoodRescue food at ${loc}. My pickup code is ${code}. My live location: `)}`;
+  document.getElementById('codeBox').textContent=serverCode; document.getElementById('codeLoc').textContent=food.location||'Dugbe Hub';
+  document.getElementById('waShare').href=`https://wa.me/?text=${encodeURIComponent(`I am going to pick FoodRescue food at ${food.location}. Code ${serverCode}. Live location: `)}`;
   document.getElementById('codeModal').classList.add('active');
-}
-
-function deleteFood(id){
-  if(!confirm('Delete this food?')) return;
-  saveLocal(getLocal().filter(f=> f.id!=id && f._id!=id));
-  allFoods=allFoods.filter(f=> f.id!=id && f._id!=id);
   render(filterNow());
-  fetch(`${API_URL}/${id}`,{method:'DELETE'}).catch(()=>{});
 }
-
+function deleteFood(id){ if(!confirm('Delete?')) return; saveLocal(getLocal().filter(f=> f.id!=id && f._id!=id)); allFoods=allFoods.filter(f=> f.id!=id && f._id!=id); render(filterNow()); fetch(`${API_URL}/${id}`,{method:'DELETE'}).catch(()=>{}); }
 async function reportFood(id){
-  const reason=prompt('Why is this suspicious? (e.g., asks for money, asks to come to house at night, fake)');
-  if(!reason) return;
-  try{
-    const res = await fetch(`${API_URL}/${id}/report`,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({reason, reporterPhone:'080...'})
-    });
-    const data = await res.json();
-    if(data.hidden) alert('⚠️ This listing is now hidden after 2 reports. Thank you for keeping Ibadan safe!');
-    else alert('Reported! We will review within 30 mins. Emergency: Call 199. Reports: '+data.reports);
-    if(data.blocked) alert('Donor phone blocked after 3 reports.');
-  }catch{
-    alert('Reported locally! Will sync when online. Emergency: 199');
-    let local=getLocal().map(f=> (f.id==id||f._id==id)?{...f,reports:(f.reports||0)+1,hidden:(f.reports||0)>=1, status:(f.reports||0)>=1?'Under Review':f.status}:f);
-    saveLocal(local);
-  }
+  const reason=prompt('Why suspicious? (asks money, house at night, fake)'); if(!reason) return;
+  try{ const res = await fetch(`${API_URL}/${id}/report`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reason, reporterPhone:'080...'})}); const data = await res.json(); if(data.hidden) alert('⚠️ Hidden after 2 reports. Thanks!'); else alert('Reported! Reports: '+data.reports); if(data.blocked) alert('Phone blocked.'); }catch{ alert('Reported locally! Emergency 199'); let local=getLocal().map(f=> (f.id==id||f._id==id)?{...f,reports:(f.reports||0)+1,hidden:(f.reports||0)>=1, status:(f.reports||0)>=1?'Under Review':f.status}:f); saveLocal(local); }
   loadFoods();
 }
-
-function clearClaimed(){
-  if(!confirm('Delete ALL claimed foods?')) return;
-  saveLocal(getLocal().filter(f=> f.status!=='Claimed'));
-  allFoods=allFoods.filter(f=> f.status!=='Claimed');
-  render(filterNow());
-  fetch(`${API_URL}?status=Claimed`,{method:'DELETE'}).catch(()=>{});
-}
-
-function filterNow(){
-  const q=document.getElementById('search').value.toLowerCase();
-  const active=document.querySelector('.pill.active')?.dataset.filter||'All';
-  return allFoods.filter(f=>{
-    const hay=(f.foodName||f.name||'')+' '+(f.location||'')+' '+(f.category||'');
-    const matchSearch=hay.toLowerCase().includes(q);
-    if(active==='Hub') return matchSearch && ((f.location||'').toLowerCase().includes('hub')||(f.location||'').toLowerCase().includes('market'));
-    if(active==='Verified') return matchSearch && f.verified===true;
-    const cat=(f.category||f.foodName||'').toLowerCase();
-    const matchCat=active==='All'||cat.includes(active.toLowerCase());
-    return matchSearch&&matchCat;
-  });
-}
-
+function clearClaimed(){ if(!confirm('Delete ALL claimed?')) return; saveLocal(getLocal().filter(f=> f.status!=='Claimed')); allFoods=allFoods.filter(f=> f.status!=='Claimed'); render(filterNow()); fetch(`${API_URL}?status=Claimed`,{method:'DELETE'}).catch(()=>{}); }
+function filterNow(){ const q=document.getElementById('search').value.toLowerCase(); const active=document.querySelector('.pill.active')?.dataset.filter||'All'; return allFoods.filter(f=>{ const hay=(f.foodName||f.name||'')+' '+(f.location||'')+' '+(f.category||''); const matchSearch=hay.toLowerCase().includes(q); if(active==='Hub') return matchSearch && ((f.location||'').toLowerCase().includes('hub')||(f.location||'').toLowerCase().includes('market')); if(active==='Verified') return matchSearch && f.verified===true; const cat=(f.category||f.foodName||'').toLowerCase(); const matchCat=active==='All'||cat.includes(active.toLowerCase()); return matchSearch&&matchCat; }); }
 document.getElementById('search').addEventListener('input',()=>render(filterNow()));
-document.getElementById('pills').addEventListener('click',e=>{
-  if(!e.target.classList.contains('pill')) return;
-  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
-  e.target.classList.add('active');
-  render(filterNow());
-});
+document.getElementById('pills').addEventListener('click',e=>{ if(!e.target.classList.contains('pill')) return; document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active')); e.target.classList.add('active'); render(filterNow()); });
 loadFoods();
 </script>
 </body>
