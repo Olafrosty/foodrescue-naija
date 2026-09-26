@@ -6,55 +6,89 @@
 <title>FoodRescue Naija - Ibadan Hub | Save Food, Feed Oyo State</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{--green:#0f7a4a;--dark:#064e3b;--light:#ecfdf5;--yellow:#facc15}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-body{background:#fff;color:#111;line-height:1.6}
+:root{--green:#0f7a4a;--dark:#111827;--light:#ecfdf5}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Inter,system-ui,sans-serif}
+body{background:#fff;color:#111;line-height:1.6;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
+img{max-width:100%}
+/* HEADER */
 header{background:#fff;display:flex;justify-content:space-between;align-items:center;padding:14px 5%;position:sticky;top:0;z-index:1000;border-bottom:1px solid #e5e7eb}
-.logo{font-weight:900;font-size:22px}.logo span{color:var(--green)}
-.nav-links{display:flex;gap:22px;list-style:none;align-items:center;font-weight:600;font-size:14px}
-.btn-donate{background:var(--dark);color:#fff;padding:9px 18px;border-radius:20px;font-weight:700}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}.hamburger span{width:24px;height:3px;background:#111;border-radius:3px;transition:.3s}
+.logo{font-weight:800;font-size:clamp(16px,4vw,22px);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.badge{border:1px solid #d1d5db;color:#065f46;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;white-space:nowrap}
+.nav-links{display:flex;gap:24px;list-style:none;align-items:center;font-size:14px;font-weight:500;color:#374151}
+.nav-links a.active{border-bottom:2px solid #065f46;padding-bottom:2px;font-weight:700;color:#111}
+.btn-donate{background:#111827;color:#fff;padding:10px 18px;border-radius:24px;font-weight:700;font-size:14px;white-space:nowrap}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:24px;height:3px;background:#111;border-radius:3px;transition:.3s}
 .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,6px)}.hamburger.active span:nth-child(2){opacity:0}.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-6px)}
 /* HERO */
-.hero{display:grid;grid-template-columns:1.1fr 0.9fr;align-items:center;gap:30px;padding:50px 5%;background:radial-gradient(circle at 20% 30%,#ecfdf5 0%,#fff 60%)}
-.hero h1{font-size:52px;line-height:1.05;font-weight:900;color:#111}.hero h1 span{color:var(--green)}
-.hero p{font-size:16px;color:#555;margin:14px 0 22px;max-width:520px}
+.hero{display:grid;grid-template-columns:1.1fr 0.9fr;align-items:center;gap:30px;padding: clamp(30px,6vw,50px) 5%;background:radial-gradient(circle at 20% 30%,#ecfdf5 0%,#fff 60%)}
+.hero h1{font-size:clamp(30px,5vw,52px);line-height:1.05;font-weight:900;color:#111}.hero h1 span{color:var(--green)}
+.hero p{font-size:clamp(13px,2.5vw,16px);color:#555;margin:14px 0 22px;max-width:520px}
 .badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.badges span{background:#f0fdf4;border:1px solid #bbf7d0;color:var(--dark);padding:5px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.badges span{background:#f0fdf4;border:1px solid #bbf7d0;color:#064e3b;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:4px}
 .hero-btns{display:flex;gap:10px;flex-wrap:wrap}
-.btn{padding:13px 22px;border-radius:30px;font-weight:700;border:none;cursor:pointer}
-.btn-primary{background:var(--dark);color:#fff}.btn-outline{background:#fff;border:2px solid var(--dark);color:var(--dark)}
+.btn{padding:13px 22px;border-radius:30px;font-weight:700;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-size:13px}
+.btn-primary{background:#111827;color:#fff}.btn-outline{background:#fff;border:2px solid #111827;color:#111827}
 .hero-visual{position:relative}
-.hero-img{width:100%;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.12);height:420px;object-fit:cover}
-.float-card{position:absolute;bottom:20px;left:-20px;background:#fff;padding:12px 14px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,.1);border:1px solid #eef2f7;font-size:12px}
+.hero-img{width:100%;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.12);height:clamp(280px,40vw,420px);object-fit:cover}
+.float-card{position:absolute;bottom:20px;left:-20px;background:#fff;padding:12px 14px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,.1);border:1px solid #eef2f7;font-size:11px;max-width:200px}
 .float-card b{color:var(--green)}
+.safety-mini{background:#fef3c7;border:1px solid #fcd34d;color:#92400e;padding:8px 12px;border-radius:10px;font-size:11px;font-weight:600;margin-top:12px;display:flex;gap:8px}
 /* STATS */
 .stats-bar{background:var(--dark);color:#fff;display:grid;grid-template-columns:repeat(4,1fr);padding:20px 5%;gap:10px;text-align:center}
-.stats-bar b{font-size:26px;display:block}.stats-bar small{color:#a7f3d0}
-/* HOW */
-.section{padding:50px 5%;text-align:center;max-width:1200px;margin:0 auto}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:24px;text-align:left}
+.stats-bar b{font-size:clamp(20px,3vw,26px);display:block}.stats-bar small{color:#a7f3d0;font-size:11px}
+/* SECTIONS */
+.section{padding: clamp(30px,5vw,50px) 5%;text-align:center;max-width:1250px;margin:0 auto}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:24px;text-align:left}
 .card{background:#fff;padding:22px;border-radius:16px;box-shadow:0 6px 20px rgba(0,0,0,.06);border:1px solid #eef2f7}
 .card .icon{width:44px;height:44px;background:var(--light);color:var(--green);display:flex;align-items:center;justify-content:center;border-radius:10px;margin-bottom:10px;font-size:18px}
-.cta{background:linear-gradient(135deg,#064e3b,#10b981);color:#fff;padding:40px;border-radius:20px;margin-top:30px}
-footer{background:#064e3b;color:#fff;padding:40px 5% 15px;margin-top:40px}
-@media(max-width:900px){.hero{grid-template-columns:1fr}.hero h1{font-size:36px}.stats-bar{grid-template-columns:repeat(2,1fr)}.hero-img{height:300px}.float-card{left:10px;bottom:10px}}
-@media(max-width:768px){.hamburger{display:flex}.nav-links{position:fixed;top:62px;right:-100%;flex-direction:column;align-items:flex-start;background:#fff;width:80%;height:100vh;padding:30px;transition:.35s;box-shadow:0 10px 20px rgba(0,0,0,.1)}.nav-links.active{right:0}}
+.cta{background:linear-gradient(135deg,#064e3b,#10b981);color:#fff;padding: clamp(24px,5vw,40px);border-radius:20px;margin-top:30px}
+/* FOOTER - SOCIAL */
+footer{background:#0b1220;color:#cbd5e1;padding:0;margin-top:0}
+.footer-top{padding:40px 5%;display:grid;grid-template-columns:1.5fr .8fr .8fr 1fr;gap:30px;max-width:1250px;margin:0 auto}
+.footer-top h4{color:#fff;font-size:14px;margin-bottom:14px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+.footer-brand b{color:#fff;font-size:20px}
+.footer-brand p{font-size:12px;color:#94a3b8;margin-top:8px;line-height:1.5}
+.socials{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.socials a{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.12);transition:.2s}
+.socials a:hover{background:#10b981;color:#fff;transform:translateY(-2px)}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-links a{font-size:13px;color:#94a3b8;transition:.2s}
+.footer-links a:hover{color:#fff}
+.footer-contact p{font-size:12px;color:#94a3b8;display:flex;gap:8px;margin-bottom:8px;align-items:flex-start}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding:16px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:11px;color:#64748b;max-width:1250px;margin:0 auto}
+.footer-bottom .legal{display:flex;gap:16px;flex-wrap:wrap}
+@media(max-width:1024px){.footer-top{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.float-card{position:relative;left:0;bottom:0;margin-top:12px;max-width:100%}.stats-bar{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){
+.hamburger{display:flex}
+.nav-links{position:fixed;top:62px;right:-100%;flex-direction:column;align-items:flex-start;background:#fff;width:85%;max-width:320px;height:100vh;padding:24px;transition:.35s;box-shadow:-10px 0 30px rgba(0,0,0,.1)}
+.nav-links.active{right:0}
+.nav-links li{width:100%}
+.nav-links a{display:block;padding:12px 0;border-bottom:1px solid #f3f4f6;width:100%}
+.btn-donate{width:100%;text-align:center;margin-top:10px;display:block}
+.hero-stats{grid-template-columns:repeat(2,1fr)}
+.footer-top{grid-template-columns:1fr}
+.footer-bottom{flex-direction:column;text-align:center}
+}
+@media(max-width:480px){
+header{padding:12px 4%}.hero{padding:24px 4%}.section{padding:24px 4%}.btn{width:100%;justify-content:center}
+}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">FoodRescue <span>Naija</span> <span style="font-size:10px;border:1px solid var(--green);padding:2px 8px;border-radius:12px;color:var(--green)">IBADAN HUB</span></div>
+  <div class="logo">FoodRescue Naija <span class="badge">IBADAN HUB</span></div>
   <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
   <ul class="nav-links" id="navLinks">
-    <li><a href="/index.html" style="border-bottom:2px solid var(--green)">Home</a></li>
+    <li><a href="/index.html" class="active">Home</a></li>
     <li><a href="/available_food.html">Available Food</a></li>
     <li><a href="/dashboard.html">Dashboard</a></li>
     <li><a href="/impact.html">Impact</a></li>
     <li><a href="/contact.html">Contact</a></li>
-    <li><a class="btn-donate" href="/donate_food.html">Donate Food</a></li>
+    <li><a class="btn-donate" href="/donate_food.html"><i class="fa fa-heart"></i> Donate Food</a></li>
   </ul>
 </header>
 
@@ -62,17 +96,18 @@ footer{background:#064e3b;color:#fff;padding:40px 5% 15px;margin-top:40px}
   <div>
     <div class="badges"><span><i class="fa fa-location-dot"></i> Ibadan • Oyo State</span><span>🌿 100% FREE • NAFDAC Verified</span><span>⚡ Pickup in 2 Hours</span></div>
     <h1>Save Food.<br><span>Feed Ibadan.</span><br>Across Oyo State.</h1>
-    <p>We connect restaurants, bakeries & markets in <b>Bodija, Dugbe, Ogbomoso, Challenge</b> with families, NGOs & students who need it — FREE, fast & verified.</p>
+    <p>We connect restaurants, bakeries & markets in <b>Bodija, Dugbe, Ogbomoso, Challenge</b> with families, NGOs & students who need it — FREE, fast & verified. Hub-only, daylight pickup, code-secured.</p>
     <div class="hero-btns">
       <a href="/donate_food.html" class="btn btn-primary"><i class="fa fa-heart"></i> Donate Surplus Food</a>
       <a href="/available_food.html" class="btn btn-outline"><i class="fa fa-search"></i> Find Free Food in Ibadan</a>
     </div>
+    <div class="safety-mini"><i class="fa fa-shield-halved" style="color:#d97706;margin-top:2px"></i><div><b>Security First:</b> No home addresses. Hub pickup only (Dugbe, Bodija, UI Gate) • 8AM-6PM • Pickup code required • 2 reports = hidden</div></div>
     <p style="font-size:11px;color:#666;margin-top:10px"><i class="fa fa-check-circle" style="color:var(--green)"></i> Trusted by 120+ partners in Ibadan • Bodija Market • UI Campus • Dugbe Commercial</p>
   </div>
   <div class="hero-visual">
     <img class="hero-img" src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800" alt="Food rescue Ibadan">
-    <div class="float-card"><i class="fa fa-bowl-rice" style="color:var(--green)"></i> <b>12 donations</b> rescued today in Bodija<br><small style="color:#666">Jollof rice, bread, vegetables • 2.1km away</small></div>
-    <div class="float-card" style="top:20px;right:-10px;left:auto;bottom:auto"><i class="fa fa-users"></i> <b>276 people fed</b> this week<br><small style="color:#666">Across 5 areas in Oyo State</small></div>
+    <div class="float-card"><i class="fa fa-bowl-rice" style="color:var(--green)"></i> <b>12 donations</b> rescued today in Bodija<br><small style="color:#666">Jollof rice, bread, vegetables • 2.1km away • Verified</small></div>
+    <div class="float-card" style="top:16px;right:-12px;left:auto;bottom:auto"><i class="fa fa-users"></i> <b>276 people fed</b> this week<br><small style="color:#666">Across 5 areas in Oyo State • Hub safe</small></div>
   </div>
 </section>
 
@@ -80,39 +115,91 @@ footer{background:#064e3b;color:#fff;padding:40px 5% 15px;margin-top:40px}
   <div><b>185kg+</b><small>Food Saved in Ibadan</small></div>
   <div><b>276+</b><small>People Fed</small></div>
   <div><b>92kg</b><small>CO₂ Avoided</small></div>
-  <div><b>5 Areas</b><small>Bodija • Dugbe • Ogbomoso</small></div>
+  <div><b>100% Safe</b><small>Code & Hub Verified</small></div>
 </div>
 
 <section class="section">
-  <h2 style="font-size:28px;font-weight:900;color:var(--dark)">How It Works in Ibadan</h2>
-  <p style="color:#666;font-size:14px">3 simple steps — takes 30 seconds to post</p>
+  <h2 style="font-size:clamp(22px,4vw,28px);font-weight:900;color:var(--dark)">How It Works in Ibadan</h2>
+  <p style="color:#666;font-size:13px">3 simple steps — takes 30 seconds to post • Security built-in</p>
   <div class="cards">
-    <div class="card"><div class="icon"><i class="fa fa-camera"></i></div><h3>1. Post in 30s</h3><p style="color:#666;font-size:13px">Snap photo of surplus in Bodija, Dugbe, or Ogbomoso — quantity, expiry, pickup address.</p><small style="color:var(--green);font-weight:700">✓ Photo required for trust</small></div>
-    <div class="card"><div class="icon"><i class="fa fa-bolt"></i></div><h3>2. Instant Match</h3><p style="color:#666;font-size:13px">Nearby NGOs & families in Challenge, Mokola, UI get WhatsApp alert — claim in minutes.</p><small style="color:var(--green);font-weight:700">✓ Avg claim time: 18 mins</small></div>
-    <div class="card"><div class="icon"><i class="fa fa-truck"></i></div><h3>3. Rescue & Track</h3><p style="color:#666;font-size:13px">Volunteer picks up, verifies, delivers — impact tracked live on dashboard.</p><small style="color:var(--green);font-weight:700">✓ SDG 2, 12, 13 Impact</small></div>
+    <div class="card"><div class="icon"><i class="fa fa-camera"></i></div><h3>1. Post in 30s at Hub</h3><p style="color:#666;font-size:13px">Snap photo of surplus — select verified Hub (Dugbe, Bodija Market, UI Gate). No home address allowed. Server generates 4-digit code.</p><small style="color:var(--green);font-weight:700">✓ Hub-only • Code generated</small></div>
+    <div class="card"><div class="icon"><i class="fa fa-bolt"></i></div><h3>2. Verified Match</h3><p style="color:#666;font-size:13px">Volunteer calls to verify. Nearby NGOs & families get alert — must agree to safety rules: never alone, daylight, share location.</p><small style="color:var(--green);font-weight:700">✓ Avg claim 18 mins • Verified</small></div>
+    <div class="card"><div class="icon"><i class="fa fa-truck"></i></div><h3>3. Safe Rescue & Track</h3><p style="color:#666;font-size:13px">Collector shows code at Hub. No code, no food. Impact tracked live. Report suspicious → 2 reports = hidden, 3 = blocked.</p><small style="color:var(--green);font-weight:700">✓ SDG 2, 12, 13, 16</small></div>
   </div>
 
   <div class="cta">
-    <h3 style="font-size:26px;font-weight:900">Ready to Rescue Food in Ibadan?</h3>
-    <p style="opacity:.9;margin:8px 0 18px;font-size:14px">Whether you're a restaurant in Dugbe, a bakery in Bodija, or a student with extra food — join us.</p>
-    <a href="/donate_food.html" class="btn" style="background:#fff;color:var(--dark)">Donate Now — It's FREE</a>
+    <h3 style="font-size:clamp(20px,4vw,26px);font-weight:900">Ready to Rescue Food Safely in Ibadan?</h3>
+    <p style="opacity:.9;margin:8px 0 18px;font-size:13px">Restaurant in Dugbe? Bakery in Bodija? Student with extra food? Join 120+ partners — Hub pickup only.</p>
+    <a href="/donate_food.html" class="btn" style="background:#fff;color:var(--dark)"><i class="fa fa-shield-halved"></i> Donate Now — It's FREE & Safe</a>
     <a href="/dashboard.html" class="btn btn-outline" style="border-color:#fff;color:#fff">View Ibadan Impact →</a>
   </div>
 </section>
 
 <footer>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;max-width:1200px;margin:0 auto">
-    <div><h4 style="color:#a7f3d0">FoodRescue Naija — Ibadan Hub</h4><p style="color:#d1fae5;font-size:13px">Reducing waste, feeding Oyo State. 100% Free. Bodija, Dugbe, Ogbomoso, Challenge.</p></div>
-    <div><h4 style="color:#a7f3d0">Explore</h4><p style="font-size:13px;color:#d1fae5"><a href="/available_food.html">Available Food</a><br><a href="/dashboard.html">Dashboard</a><br><a href="/impact.html">Our Impact</a></p></div>
-    <div><h4 style="color:#a7f3d0">Contact</h4><p style="font-size:13px;color:#d1fae5">Dugbe, Ibadan, Oyo State<br>+234 810 142 3991<br>hello@foodrescuenaija.ng</p></div>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><b>FoodRescue Naija</b><span style="border:1px solid #10b981;color:#10b981;padding:2px 8px;border-radius:20px;font-size:9px;font-weight:800">IBADAN HUB</span></div>
+      <p>Dugbe Hub • No Home Pickups • 8AM-6PM Only • Pickup Code Required<br>Building safe, no-waste Ibadan. Verified by NAFDAC & Ibadan Food Bank. 100% FREE food rescue.</p>
+      <div class="socials">
+        <a href="https://wa.me/2348101423991" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://www.facebook.com/" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://x.com/" target="_blank" title="X Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.tiktok.com/" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://www.linkedin.com/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:hello@foodrescuenaija.ng" title="Email"><i class="fa fa-envelope"></i></a>
+      </div>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/available_food.html">Available Food</a></li>
+        <li><a href="/dashboard.html">Dashboard</a></li>
+        <li><a href="/impact.html">Impact & Safety</a></li>
+        <li><a href="/donate_food.html">Donate Food</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Safety & Support</h4>
+      <ul class="footer-links">
+        <li><a href="/impact.html">Security Policy - No Home Pickup</a></li>
+        <li><a href="/contact.html">Contact Hub</a></li>
+        <li><a href="#">Report Issue - Call 199</a></li>
+        <li><a href="#">NGO Verification</a></li>
+        <li><a href="#">SDGs 2,12,13,16</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h4>Ibadan Hub</h4>
+      <p><i class="fa fa-location-dot" style="color:#10b981"></i> No 12 Awolowo Ave, Dugbe, Ibadan, Oyo State</p>
+      <p><i class="fa fa-phone" style="color:#10b981"></i> 08101423991 • Emergency 199 / 112</p>
+      <p><i class="fa fa-envelope" style="color:#10b981"></i> hello@foodrescuenaija.ng</p>
+      <p><i class="fa fa-clock" style="color:#10b981"></i> Mon-Sat 8AM-6PM • Sun 9AM-4PM (Emergency)</p>
+      <div style="margin-top:12px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);padding:8px 10px;border-radius:8px;font-size:11px;color:#6ee7b7"><i class="fa fa-shield-halved"></i> Hub-Only • No home pickup • Code required • Go with someone • Share location</div>
+    </div>
   </div>
-  <div style="text-align:center;margin-top:25px;border-top:1px solid rgba(255,255,255,.15);padding-top:12px;font-size:11px;color:#a7f3d0">© 2026 FoodRescue Naija • Ibadan Hub • Built for SDGs • Oyo State, Nigeria</div>
+  <div class="footer-bottom">
+    <span>© 2026 FoodRescue Naija • Ibadan Hub • Security First • SDG 2,12,13,16 • Oyo State, Nigeria</span>
+    <div class="legal">
+      <span>Built with ❤️ for Ibadan</span>
+      <a href="#" style="color:#64748b">Privacy</a>
+      <a href="#" style="color:#64748b">Terms</a>
+      <a href="https://wa.me/2348101423991" style="color:#10b981">Chat on WhatsApp</a>
+    </div>
+  </div>
 </footer>
 
 <script>
 const ham=document.getElementById('hamburger'), nav=document.getElementById('navLinks');
-ham.addEventListener('click',()=>{ham.classList.toggle('active');nav.classList.toggle('active')});
-document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{ham.classList.remove('active');nav.classList.remove('active')}));
+ham.addEventListener('click',()=>{
+  ham.classList.toggle('active');
+  nav.classList.toggle('active');
+  document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+});
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{
+  ham.classList.remove('active');nav.classList.remove('active');document.body.style.overflow='';
+}));
 </script>
 </body>
 </html>
