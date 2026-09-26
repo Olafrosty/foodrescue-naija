@@ -6,190 +6,199 @@
 <title>Donate Food - Ibadan Hub | FoodRescue Naija</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{--green:#0f7a4a;--dark:#064e3b;--light:#ecfdf5;--red:#ef4444}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-body{background:#f8faf8;color:#222}
+:root{--green:#0f7a4a;--dark:#111827;--light:#ecfdf5;--red:#ef4444}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Inter,system-ui,sans-serif}
+body{background:#f8faf8;color:#222;line-height:1.6;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
-header{background:#fff;display:flex;justify-content:space-between;align-items:center;padding:14px 5%;position:sticky;top:0;z-index:100;border-bottom:1px solid #e5e7eb}
-.logo{font-weight:900;font-size:20px}.logo span{color:var(--green)}
-.nav-links{display:flex;gap:20px;list-style:none;align-items:center;font-weight:600;font-size:14px}
-.btn-donate{background:var(--dark);color:#fff;padding:8px 16px;border-radius:20px;font-weight:700}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}.hamburger span{width:24px;height:3px;background:#111;border-radius:3px}
-.container{max-width:1100px;margin:30px auto;padding:0 5%}
-.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:20px}
-.badge-secure{border:1px solid #10b981;color:#065f46;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:700;background:#ecfdf5}
+img{max-width:100%}
+/* HEADER */
+header{background:#fff;display:flex;justify-content:space-between;align-items:center;padding:14px 5%;position:sticky;top:0;z-index:1000;border-bottom:1px solid #e5e7eb}
+.logo{font-weight:800;font-size:clamp(16px,4vw,20px);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.badge{border:1px solid #d1d5db;color:#065f46;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;white-space:nowrap}
+.nav-links{display:flex;gap:24px;list-style:none;align-items:center;font-size:14px;font-weight:500;color:#374151}
+.nav-links a.active{border-bottom:2px solid #065f46;padding-bottom:2px;font-weight:700;color:#111}
+.btn-donate{background:#111827;color:#fff;padding:10px 18px;border-radius:24px;font-weight:700;font-size:14px}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:24px;height:3px;background:#111;border-radius:3px;transition:.3s}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,6px)}.hamburger.active span:nth-child(2){opacity:0}.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-6px)}
+.container{max-width:1150px;margin: clamp(16px,3vw,30px) auto;padding:0 5%}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+.top h1{font-size:clamp(22px,5vw,32px);font-weight:900}
+.badge-secure{border:1px solid #10b981;color:#065f46;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:700;background:#ecfdf5;white-space:nowrap}
 .safety-alert{background:#fef3c7;border:1.5px solid #fbbf24;padding:12px 14px;border-radius:12px;margin-bottom:18px;display:flex;gap:10px;font-size:12px;line-height:1.5;color:#92400e}
-.safety-alert i{font-size:18px;color:#d97706;margin-top:2px}
 .grid{display:grid;grid-template-columns:1fr 1.2fr;gap:20px}
-.card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 6px 20px rgba(0,0,0,.06);border:1px solid #eef2f7}
-.upload{border:2px dashed var(--green);background:#f0fdf4;border-radius:14px;padding:30px;text-align:center;cursor:pointer;transition:.2s}
+.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 6px 20px rgba(0,0,0,.06);border:1px solid #eef2f7}
+.upload{border:2px dashed var(--green);background:#f0fdf4;border-radius:14px;padding:24px;text-align:center;cursor:pointer;transition:.2s}
 .upload:hover{background:#dcfce7}
-.upload i{width:56px;height:56px;background:#fff;border:2px solid var(--green);color:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:22px}
+.upload i{width:52px;height:52px;background:#fff;border:2px solid var(--green);color:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:20px}
 label{display:block;font-weight:600;margin:12px 0 5px;font-size:13px}
 input,select,textarea{width:100%;padding:11px 13px;border:1.5px solid #d1d5db;border-radius:8px;outline:none;font-size:14px}
 input:focus,select:focus,textarea:focus{border-color:var(--green)}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.btn-submit{width:100%;padding:13px;background:var(--dark);color:#fff;border:none;border-radius:10px;font-weight:700;font-size:15px;cursor:pointer;margin-top:10px}
-.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
-.trust-item{border:1px solid #e5e7eb;padding:12px;border-radius:10px;font-size:12px;display:flex;gap:8px;align-items:center;background:#fff}
-.trust-item i{color:var(--green);font-size:18px}
-.footer-bar{margin-top:30px;background:var(--green);color:#fff;padding:14px 5%;border-radius:0 0 16px 16px;display:flex;justify-content:center;gap:30px;flex-wrap:wrap;font-size:12px;font-weight:600}
-@media(max-width:900px){.grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}.trust{grid-template-columns:1fr}}
-@media(max-width:768px){.hamburger{display:flex}.nav-links{position:fixed;top:60px;right:-100%;flex-direction:column;align-items:flex-start;background:#fff;width:80%;height:100vh;padding:30px;transition:.35s}.nav-links.active{right:0}}
+.btn-submit{width:100%;padding:13px;background:#111827;color:#fff;border:none;border-radius:10px;font-weight:700;font-size:15px;cursor:pointer;margin-top:10px;display:flex;justify-content:center;align-items:center;gap:8px}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.trust-item{border:1px solid #e5e7eb;padding:12px;border-radius:10px;font-size:11px;display:flex;gap:8px;align-items:center;background:#fff}
+.footer-bar{margin-top:24px;background:#111827;color:#a7f3d0;padding:14px 5%;border-radius:12px;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;font-size:11px;font-weight:600}
+/* FOOTER SOCIAL */
+footer{background:#0b1220;color:#cbd5e1;margin-top:30px}
+.footer-top{padding:36px 5%;display:grid;grid-template-columns:1.5fr.8fr.8fr 1fr;gap:28px;max-width:1250px;margin:0 auto}
+.footer-top h4{color:#fff;font-size:13px;margin-bottom:12px;font-weight:800;text-transform:uppercase}
+.socials{display:flex;gap:9px;margin-top:14px;flex-wrap:wrap}
+.socials a{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.12);transition:.2s}
+.socials a:hover{background:#10b981;transform:translateY(-2px)}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:7px}
+.footer-links a{font-size:12px;color:#94a3b8}
+.footer-links a:hover{color:#fff}
+.footer-contact p{font-size:11px;color:#94a3b8;display:flex;gap:8px;margin-bottom:7px}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding:14px 5%;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:10px;color:#64748b;max-width:1250px;margin:0 auto}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}.trust{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){
+.hamburger{display:flex}
+.nav-links{position:fixed;top:62px;right:-100%;flex-direction:column;align-items:flex-start;background:#fff;width:85%;max-width:320px;height:100vh;padding:24px;transition:.35s;box-shadow:-10px 0 30px rgba(0,0,0,.1);z-index:99}
+.nav-links.active{right:0}
+.nav-links li{width:100%}.nav-links a{display:block;padding:12px 0;border-bottom:1px solid #f3f4f6;width:100%}
+.btn-donate{width:100%;text-align:center;margin-top:10px}
+.footer-top{grid-template-columns:1fr;gap:24px}
+.footer-bottom{flex-direction:column;text-align:center}
+}
+@media(max-width:480px){
+header{padding:12px 4%}.container{padding:0 4%}.trust{grid-template-columns:1fr}.footer-bar{flex-direction:column;align-items:center}
+}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">FoodRescue <span>Naija</span> <span style="font-size:10px;border:1px solid var(--green);padding:2px 8px;border-radius:12px;color:var(--green)">IBADAN SECURE</span></div>
+  <div class="logo">FoodRescue Naija <span class="badge">IBADAN HUB</span></div>
   <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
   <ul class="nav-links" id="nav">
     <li><a href="/index.html">Home</a></li>
     <li><a href="/available_food.html">Available Food</a></li>
     <li><a href="/dashboard.html">Dashboard</a></li>
-    <li><a href="/impact.html">impact</a></li>
+    <li><a href="/impact.html">Impact</a></li>
     <li><a href="/contact.html">Contact</a></li>
-    <li><a class="btn-donate" href="/donate_food.html">Donate Food</a></li>
+    <li><a class="btn-donate active" href="/donate_food.html" style="border-bottom:2px solid #065f46">Donate Food</a></li>
   </ul>
 </header>
 
 <div class="container">
   <div class="top">
-    <div><h1 style="font-size:32px;font-weight:900"><i class="fa fa-shield-halved" style="color:var(--green)"></i> Safe Food Donation</h1><p style="color:#666;font-size:13px">Hub-only drop-off • No home address • Daylight 8AM-6PM only</p></div>
+    <div><h1><i class="fa fa-shield-halved" style="color:var(--green)"></i> Safe Food Donation</h1><p style="color:#666;font-size:12px">Hub-only drop-off • No home address • Daylight 8AM-6PM only • Code-secured</p></div>
     <span class="badge-secure"><i class="fa fa-lock"></i> Secure • Verified Hub</span>
   </div>
 
   <div class="safety-alert">
     <i class="fa fa-triangle-exclamation"></i>
     <div><b>SECURITY RULE - We banned home addresses to stop kidnapping:</b><br>
-    1. Never use your house address. Drop food only at <b>public Hubs/Markets/Churches</b>.<br>
-    2. Pickup is <b>Daylight only (8AM-6PM)</b>. Night pickup will be rejected.<br>
-    3. Receiver must show <b>4-digit Pickup Code</b>. No code, no food.<br>
-    4. Our volunteer will call you to verify before listing goes live.
+    1. Drop food only at <b>public Hubs/Markets/Churches</b>. 2. Pickup <b>Daylight only (8AM-6PM)</b>. 3. Receiver shows <b>4-digit Code</b>. 4. Volunteer calls to verify.
     </div>
   </div>
 
   <div class="grid">
     <div>
       <div class="card">
-        <h3 style="display:flex;justify-content:space-between;align-items:center"><span>1. Upload Photo</span><span style="font-size:10px;border:1px solid var(--green);padding:3px 8px;border-radius:12px;color:var(--green)">Required</span></h3>
+        <h3 style="display:flex;justify-content:space-between">Upload Photo <span style="font-size:10px;border:1px solid var(--green);padding:3px 8px;border-radius:12px;color:var(--green)">Required</span></h3>
         <div class="upload" onclick="document.getElementById('fileInput').click()">
           <i class="fa fa-cloud-arrow-up"></i>
-          <b>Drag & drop photo here</b><p style="font-size:12px;color:#666;margin:4px 0">or click to browse</p>
-          <p style="font-size:11px;color:#888">Clear photo • JPG, PNG • Max 5MB</p>
+          <b>Drag & drop photo here</b><p style="font-size:12px;color:#666">or click to browse</p>
+          <p style="font-size:10px;color:#888">JPG, PNG • Max 5MB</p>
           <input type="file" id="fileInput" accept="image/*" style="display:none">
           <img id="preview" style="display:none;width:100%;margin-top:12px;border-radius:10px;max-height:200px;object-fit:cover">
         </div>
-        <div style="margin-top:12px;background:#f0fdf4;border-left:4px solid var(--green);padding:10px;border-radius:6px;font-size:12px"><i class="fa fa-circle-info" style="color:var(--green)"></i> <b>Verification:</b> Our Ibadan volunteer will call <span id="vPhone">your number</span> to confirm food safety before it shows publicly.</div>
+        <div style="margin-top:12px;background:#f0fdf4;border-left:4px solid var(--green);padding:10px;border-radius:6px;font-size:11px"><i class="fa fa-circle-info" style="color:var(--green)"></i> <b>Verification:</b> Volunteer will call <span id="vPhone">your number</span> before listing goes live.</div>
       </div>
-      <div style="margin-top:18px"><h3>Trust & Safety</h3><div class="trust">
-        <div class="trust-item"><i class="fa fa-shield-check"></i><span><b>No Home Pickup</b><br>Hub only, public places</span></div>
-        <div class="trust-item"><i class="fa fa-sun"></i><span><b>Daylight Only</b><br>8AM - 6PM safe window</span></div>
-        <div class="trust-item"><i class="fa fa-key"></i><span><b>Pickup Code</b><br>4-digit code verification</span></div>
+      <div style="margin-top:16px"><h4 style="font-size:13px;margin-bottom:8px">Trust & Safety</h4><div class="trust">
+        <div class="trust-item"><i class="fa fa-shield-check" style="color:var(--green)"></i><span><b>No Home Pickup</b><br>Hub only, public</span></div>
+        <div class="trust-item"><i class="fa fa-sun" style="color:#d97706"></i><span><b>Daylight Only</b><br>8AM-6PM safe</span></div>
+        <div class="trust-item"><i class="fa fa-key" style="color:#111827"></i><span><b>Pickup Code</b><br>4-digit verification</span></div>
       </div></div>
     </div>
 
     <div class="card">
-      <h3>2. Donation Details <span style="float:right;font-size:10px;background:var(--green);color:#fff;padding:3px 8px;border-radius:12px">SECURE MODE</span></h3>
+      <h3>Donation Details <span style="float:right;font-size:10px;background:#111827;color:#fff;padding:3px 8px;border-radius:12px">SECURE MODE</span></h3>
       <form id="donateForm" style="margin-top:10px">
-        <label>Food Details</label>
-        <div class="row"><div><label style="margin-top:4px">Food Type *</label><input type="text" id="foodName" placeholder="e.g. Jollof Rice, Bread" required></div><div><label style="margin-top:4px">Category *</label><select id="category" required><option value="">Select category</option><option>Cooked Meal</option><option>Bakery</option><option>Fresh Produce</option><option>Packaged</option><option>Other</option></select></div></div>
-        <div class="row"><div><label>Quantity *</label><input type="text" id="quantity" placeholder="e.g. 10 packs / 5kg" required></div><div><label>Expiry Date *</label><input type="datetime-local" id="expiry" required></div></div>
-        <label>Food Description *</label><textarea id="notes" rows="2" placeholder="Ingredients, storage, packaging condition..." maxlength="200" required></textarea>
+        <div class="row"><div><label>Food Type *</label><input type="text" id="foodName" placeholder="e.g. Jollof Rice, Bread" required></div><div><label>Category *</label><select id="category" required><option value="">Select</option><option>Cooked Meal</option><option>Bakery</option><option>Fresh Produce</option><option>Packaged</option><option>Other</option></select></div></div>
+        <div class="row"><div><label>Quantity *</label><input type="text" id="quantity" placeholder="10 packs / 5kg" required></div><div><label>Expiry *</label><input type="datetime-local" id="expiry" required></div></div>
+        <label>Description *</label><textarea id="notes" rows="2" placeholder="Ingredients, packaging..." required></textarea>
 
-        <label style="margin-top:14px;color:var(--green)"><i class="fa fa-location-dot"></i> Safe Drop-off Point (NO HOME ADDRESS) *</label>
+        <label style="margin-top:12px;color:var(--green)"><i class="fa fa-location-dot"></i> Safe Drop-off Point (NO HOME) *</label>
         <select id="hubLocation" required>
           <option value="">Select verified public hub</option>
-          <option value="Dugbe Hub - No 12 Awolowo Ave, Dugbe, Ibadan">Dugbe Hub - No 12 Awolowo Ave (Main Hub - Safest)</option>
+          <option value="Dugbe Hub - No 12 Awolowo Ave, Dugbe, Ibadan">Dugbe Hub - No 12 Awolowo Ave (Main - Safest)</option>
           <option value="Bodija Market - FoodRescue Point">Bodija Market - FoodRescue Point</option>
           <option value="UI Campus - Student Affairs Gate">UI Campus - Student Affairs Gate</option>
-          <option value="Challenge - FoodRescue Volunteer Point">Challenge - FoodRescue Volunteer Point</option>
+          <option value="Challenge - FoodRescue Volunteer Point">Challenge - Volunteer Point</option>
           <option value="Ring Road - Ibadan Food Bank">Ring Road - Ibadan Food Bank</option>
           <option value="Mokola - Agodi Park">Mokola - Agodi Park</option>
-          <option value="Other Public Place - Church/Mosque/NGO">Other Public Place - Church/Mosque/NGO (specify in notes)</option>
+          <option value="Other Public Place - Church/Mosque/NGO">Other Public Place - Church/Mosque/NGO</option>
         </select>
-        <p style="font-size:10px;color:#ef4444;margin-top:4px;font-weight:600"><i class="fa fa-ban"></i> DO NOT type your house address. For security, only Hubs/Markets/Churches allowed.</p>
+        <p style="font-size:10px;color:#ef4444;margin-top:4px;font-weight:600"><i class="fa fa-ban"></i> DO NOT type house address. Hubs/Markets/Churches only.</p>
 
         <div class="row">
-          <div>
-            <label>Pickup Time (Daylight Only) *</label>
-            <select id="pickupTime" required>
-              <option value="">Select time</option>
-              <option>Today 8AM - 11AM</option>
-              <option>Today 11AM - 2PM</option>
-              <option>Today 2PM - 5PM</option>
-              <option>Tomorrow 8AM - 11AM</option>
-              <option>Tomorrow 11AM - 2PM</option>
-              <option>Tomorrow 2PM - 5PM</option>
-            </select>
-          </div>
-          <div><label>Nearest Landmark (Public)</label><input type="text" id="lga" placeholder="e.g. Near Dugbe Market"></div>
+          <div><label>Pickup Time (Daylight) *</label><select id="pickupTime" required><option value="">Select time</option><option>Today 8AM - 11AM</option><option>Today 11AM - 2PM</option><option>Today 2PM - 5PM</option><option>Tomorrow 8AM - 11AM</option><option>Tomorrow 11AM - 2PM</option><option>Tomorrow 2PM - 5PM</option></select></div>
+          <div><label>Landmark</label><input type="text" id="lga" placeholder="Near Dugbe Market"></div>
+        </div>
+        <div class="row"><div><label>Name *</label><input type="text" id="contactName" placeholder="Adebayo O." required></div><div><label>Phone *</label><input type="tel" id="phone" placeholder="080..." required oninput="document.getElementById('vPhone').textContent=this.value||'your number'"></div></div>
+
+        <div style="margin-top:12px;background:#ecfdf5;border:1px solid #a7f3d0;padding:10px;border-radius:10px;font-size:11px">
+          <b><i class="fa fa-shield-halved"></i> Safety Agreement:</b><br>
+          <label style="display:flex;gap:6px;margin-top:6px"><input type="checkbox" required style="width:16px"> I will drop food ONLY at selected public Hub/market, not at my house.</label>
+          <label style="display:flex;gap:6px;margin-top:6px"><input type="checkbox" required style="width:16px"> Food is safe, not contaminated, no night/private meeting.</label>
+          <label style="display:flex;gap:6px;margin-top:6px"><input type="checkbox" required style="width:16px"> I agree to code system & phone verification.</label>
         </div>
 
-        <div class="row"><div><label>Contact Name *</label><input type="text" id="contactName" placeholder="Adebayo O." required></div><div><label>Contact Phone (For verification) *</label><input type="tel" id="phone" placeholder="080..." required oninput="document.getElementById('vPhone').textContent=this.value||'your number'"></div></div>
-
-        <div style="margin-top:14px;background:#ecfdf5;border:1px solid #a7f3d0;padding:12px;border-radius:10px;font-size:12px">
-          <b style="color:var(--dark)"><i class="fa fa-shield-halved"></i> Safety Agreement:</b><br>
-          <label style="display:flex;gap:8px;align-items:flex-start;font-weight:500;margin-top:8px"><input type="checkbox" required style="width:16px;height:16px;margin-top:2px"> I confirm I will drop food ONLY at the selected public Hub/market, not at my house.</label>
-          <label style="display:flex;gap:8px;align-items:flex-start;font-weight:500;margin-top:6px"><input type="checkbox" required style="width:16px;height:16px;margin-top:2px"> I confirm food is safe, uncontaminated, and I will not ask receiver to come at night or to private place.</label>
-          <label style="display:flex;gap:8px;align-items:flex-start;font-weight:500;margin-top:6px"><input type="checkbox" required style="width:16px;height:16px;margin-top:2px"> I agree to pickup code system and phone verification by volunteer.</label>
-        </div>
-
-        <div style="display:flex;gap:10px;margin-top:14px"><button type="button" class="btn-submit" style="background:#fff;color:#111;border:1.5px solid #d1d5db;flex:1" onclick="alert('Draft saved locally')">Save as Draft</button><button type="submit" class="btn-submit" style="flex:1.5"><i class="fa fa-shield-halved"></i> Submit Safely</button></div>
-        <p style="text-align:center;font-size:11px;color:#666;margin-top:8px">Volunteer will call you within 2 hours to verify • Pickup code auto-generated</p>
+        <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap"><button type="button" class="btn-submit" style="background:#fff;color:#111;border:1.5px solid #d1d5db;flex:1" onclick="alert('Draft saved locally')">Save Draft</button><button type="submit" class="btn-submit" style="flex:1.5"><i class="fa fa-shield-halved"></i> Submit Safely</button></div>
+        <p style="text-align:center;font-size:10px;color:#666;margin-top:8px">Volunteer calls within 2 hours • Code auto-generated server-side</p>
       </form>
     </div>
   </div>
-  <div class="footer-bar"><span><i class="fa fa-shield"></i> Hub-Only • No Home Address</span><span>•</span><span><i class="fa fa-sun"></i> Daylight 8AM-6PM</span><span>•</span><span><i class="fa fa-key"></i> Code Verified</span></div>
+  <div class="footer-bar"><span><i class="fa fa-shield"></i> Hub-Only • No Home Address</span><span><i class="fa fa-sun"></i> Daylight 8AM-6PM</span><span><i class="fa fa-key"></i> Code Verified</span><span><i class="fa fa-flag"></i> Report = 2 hide, 3 block</span></div>
 </div>
 
+<footer>
+  <div class="footer-top">
+    <div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><b style="color:#fff;font-size:18px">FoodRescue Naija</b><span style="border:1px solid #10b981;color:#10b981;padding:2px 8px;border-radius:20px;font-size:9px;font-weight:800">IBADAN HUB</span></div><p style="font-size:11px;color:#94a3b8;margin-top:8px;line-height:1.5">Dugbe Hub • No Home Pickups • 8AM-6PM • Code Required<br>Building safe, no-waste Ibadan. 100% FREE rescue.</p><div class="socials">
+      <a href="https://wa.me/2348101423991" target="_blank"><i class="fa-brands fa-whatsapp"></i></a><a href="https://facebook.com/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a><a href="https://instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a><a href="https://x.com/" target="_blank"><i class="fa-brands fa-x-twitter"></i></a><a href="https://tiktok.com/" target="_blank"><i class="fa-brands fa-tiktok"></i></a><a href="mailto:hello@foodrescuenaija.ng"><i class="fa fa-envelope"></i></a>
+    </div></div>
+    <div><h4>Quick Links</h4><ul class="footer-links"><li><a href="/index.html">Home</a></li><li><a href="/available_food.html">Available Food</a></li><li><a href="/dashboard.html">Dashboard</a></li><li><a href="/impact.html">Impact & Safety</a></li></ul></div>
+    <div><h4>Safety</h4><ul class="footer-links"><li><a href="/impact.html">Security Policy</a></li><li><a href="/contact.html">Contact Hub</a></li><li><a href="#">Report - 199</a></li><li><a href="#">NGO Verification</a></li></ul></div>
+    <div class="footer-contact"><h4>Ibadan Hub</h4><p><i class="fa fa-location-dot" style="color:#10b981"></i> No 12 Awolowo Ave, Dugbe</p><p><i class="fa fa-phone" style="color:#10b981"></i> 08101423991 • 199 / 112</p><p><i class="fa fa-envelope" style="color:#10b981"></i> hello@foodrescuenaija.ng</p></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 FoodRescue Naija • Security First • SDG 2,12,13,16</span><span>Built with ❤️ for Ibadan • <a href="https://wa.me/2348101423991" style="color:#10b981">WhatsApp Us</a></span></div>
+</footer>
+
 <script>
-document.getElementById('ham').onclick=()=>document.getElementById('nav').classList.toggle('active');
+const ham=document.getElementById('ham'), nav=document.getElementById('nav');
+ham.onclick=()=>{ham.classList.toggle('active');nav.classList.toggle('active');document.body.style.overflow=nav.classList.contains('active')?'hidden':''};
 document.getElementById('fileInput').addEventListener('change',e=>{
   const file=e.target.files[0]; if(!file) return;
-  const url=URL.createObjectURL(file); const img=document.getElementById('preview'); img.src=url; img.style.display='block';
+  const img=document.getElementById('preview'); img.src=URL.createObjectURL(file); img.style.display='block';
 });
-const API_BASE = window.location.hostname==='localhost'? 'http://localhost:3000' : '';
-const API_URL = `${API_BASE}/api/donate`;
-
+const API_BASE = location.hostname==='localhost'? 'http://localhost:3000' : '';
 document.getElementById('donateForm').addEventListener('submit', async e=>{
   e.preventDefault();
-  const hub = document.getElementById('hubLocation').value;
-  if(hub.toLowerCase().includes('house')||hub.toLowerCase().includes('home')||hub.toLowerCase().includes('my house')){
-    alert('SECURITY BLOCK: Please select public Hub only, not home address.');
-    return;
-  }
-  const code = Math.floor(1000+Math.random()*9000).toString();
+  const hub=document.getElementById('hubLocation').value;
+  const code=Math.floor(1000+Math.random()*9000).toString();
   const data={
     foodName:document.getElementById('foodName').value.trim(),
     quantity:document.getElementById('quantity').value.trim(),
-    location: hub,
-    address: hub,
-    lga:document.getElementById('lga').value.trim()||'Ibadan',
-    state:'Oyo',
-    pickupTime:document.getElementById('pickupTime').value,
-    pickup_time:document.getElementById('pickupTime').value,
-    expiry:document.getElementById('expiry').value,
-    phone:document.getElementById('phone').value.trim(),
-    notes:document.getElementById('notes').value.trim(),
-    category:document.getElementById('category').value,
-    contactName:document.getElementById('contactName').value.trim(),
-    status:'Available',
-    pickupCode: code,
-    verified: false,
-    reports: 0,
-    id:Date.now().toString(),
-    _id:Date.now().toString(),
-    image:''
+    location:hub, address:hub, lga:document.getElementById('lga').value||'Ibadan', state:'Oyo',
+    pickupTime:document.getElementById('pickupTime').value, pickup_time:document.getElementById('pickupTime').value,
+    expiry:document.getElementById('expiry').value, phone:document.getElementById('phone').value.trim(),
+    notes:document.getElementById('notes').value.trim(), category:document.getElementById('category').value,
+    contactName:document.getElementById('contactName').value.trim(), status:'Available', pickupCode:code, verified:false, reports:0,
+    id:Date.now().toString(), _id:Date.now().toString(), image:''
   };
-  // Save locally
   let local=JSON.parse(localStorage.getItem('foodDonations')||'[]'); local.unshift(data); localStorage.setItem('foodDonations',JSON.stringify(local));
   try{
-    const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-    if(!res.ok) throw new Error('server');
-  }catch(err){ console.log('Local save only'); }
-  alert(`🎉 Donation submitted SECURELY!\n\nYour Pickup Code: ${code}\nDrop-off: ${hub}\n\nOur volunteer will call ${data.phone} to verify before it goes live.\nTell receiver the code at Hub.`);
-  window.location.href='available_food.html';
+    const res=await fetch(`${API_BASE}/api/donate`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+    const j=await res.json();
+    if(!res.ok) throw new Error(j.error||'Blocked');
+    alert(`✅ SECURE! Server Code: ${j.food.pickupCode||code}\nDrop: ${hub}\nVolunteer will call to verify.`);
+  }catch(err){
+    alert(`Saved locally! Code: ${code}\n${err.message.includes('BANNED')||err.message.includes('Home')?'Security: '+err.message:''}`);
+  }
+  location.href='available_food.html';
 });
 </script>
 </body>
